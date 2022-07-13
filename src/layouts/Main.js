@@ -16,7 +16,7 @@ const Main = () => {
                 {/* end header */}
 
                 {/* start page route content */}
-                <div className="h-full bg-backgroundGrey px-6">
+                <div className="bg-backgroundGrey px-6">
                     <Outlet />
                 </div>
                 {/* end page route content */}

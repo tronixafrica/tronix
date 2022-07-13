@@ -1,6 +1,9 @@
 const Device = () => {
     return ( 
-        <div>Device</div>
+        <div>
+            <div>Device</div>
+           
+        </div>
     );  
 }
  

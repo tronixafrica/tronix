@@ -6,15 +6,18 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom'
 import 'tw-elements'
 import HeaderContextProvider from './state/contexts/HeaderContext';
+import DisplaySidebarProvider from './state/contexts/DisplaySidebarContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
-      <HeaderContextProvider>
-        <App />
-      </HeaderContextProvider>
+      <DisplaySidebarProvider>
+        <HeaderContextProvider>
+          <App />
+        </HeaderContextProvider>
+      </DisplaySidebarProvider>
     </Router>
   </React.StrictMode>
 );

@@ -21,7 +21,7 @@ const SideNav = () => {
     }
 
     return ( 
-        <div className="fixed w-[15rem] h-[100vh] shadow-md bg-backgroundDark px-1 py-6 flex flex-col justify-between">
+        <div className="fixed w-[15rem] h-[100vh] shadow-md bg-backgroundDark px-1 py-6 sm:flex flex-col justify-between hidden">
             {/* start tronix logo */}
             <ul className="px-6">
                 <li><img src="/logo/TronixLogo.png" alt="tronix logo" className="w-[7rem]"/></li>

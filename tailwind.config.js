@@ -9,7 +9,8 @@ module.exports = {
         backgroundRed: '#D20202',
         backgroundDarkRed: '#7A0E0E',
         textGrey: '#C2C2C2',
-        textGreyLighter: '#D4D4D4'
+        textGreyLighter: '#D4D4D4',
+        textGreyLight: '#F9F9F9'
         
       },
       fontFamily: {

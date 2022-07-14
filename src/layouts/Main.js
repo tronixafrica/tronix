@@ -1,16 +1,23 @@
 import { Outlet } from 'react-router-dom'
 import Header from '../components/Header/Header';
+import BottomNav from '../components/Navbar/BottomNav';
 import SideNav from '../components/Navbar/SideNav';
+import '../App.css'
+import FloatingIcon from '../components/AddDevicesFloatingIcon/FloatingIcon';
+import MobileSideNav from '../components/Navbar/MobileSideNav';
 
 const Main = () => {
+    
     return ( 
-        <div className="flex h-[100vh]">
+        <div className="flex h-[100vh] relative">
             {/* start desktop sidenav */}
             <SideNav />
             {/* end desktop sidenav */}
 
+            <MobileSideNav />
+
             {/* start header and page route content */}
-            <div className="ml-[15rem] w-full bg-backgroundGrey">
+            <div className="sm:ml-[15rem] w-full bg-backgroundGrey relative">
                 {/* start header */}
                 <Header />
                 {/* end header */}
@@ -20,6 +27,14 @@ const Main = () => {
                     <Outlet />
                 </div>
                 {/* end page route content */}
+
+                {/* start bottom nav */}
+                <BottomNav />
+                {/* end bottom nav */}
+
+                {/* start float icon */}
+                <FloatingIcon />
+                {/* end float icon */}
             </div>
             {/* end header and page route content */}
         </div>

@@ -49,7 +49,7 @@ const DashboardComponent = () => {
         {/*  */}
         {/*  */}
         {/* DEVICES DIV BELOW */}
-        <div className="bg-[#121212] h-[30rem] mt-[4%] p-[1rem] border border-[#777] rounded-lg overflow-auto">
+        <div className="bg-[#121212] h-[30rem] mt-[4%] p-[1rem] border border-[#777] rounded-lg overflow-auto scroll">
           <h1 className="text-[180%] font-poppins text-[#D4D4D4] mb-[20px] ml-[8px]">
             Devices
           </h1>
@@ -79,7 +79,7 @@ const DashboardComponent = () => {
       {/*  */}
       {/*  */}
       {/* NOTIFICATIONS DIV BELOW */}
-      <div className="bg-[#121212] h-[40rem] w-[28%] p-[1rem] border border-[#777] rounded-lg overflow-auto">
+      <div className="bg-[#121212] h-[40rem] w-[28%] p-[1rem] border border-[#777] rounded-lg overflow-auto scroll">
         <h1 className="text-[180%] font-poppins text-[#D4D4D4] mb-[20px] ml-[8px]">
           Notifications
         </h1>

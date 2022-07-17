@@ -4,9 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import Device from "./pages/Device";
 import Reports from "./pages/Reports";
 
-
 function App() {
-
   return (
     <div>
       <Routes>
@@ -19,7 +17,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/devices" element={<Device />} />
-        </Route> 
+        </Route>
         {/* end routes using the default layout */}
       </Routes>
     </div>

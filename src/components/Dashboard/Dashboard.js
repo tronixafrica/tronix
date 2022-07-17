@@ -49,28 +49,32 @@ const DashboardComponent = () => {
         {/*  */}
         {/*  */}
         {/* DEVICES DIV BELOW */}
-        <div className="bg-[#121212] h-[30rem] mt-[4%] p-[1rem] border border-[#777] rounded-lg overflow-auto scroll">
-          <h1 className="text-[180%] font-poppins text-[#D4D4D4] mb-[20px] ml-[8px]">
-            Devices
-          </h1>
-          {[
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-            20,
-          ].map((i) => (
-            <div className="border-t border-[#555] flex items-center justify-between p-[10px] transition ease-in-out duration-300 hover:bg-[#D20202] bg-[#121212]">
-              <div>
-                <h1 className="font-poppins text-[#D4D4D4] flex flex-col text-[100%]">
-                  Razor drill
-                </h1>
-                <p className="font-poppins text-[#777] text-[70%]">
-                  Office Lounge
-                </p>
+        <div className="bg-[#121212] h-[30rem] mt-[4%] p-[1rem] border border-[#777] rounded-lg">
+          <div className="p-3 overflow-auto scroll h-[28rem]">
+            <h1 className="text-[160%] font-poppins text-[#D4D4D4] mb-[20px] ml-[8px]">
+              Devices
+            </h1>
+            {[
+              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+              20,
+            ].map((i) => (
+              <div className="border-t border-[#555] flex items-center justify-between p-[10px] transition ease-in-out duration-300 hover:bg-[#D20202] bg-[#121212]">
+                <div>
+                  <h1 className="font-poppins text-[#D4D4D4] flex flex-col text-[100%]">
+                    Razor drill
+                  </h1>
+                  <p className="font-poppins text-[#777] text-[70%]">
+                    Office Lounge
+                  </p>
+                </div>
+                <div>
+                  <h1 className="font-poppins text-[#059D1D] text-[100%]">
+                    ON
+                  </h1>
+                </div>
               </div>
-              <div>
-                <h1 className="font-poppins text-[#059D1D] text-[100%]">ON</h1>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
         {/* END OF DEVICES DIV */}
         {/*  */}
@@ -79,22 +83,27 @@ const DashboardComponent = () => {
       {/*  */}
       {/*  */}
       {/* NOTIFICATIONS DIV BELOW */}
-      <div className="bg-[#121212] h-[40rem] w-[28%] p-[1rem] border border-[#777] rounded-lg overflow-auto scroll">
-        <h1 className="text-[180%] font-poppins text-[#D4D4D4] mb-[20px] ml-[8px]">
-          Notifications
-        </h1>
-        {[
-          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-        ].map((i) => (
-          <div className="border-t border-[#555] flex items-center justify-between p-[10px] transition ease-in-out duration-300 hover:bg-[#D20202] bg-[#121212]">
-            <div>
-              <h1 className="font-poppins text-[#D4D4D4] flex flex-col text-[100%]">
-                New device added
-              </h1>
-              <p className="font-poppins text-[#777] text-[70%]">5 mins ago</p>
+      <div className="bg-[#121212] h-[40rem] w-[28%] p-[1rem] border border-[#777] rounded-lg">
+        <div className="p-2 overflow-auto scroll h-[38rem]">
+          <h1 className="text-[160%] font-poppins text-[#D4D4D4] mb-[20px] ml-[8px]">
+            Notifications
+          </h1>
+          {[
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+            20,
+          ].map((i) => (
+            <div className="border-t border-[#555] flex items-center justify-between p-[10px] transition ease-in-out duration-300 hover:bg-[#D20202] bg-[#121212]">
+              <div>
+                <h1 className="font-poppins text-[#D4D4D4] flex flex-col text-[100%]">
+                  New device added
+                </h1>
+                <p className="font-poppins text-[#777] text-[70%]">
+                  5 mins ago
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
       {/* END OF NOTIFICATIONS DIV */}
       {/*  */}

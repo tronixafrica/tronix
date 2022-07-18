@@ -1,0 +1,193 @@
+import React, { useState, useEffect } from "react";
+import { useFormik } from "formik";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { FcGoogle } from "react-icons/fc";
+import * as Yup from "yup";
+
+const LogIn = () => {
+  const [loader, setLoader] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  // INITIAL FORM VALUES
+  let initialValues = {
+    email: "",
+    password: "",
+  };
+
+  // Yup Validation Schema
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email("Invalid Email")
+      .required("This field is required"),
+    password: Yup.string()
+      .min(6, "Password must be at least 6 characters")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+        "Password must contain at least one uppercase, one lowercase, one number and one special character e.g (!@#$%^&*)"
+      )
+      .required("This field is required"),
+  });
+
+  // USING FORMIK PACKAGE FOR FORM HANDLING
+  const formik = useFormik({
+    initialValues,
+    // onSubmit,
+    validationSchema,
+  });
+  console.log(formik, "The  formik");
+
+  return (
+    <>
+      {/* Start of login page */}
+
+      <section className="bg-black w-full h-screen">
+        <div className="flex w-1/2 bg-secondary-dark-opaque grow h-screen items-center justify-center py-7">
+          <div className="w-screen xs:w-96  h-fit rounded-md  px-6 scrollbar-hide">
+            <h2 className="text-lg font-bold mb-8 text-center">Sign In</h2>
+            <form
+            //   onSubmit={(e) => {
+            //     e.preventDefault;
+            //     formik.handleSubmit(e);
+            //   }}
+            >
+              <div className="mb-8">
+                <article className="flex font-[300] transition-[border] duration-300 w-full  justify-center">
+                  <p className="text-secondary-light">First time?</p>
+                  <p className="pl-2 font-[300] transition-[border] duration-300 cursor-pointer hover:underline hover:underline-offset-1">
+                    Create an account
+                  </p>
+                </article>
+              </div>
+
+              <article className="mb-4 ">
+                <article className="block mb-4">
+                  <div className={`flex relative  border-0 border-b-2 `}>
+                    <input
+                      type="email"
+                      name="email"
+                      className="py-0 h-12 transition-[border] duration-300 text-base bg-transparent border-0 placeholder-secondary-light focus:outline-none  appearance-none focus:ring-transparent block w-full px-0"
+                      value={formik.values.email}
+                      onChange={formik.handleChange}
+                      onBlur={(e) => {
+                        formik.handleBlur(e);
+                      }}
+                    />
+                    <label
+                      htmlFor="email"
+                      className={` text-base absolute top-0 left-0 transition-all transform duration-300`}
+                    >
+                      Email
+                    </label>
+                  </div>
+                  {/* Email Input Error Message */}
+                  {formik.touched.email && formik.errors.email && (
+                    <p className="text-xs text-red-600 mt-1">
+                      {formik.errors.email}
+                    </p>
+                  )}
+                </article>
+                <article className="block mb-4">
+                  <div className={`flex relative  border-0 border-b-2 `}>
+                    <input
+                      type={`${showPassword ? "text" : "password"}`}
+                      name="password"
+                      id="password"
+                      className="py-0 h-12 transition-[border] duration-300 text-base bg-transparent border-0 placeholder-secondary-light focus:outline-none  appearance-none focus:ring-transparent block w-full px-0"
+                      value={formik.values.password}
+                      onChange={formik.handleChange}
+                      onBlur={(e) => {
+                        formik.handleBlur(e);
+                      }}
+                    />
+                    <label
+                      htmlFor="password"
+                      className={` text-base absolute top-0 left-0 transition-all transform duration-300`}
+                    >
+                      Password
+                    </label>
+                    <p
+                      className="absolute right-3 top-4 cursor-pointer"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? (
+                        <AiOutlineEye fontSize="20px" color="#d2caca" />
+                      ) : (
+                        <AiOutlineEyeInvisible
+                          fontSize="20px"
+                          color="#d2caca"
+                        />
+                      )}
+                    </p>
+                  </div>
+                  {/*Password Input Error Message */}
+                  {formik.touched.password && formik.errors.password && (
+                    <p className="text-xs mt-1 text-red-600">
+                      {formik.errors.password}
+                    </p>
+                  )}
+                </article>
+              </article>
+              <article className="flex items-center justify-between mb-4">
+                <div className="text-sm">
+                  <button
+                    type="button"
+                    className="font-[400] text-sm hover:underline hover:underline-offset-1"
+                    //   onClick={resetPassword}
+                  >
+                    {" "}
+                    Forgot your password?{" "}
+                  </button>
+                </div>
+              </article>
+
+              <article className="flex items-center justify-between w-full mt-16">
+                <button
+                  type="submit"
+                  className={`flex justify-center items-center px-4 h-12 w-24 grow font-bold text-white rounded-full bg-primary-light hover:brightness-90`}
+                >
+                  {loader ? (
+                    <svg
+                      className="w-5 h-5 text-white animate-spin"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                  ) : (
+                    "Sign In"
+                  )}
+                </button>
+              </article>
+              {/* )} */}
+
+              {/* With google */}
+              <button
+                type="button"
+                className="flex items-center justify-center w-full mt-10"
+              >
+                With <FcGoogle fontSize="25px" className="mr-1 ml-2" />
+                Google
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+      {/*  */}
+    </>
+  );
+};
+
+export default LogIn;

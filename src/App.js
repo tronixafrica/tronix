@@ -1,12 +1,11 @@
 import { Routes, Route } from "react-router-dom";
+import SingleDevice from "./components/Devices/SingleDevice";
 import Main from "./layouts/Main";
 import Dashboard from "./pages/Dashboard";
 import Device from "./pages/Device";
 import Reports from "./pages/Reports";
 
-
 function App() {
-
   return (
     <div>
       <Routes>
@@ -19,7 +18,8 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/devices" element={<Device />} />
-        </Route> 
+          <Route path="/singledevice" element={<SingleDevice />} />
+        </Route>
         {/* end routes using the default layout */}
       </Routes>
     </div>

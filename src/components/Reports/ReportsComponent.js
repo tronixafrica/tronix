@@ -18,12 +18,13 @@ const ReportsComponent = () => {
                 max="2099-12-31"
                 name="datepicker"
                 style={{
-                  backgroundColor: "red",
+                  backgroundColor: "#464646",
                   borderRadius: "4px",
                   padding: "10px",
                   marginTop: "10px",
-                  color: "black",
+                  color: "white",
                   textDecoration: "none",
+                  fontFamily: "Poppins",
                 }}
               />
             </div>
@@ -36,12 +37,13 @@ const ReportsComponent = () => {
                 max="2099-12-31"
                 name="datepicker"
                 style={{
-                  backgroundColor: "red",
+                  backgroundColor: "#464646",
                   borderRadius: "4px",
                   padding: "10px",
                   marginTop: "10px",
-                  color: "black",
+                  color: "white",
                   textDecoration: "none",
+                  fontFamily: "Poppins",
                 }}
               />
             </div>
@@ -51,17 +53,17 @@ const ReportsComponent = () => {
         {/* POLLUTATNTS DIV STARTS HERE */}
         <div className="bg-[#121212] border border-[#777] rounded-lg flex flex-col h-[45%] w-[95%] font-poppins text-base text-[white]">
           <h1 className="text-[150%] p-8">Pollutant</h1>
-          <div className="border-[#777] border-t ">
+          <div className="border-[#777] border-t transition ease-in-out duration-300 hover:bg-[#D20202]">
             <p className="font-poppins text-[#D4D4D4] text-[120%] p-5 flex flex-row items-center">
               CO<sub>2</sub>
             </p>
           </div>
-          <div className="border-[#777] border-t">
+          <div className="border-[#777] border-t transition ease-in-out duration-300 hover:bg-[#D20202]">
             <p className="font-poppins text-[#D4D4D4] text-[120%] p-5 flex flex-row items-center">
               CO
             </p>
           </div>
-          <div className="border-[#777] border-t flex flex-row items-center">
+          <div className="border-[#777] border-t flex flex-row items-center transition ease-in-out duration-300 hover:bg-[#D20202] hover:rounded-b-lg">
             <p className="font-poppins text-[#D4D4D4] text-[120%] p-5 flex flex-row items-center">
               PM1
             </p>
@@ -74,37 +76,39 @@ const ReportsComponent = () => {
       </div>
       {/* time frame + POLLUTANT CONTAINER ends HERE */}
       {/* TIME INTERVAL DIV STARTS HERE */}
-      <div className="bg-[#121212] border border-[#777] rounded-lg flex flex-col h-[70%] w-[40%] font-poppins text-base text-[white]">
+      <div className="bg-[#121212] border border-[#777] rounded-lg flex flex-col h-[78%] w-[40%] font-poppins text-base text-[white]">
         <h1 className="text-[150%] p-8">Time interval</h1>
-        <div className="border-[#777] border-t ">
-          <p className="font-poppins text-[#D4D4D4] text-[120%] p-5 flex flex-row items-center">
-            Minutes
-          </p>
-        </div>
-        <div className="border-[#777] border-t ">
-          <p className="font-poppins text-[#D4D4D4] text-[120%] p-5 flex flex-row items-center">
-            Hours
-          </p>
-        </div>
-        <div className="border-[#777] border-t ">
-          <p className="font-poppins text-[#D4D4D4] text-[120%] p-5 flex flex-row items-center">
-            Days
-          </p>
-        </div>
-        <div className="border-[#777] border-t ">
-          <p className="font-poppins text-[#D4D4D4] text-[120%] p-5 flex flex-row items-center">
-            Week
-          </p>
-        </div>
-        <div className="border-[#777] border-t ">
-          <p className="font-poppins text-[#D4D4D4] text-[120%] p-5 flex flex-row items-center">
-            Month
-          </p>
-        </div>
-        <div className="border-[#777] border-t ">
-          <p className="font-poppins text-[#D4D4D4] text-[120%] p-5 flex flex-row items-center">
-            Year
-          </p>
+        <div className="flex flex-col justify-between h-full">
+          <div className="border-[#777] border-t transition ease-in-out duration-300 hover:bg-[#D20202]">
+            <p className="font-poppins text-[#D4D4D4] text-[120%] p-5 flex flex-row items-center">
+              Minutes
+            </p>
+          </div>
+          <div className="border-[#777] border-t transition ease-in-out duration-300 hover:bg-[#D20202]">
+            <p className="font-poppins text-[#D4D4D4] text-[120%] p-5 flex flex-row items-center">
+              Hours
+            </p>
+          </div>
+          <div className="border-[#777] border-t transition ease-in-out duration-300 hover:bg-[#D20202]">
+            <p className="font-poppins text-[#D4D4D4] text-[120%] p-5 flex flex-row items-center">
+              Days
+            </p>
+          </div>
+          <div className="border-[#777] border-t transition ease-in-out duration-300 hover:bg-[#D20202]">
+            <p className="font-poppins text-[#D4D4D4] text-[120%] p-5 flex flex-row items-center">
+              Week
+            </p>
+          </div>
+          <div className="border-[#777] border-t transition ease-in-out duration-300 hover:bg-[#D20202]">
+            <p className="font-poppins text-[#D4D4D4] text-[120%] p-5 flex flex-row items-center">
+              Month
+            </p>
+          </div>
+          <div className="border-[#777] border-t transition ease-in-out duration-300 hover:bg-[#D20202]">
+            <p className="font-poppins text-[#D4D4D4] text-[120%] p-5 flex flex-row items-center">
+              Year
+            </p>
+          </div>
         </div>
       </div>
       {/* TIME INTERVAL DIV ENDS HERE */}

@@ -3,6 +3,7 @@ import Main from "./layouts/Main";
 import Dashboard from "./pages/Dashboard";
 import Device from "./pages/Device";
 import Reports from "./pages/Reports";
+import Users from "./pages/users";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/devices" element={<Device />} />
+          <Route path="/users" element={<Users />} />
         </Route>
         {/* end routes using the default layout */}
       </Routes>

@@ -59,7 +59,7 @@ const ConfirmationModal = (props) => {
               Confirm Device Removal
             </p>
           </article>
-          <div className="flex space-x-5">
+          <div className="flex space-x-3">
             {/* Login button starts */}
             <article className="flex items-center justify-between w-full mt-7">
               <button

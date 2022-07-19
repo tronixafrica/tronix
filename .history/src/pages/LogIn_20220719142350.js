@@ -5,6 +5,7 @@ import Loader from "../components/Auth/Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import * as Yup from "yup";
+import RedButton from "../components/Button/Button";
 
 const LogIn = () => {
   const [loader, setLoader] = useState(false);
@@ -159,14 +160,9 @@ const LogIn = () => {
             </article>
             {/*Sign in With google ends*/}
             {/* Login button starts */}
-            <article className="flex items-center justify-between w-full mt-7">
-              <button
-                type="submit"
-                className={`flex uppercase justify-center items-center px-4 h-12 w-24 grow font-bold text-white rounded-md bg-backgroundRed hover:brightness-90 tracking-wider font-poppins`}
-              >
-                {loader ? <Loader /> : "log In"}
-              </button>
-            </article>
+            <RedButton disabled={false} type="submit">
+              {loader ? <Loader /> : "log In"}
+            </RedButton>
             {/* Login button ends */}
           </form>
           {/* Form ends */}

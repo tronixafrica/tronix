@@ -55,15 +55,13 @@ const ConfirmationModal = (props) => {
                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            <p className="font-bold font-raleway text-white">
-              Confirm Device Removal
-            </p>
+            <p className="font-bold">Confirm Device Removal</p>
           </article>
-          <div className="flex space-x-5">
+          <div className="flex space-x-3">
             {/* Login button starts */}
             <article className="flex items-center justify-between w-full mt-7">
               <button
-                type="button"
+                type="submit"
                 className={`flex uppercase justify-center items-center px-4 h-12 w-24 grow font-bold text-black rounded-md bg-white hover:brightness-90 tracking-wider font-poppins`}
               >
                 {loader ? <Loader /> : "Cancel"}
@@ -73,7 +71,7 @@ const ConfirmationModal = (props) => {
             {/* Login button starts */}
             <article className="flex items-center justify-between w-full mt-7">
               <button
-                type="button"
+                type="submit"
                 className={`flex uppercase justify-center items-center px-4 h-12 w-24 grow font-bold text-white rounded-md bg-backgroundRed hover:brightness-90 tracking-wider font-poppins`}
               >
                 {loader ? <Loader /> : "Confirm"}

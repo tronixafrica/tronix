@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import EmailImage from "../../src/components/Auth/EmailImage/EmailImage";
 import Loader from "../components/Auth/Loader/Loader";
+import Button from "../components/Button/Button";
 import ConfirmationModal from "../components/Modals/ConfirmationModal";
 
 const VerifyEmail = () => {

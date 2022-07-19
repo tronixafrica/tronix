@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import * as Yup from "yup";
 
-const LogIn = () => {
+const SignUp = () => {
   const [loader, setLoader] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -17,6 +17,7 @@ const LogIn = () => {
   let initialValues = {
     email: "",
     password: "",
+    confirmPassword: "",
   };
 
   // Yup validation schema... this is for form validation
@@ -31,6 +32,9 @@ const LogIn = () => {
         "Password must contain at least one uppercase, one lowercase, one number and one special character e.g (!@#$%^&*)"
       )
       .required("This field is required"),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Passwords must match")
+      .required("This field is required"),
   });
 
   //The useFormik hook... takes all variables for handling the form
@@ -39,17 +43,16 @@ const LogIn = () => {
     // onSubmit,
     validationSchema,
   });
-  console.log(formik, "The  formik");
 
   return (
     <>
-      {/* Start of login page */}
+      {/* Start of Create account page */}
 
-      <section className="bg-backgroundDark overflow-y-auto w-full flex h-full items-center justify-center py-7">
-        <div className="w-[450px] h-full rounded-md  px-5 scrollbar-hide">
+      <section className="overflow-y-auto w-full flex h-full items-center justify-center py-7">
+        <div className="w-[450px] h-full rounded-md scrollbar-hide">
           {/*Start of Header */}
           <h2 className="text-2xl font-bold text-center font-raleway mb-7">
-            Log In
+            Create Account
           </h2>
           {/* End of header */}
           {/* Form starts */}
@@ -124,25 +127,51 @@ const LogIn = () => {
                 {/* Password input block ends */}
               </article>
               {/* Password input block ends */}
-            </article>
+              {/* confirmPassword input  block starts */}
+              <article className="block mb-4">
+                {/* confirmPassword input start */}
+                <div className={`relative`}>
+                  <input
+                    type={`${showPassword ? "text" : "password"}`}
+                    name="confirmPassword"
+                    id="confirmPassword"
+                    className=" block w-full px-4 py-2 h-[50px] font-normal bg-transparent bg-clip-padding border-2 border-solid border-backgroundGrey rounded-md transition ease-in-out m-0 placeholder:text-backgroundGrey placeholder: focus:bg-transparent focus:border-textGrey focus:outline-none"
+                    placeholder="Confirm Password"
+                    value={formik.values.confirmPassword}
+                    onChange={formik.handleChange}
+                    onBlur={(e) => {
+                      formik.handleBlur(e);
+                    }}
+                  />
+                  <p
+                    className="absolute right-3 top-4 cursor-pointer"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <AiOutlineEye fontSize="20px" />
+                    ) : (
+                      <AiOutlineEyeInvisible fontSize="20px" />
+                    )}
+                  </p>
+                </div>
+                {/* confirmPassword input end */}
 
-            <article className="flex items-center justify-between mb-4">
-              <div className="text-sm">
-                <button
-                  type="button"
-                  className="font-[400] text-sm hover:underline hover:underline-offset-1"
-                  //   onClick={resetPassword}
-                >
-                  {" "}
-                  Forgot your password?{" "}
-                </button>
-              </div>
+                {/*confirmPassword Input Error Message */}
+                {formik.touched.confirmPassword &&
+                  formik.errors.confirmPassword && (
+                    <p className="text-xs mt-1 text-[#06CD3BC2]">
+                      {formik.errors.confirmPassword}
+                    </p>
+                  )}
+                {/* confirmPassword input block ends */}
+              </article>
+              {/* confirmPassword input block ends */}
             </article>
 
             {/* OR Divider starts*/}
             <article className="flex items-center  w-full mt-5">
               <div className="border-t border-backgroundGrey w-full"></div>
-              <p className="mx-3 font-poppins">OR</p>
+              <p className="mx-3">OR</p>
               <div className="border-t border-backgroundGrey w-full"></div>
             </article>
             {/* OR Divider ends*/}
@@ -158,39 +187,39 @@ const LogIn = () => {
               </button>
             </article>
             {/*Sign in With google ends*/}
-            {/* Login button starts */}
+            {/* Create account button starts */}
             <article className="flex items-center justify-between w-full mt-7">
               <button
                 type="submit"
                 className={`flex uppercase justify-center items-center px-4 h-12 w-24 grow font-bold text-white rounded-md bg-backgroundRed hover:brightness-90 tracking-wider font-poppins`}
               >
-                {loader ? <Loader /> : "log In"}
+                {loader ? <Loader /> : "Create Account"}
               </button>
             </article>
-            {/* Login button ends */}
+            {/* Create account button ends */}
           </form>
           {/* Form ends */}
 
-          {/* Sign up redirect button starts */}
+          {/* Log in redirect button starts */}
           <div className="mt-7">
             <article className="flex transition-[border] duration-300 w-full  justify-center">
-              <p className="">First time?</p>
+              <p className="">Already have an account?</p>
               <p
                 className="pl-2 transition-[border] text-backgroundRed duration-300 cursor-pointer hover:underline hover:underline-offset-1"
                 onClick={() => {
-                  navigate("/auth/signup");
+                  navigate("/auth/login");
                 }}
               >
-                Create an account
+                Log in
               </p>
             </article>
           </div>
-          {/* Sign up redirect button ends */}
+          {/* Log in redirect button ends */}
         </div>
       </section>
-      {/* End  of login page */}
+      {/* End  of Create account page */}
     </>
   );
 };
 
-export default LogIn;
+export default SignUp;

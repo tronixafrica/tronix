@@ -11,7 +11,7 @@ const Button = (props) => {
         } ${
           props.border && `border` //This specifies if the button has aborder or not
         } border-${props.borderColor} items-center px-4 h-12 w-24 grow font-${
-          props.fontWeight||"bold"
+          props.fontWeight || "bold"
         } text-${
           props.textColor // This specifies the color of the button text
         } rounded-md bg-${

@@ -48,7 +48,7 @@ const LogIn = () => {
       <section className="bg-backgroundDark overflow-y-auto w-full flex h-full items-center justify-center py-7">
         <div className="w-[450px] h-full rounded-md  px-5 scrollbar-hide">
           {/*Start of Header */}
-          <h2 className="text-2xl font-bold text-center font-raleway mb-7">
+          <h2 className="text-2xl font-bold text-center font-raleway">
             Log In
           </h2>
           {/* End of header */}

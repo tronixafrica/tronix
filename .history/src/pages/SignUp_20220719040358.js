@@ -5,7 +5,6 @@ import Loader from "../components/Auth/Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import * as Yup from "yup";
-import Button from "../components/Button/Button";
 
 const SignUp = () => {
   const [loader, setLoader] = useState(false);
@@ -52,7 +51,7 @@ const SignUp = () => {
       <section className="overflow-y-auto w-full flex h-full items-center justify-center py-7">
         <div className="w-[450px] h-full rounded-md  px-5 scrollbar-hide">
           {/*Start of Header */}
-          <h2 className="text-2xl font-bold text-center font-raleway mb-7">
+          <h2 className="text-2xl font-bold mb-7 text-center">
             Create Account
           </h2>
           {/* End of header */}
@@ -178,29 +177,25 @@ const SignUp = () => {
             {/* OR Divider ends*/}
 
             {/*Sign in With google starts*/}
-            <Button
-              disabled={false}
-              type="submit"
-              backgroundColor="backgroundGrey"
-              textColor="white"
-              border={true}
-              borderColor="[#dadada26]"
-              fontFamily="raleway"
-              fontWeight="light"
-            >
-              <FcGoogle fontSize="25px" className="mr-1 ml-2" />
-              Google
-            </Button>
+            <article className="flex items-center justify-between w-full mt-5">
+              <button
+                type="button"
+                className={`flex justify-center items-center px-4 h-12 w-24 grow text-white rounded-md bg-backgroundGrey border border-solid border-[#dadada26] hover:brightness-90`}
+              >
+                <FcGoogle fontSize="25px" className="mr-1 ml-2" />
+                Google
+              </button>
+            </article>
             {/*Sign in With google ends*/}
             {/* Create account button starts */}
-            <Button
-              disabled={false}
-              type="submit"
-              backgroundColor="backgroundRed"
-              textColor="white"
-            >
-              {loader ? <Loader /> : "Create Account"}
-            </Button>
+            <article className="flex items-center justify-between w-full mt-7">
+              <button
+                type="submit"
+                className={`flex uppercase justify-center items-center px-4 h-12 w-24 grow font-bold text-white rounded-md bg-backgroundRed hover:brightness-90`}
+              >
+                {loader ? <Loader /> : "Create Account"}
+              </button>
+            </article>
             {/* Create account button ends */}
           </form>
           {/* Form ends */}

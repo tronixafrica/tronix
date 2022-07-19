@@ -31,7 +31,7 @@ function App() {
           <Route path="login" element={<LogIn />} />
           <Route path="signup" element={<SignUp />} />
         </Route>
-        <Route path="/auth/verify_email" element={<VerifyEmail />} />
+        <Route path="verify_email" element={<VerifyEmail />} />
 
         {/* Auth routes ends */}
       </Routes>

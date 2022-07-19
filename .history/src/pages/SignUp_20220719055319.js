@@ -178,27 +178,18 @@ const SignUp = () => {
             {/* OR Divider ends*/}
 
             {/*Sign in With google starts*/}
-            <Button
-              disabled={false}
-              type="submit"
-              backgroundColor="backgroundGrey"
-              textColor="white"
-              border={true}
-              borderColor="[#dadada26]"
-              fontFamily="raleway"
-              fontWeight="light"
-            >
-              <FcGoogle fontSize="25px" className="mr-1 ml-2" />
-              Google
-            </Button>
+            <article className="flex items-center justify-between w-full mt-5">
+              <button
+                type="button"
+                className={`flex justify-center items-center px-4 h-12 w-24 grow text-white rounded-md bg-backgroundGrey border border-solid border-[#dadada26] hover:brightness-90`}
+              >
+                <FcGoogle fontSize="25px" className="mr-1 ml-2" />
+                Google
+              </button>
+            </article>
             {/*Sign in With google ends*/}
             {/* Create account button starts */}
-            <Button
-              disabled={false}
-              type="submit"
-              backgroundColor="backgroundRed"
-              textColor="white"
-            >
+            <Button disabled={false} type="button">
               {loader ? <Loader /> : "Create Account"}
             </Button>
             {/* Create account button ends */}

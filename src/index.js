@@ -8,6 +8,8 @@ import 'tw-elements'
 import HeaderContextProvider from './state/contexts/HeaderContext';
 import DisplaySidebarProvider from './state/contexts/DisplaySidebarContext';
 
+import "swiper/css/bundle";
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -3,7 +3,7 @@ import RoundWithMinus from "../icons/RoundWithMinus";
 const DashboardComponent = () => {
   return (
     <div className="bg-[#464646] p-0 m-0 box-border h-[80%] w-full flex flex-row justify-between">
-      <div className="h-full w-[70%] bg-[#464646]">
+      <div className="h-full sm:w-[70%] bg-[#464646] w-full">
         <div className="bg-[#464646] flex h-[20%] flex-row justify-between">
           {/*  */}
           {/*  */}
@@ -79,7 +79,7 @@ const DashboardComponent = () => {
       {/*  */}
       {/*  */}
       {/* NOTIFICATIONS DIV BELOW */}
-      <div className="bg-[#121212] h-[40rem] w-[28%] p-[1rem] border border-[#777] rounded-lg overflow-auto scroll">
+      <div className="bg-[#121212] h-[40rem] w-[28%] p-[1rem] border border-[#777] rounded-lg overflow-auto scroll sm:block hidden">
         <h1 className="text-[180%] font-poppins text-[#D4D4D4] mb-[20px] ml-[8px]">
           Notifications
         </h1>

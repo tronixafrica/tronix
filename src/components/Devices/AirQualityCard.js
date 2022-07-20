@@ -1,5 +1,14 @@
 import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
 
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+
+// import required modules
+import { Pagination } from "swiper";
+
+import "../../App.css";
 const AirQualityCard = () => {
   return (
     <>
@@ -12,35 +21,76 @@ const AirQualityCard = () => {
               <p className="font-semibold text-lg text-white">Pollutants</p>
               <p className="font-semibold text-lg text-backgroundRed">Unsafe</p>
             </div>
-            <hr className="border border-[#abaaaa]" />
+            <hr className="border border-[#e2b6b6]" />
 
-            {/* Carousel Items */}
             <div
-              className="flex w-full mt-4 gap-2 border-none h-[250px] p-2 carousel slide relative"
-              id="carouselExampleIndicators"
-              data-bs-ride="carousel"
+              className="h-[250px] w-full mt-4 p-2 flex gap-2"
+              style={{ zIndex: "1000" }}
             >
-              <div className="border border-backgroundRed bg-backgroundRed w-[30%] rounded-lg flex items-center justify-center">
+              {/* First Item */}
+              <div className="border border-backgroundRed bg-backgroundRed sm:w-[30%] w-full rounded-lg flex items-center justify-center">
                 <div className="text-center text-white space-y-2 ">
                   <p className="font-thin text-sm">CO2</p>
                   <p className="text-xl font-semibold">0.33</p>
                   <p className="font-thin text-sm">ONSAFE</p>
                 </div>
               </div>
-              <div className="border-none w-full grid grid-cols-3 gap-2">
-                {[1, 2, 3, 4, 5, 6].map((i) => (
-                  <div
-                    className="border border-[#059D1D] bg-[#059D1D] w-full h-[110px] rounded-lg flex items-center justify-center"
-                    key={i}
-                  >
-                    <div className="text-center text-white space-y-2">
-                      <p className="text-sm font-thin">CO2</p>
-                      <p className="text-xl font-semibold">0.33</p>
-                      <p className="text-sm font-thin">ONSAFE</p>
-                    </div>
+              {/* Second Item */}
+              {/* Carousel Items */}
+              <Swiper
+                pagination={true}
+                modules={[Pagination]}
+                className="w-[34.38rem] overflow-hidden"
+              >
+                <SwiperSlide>
+                  <div className="border-none grid sm:grid-cols-3 grid-cols-2 gap-2">
+                    {[1, 2, 3, 4, 5, 6].map((i) => (
+                      <div
+                        className="border border-[#059D1D] bg-[#059D1D] w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto"
+                        key={i}
+                      >
+                        <div className="text-center text-white space-y-2">
+                          <p className="text-sm font-thin">CO2</p>
+                          <p className="text-xl font-semibold">0.33</p>
+                          <p className="text-sm font-thin">ONSAFE</p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="border-none grid sm:grid-cols-3 grid-cols-2 gap-2">
+                    {[1, 2, 3, 4, 5, 6].map((i) => (
+                      <div
+                        className="border border-[#059D1D] bg-[#059D1D] w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto"
+                        key={i}
+                      >
+                        <div className="text-center text-white space-y-2">
+                          <p className="text-sm font-thin">CO2</p>
+                          <p className="text-xl font-semibold">0.33</p>
+                          <p className="text-sm font-thin">ONSAFE</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="border-none grid sm:grid-cols-3 grid-cols-2 gap-2">
+                    {[1, 2, 3, 4, 5, 6].map((i) => (
+                      <div
+                        className="border border-[#059D1D] bg-[#059D1D] w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto"
+                        key={i}
+                      >
+                        <div className="text-center text-white space-y-2">
+                          <p className="text-sm font-thin">CO2</p>
+                          <p className="text-xl font-semibold">0.33</p>
+                          <p className="text-sm font-thin">ONSAFE</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </SwiperSlide>
+              </Swiper>
             </div>
           </div>
           {/* End of Pollutant Card */}

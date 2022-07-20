@@ -8,7 +8,7 @@ const MobileSideNav = () => {
     return ( 
         <div 
         style={{background: 'rgba(0,0,0,0.700)'}}
-        className={`bg-green-900 w-full absolute h-full top-0 z-20 transition-all
+        className={`bg-green-900 w-full absolute h-full top-0 z-[12000] transition-all
         ${sideNav ? 'flex' : 'hidden'}`}
         onClick={toggleSideNav}>
             <div className="fixed w-[15rem] h-[100vh] shadow-md bg-backgroundDark px-1 py-6 flex flex-col justify-start z-10">

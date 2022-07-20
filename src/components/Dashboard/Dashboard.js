@@ -9,7 +9,7 @@ const DashboardComponent = () => {
           {/* DIV HOLDING CARDS DIV AND DEVICES+USERS DIV */}
           <div className="flex flex-col  sm:w-[69%] w-full">
             {/* TOTAL DEVICES + TOTAL USERS CARDS DIV */}
-            <div className="flex h-[20%] overflow-y-scroll flex-row justify-between">
+            <div className="flex h-[20%] overflow-y-scroll sm:overflow-hidden flex-row justify-between">
               <ul
                 class="nav nav-tabs w-full flex justify-between flex-col md:flex-row flex-wrap list-none border-b-0 pl-0"
                 id="tabs-tab"

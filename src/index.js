@@ -7,6 +7,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import 'tw-elements'
 import HeaderContextProvider from './state/contexts/HeaderContext';
 import DisplaySidebarProvider from './state/contexts/DisplaySidebarContext';
+import AuthProvider from './state/contexts/AuthContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,7 +16,9 @@ root.render(
     <Router>
       <DisplaySidebarProvider>
         <HeaderContextProvider>
-          <App />
+          <AuthProvider>
+            <App />
+          </AuthProvider>
         </HeaderContextProvider>
       </DisplaySidebarProvider>
     </Router>

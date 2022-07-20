@@ -3,6 +3,7 @@ import Main from "./layouts/Main";
 import Dashboard from "./pages/Dashboard";
 import Device from "./pages/Device";
 import Reports from "./pages/Reports";
+import SignUp from "./pages/SignUp";
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         {/* start routes excluding the default layout */}
         {/* ROUTES GOES IN HERE */}
+        <Route path="/signup" element={<SignUp />} />
         {/* end routes excluding the default layout */}
 
         {/* start routes using the default layout */}

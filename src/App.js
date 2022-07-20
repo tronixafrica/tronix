@@ -4,7 +4,6 @@ import Main from "./layouts/Main";
 import Dashboard from "./pages/Dashboard";
 import Device from "./pages/Device";
 import Reports from "./pages/Reports";
-import Swiperpage from "./Swiper";
 
 function App() {
   return (

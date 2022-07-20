@@ -36,7 +36,7 @@ const VerifyEmail = () => {
       </section>
 
       {/* Confirmation modal starts */}
-      <FilterUsersModal display={false} />
+      <AddUserModal display={true} />
       {/* Confirmation modal ends */}
     </>
   );

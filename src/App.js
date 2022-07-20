@@ -20,7 +20,6 @@ function App() {
           <Route path="/reports" element={<Reports />} />
           <Route path="/devices" element={<Device />} />
           <Route path="/singledevice" element={<SingleDevice />} />
-          <Route path="/swiper" element={<Swiperpage />} />
         </Route>
         {/* end routes using the default layout */}
       </Routes>

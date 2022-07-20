@@ -91,7 +91,9 @@ const Device = () => {
       <div className="block sm:hidden mt-5 h-[25.63rem] overflow-auto scroll">
         {deviceItems.map((device, index) => (
           <div key={index}>
-            <MobDeviceCard device={device} />
+            <Link to="/singledevice">
+              <MobDeviceCard device={device} />
+            </Link>
           </div>
         ))}
       </div>

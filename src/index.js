@@ -9,6 +9,8 @@ import HeaderContextProvider from './state/contexts/HeaderContext';
 import DisplaySidebarProvider from './state/contexts/DisplaySidebarContext';
 import AuthProvider from './state/contexts/AuthContext';
 
+import "swiper/css/bundle";
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

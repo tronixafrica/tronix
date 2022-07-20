@@ -26,7 +26,7 @@ const Header = () => {
     // }
 
     return ( 
-            <div className={`sticky top-0 px-6 py-[2rem] h-[9rem] sm:h-[8rem] bg-backgroundGrey flex sm:flex-row flex-col-reverse justify-between sm:items-center transition-all`}>
+            <div className={`sticky top-0 px-6 py-[2rem] h-[9rem] sm:h-[8rem] bg-backgroundGrey flex sm:flex-row flex-col-reverse justify-between sm:items-center transition-all z-[10000]`}>
             {/* start page title */}
             <div className="pt-[1rem] sm:pt-0 ">
                 <div className='text-white font-poppins pb-3 text-[17px] sm:text-[23px]'>{pageTitle} { dashboardPageTitle ? 'Precious' : null }</div>

@@ -1,6 +1,7 @@
 import DeviceCardComp from "../components/Devices/DeviceCardComp";
 import { deviceItems } from "../../src/components/DataList/dummyData";
 import MobDeviceCard from "../components/Devices/MobDeviceCard";
+import { Link } from "react-router-dom";
 
 const Device = () => {
   return (
@@ -78,7 +79,9 @@ const Device = () => {
         <div className="h-[25.63rem] overflow-auto scroll">
           {deviceItems.map((device, index) => (
             <div key={index}>
-              <DeviceCardComp device={device} />
+              <Link to="/singledevice">
+                <DeviceCardComp device={device} />
+              </Link>
             </div>
           ))}
         </div>

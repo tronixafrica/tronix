@@ -67,7 +67,7 @@ const LogIn = () => {
                   <input
                     type="email"
                     name="email"
-                    className=" block w-full px-4 py-2 h-[50px] font-normal bg-transparent bg-clip-padding border-2 border-solid border-backgroundGrey rounded-md transition ease-in-out m-0 placeholder:text-backgroundGrey placeholder: focus:bg-transparent focus:border-textGrey focus:outline-none"
+                    className=" block w-full px-4 py-2 h-[50px] font-normal bg-transparent bg-clip-padding border-[2px] border-solid border-backgroundGrey rounded-md transition ease-in-out m-0 placeholder:text-backgroundGrey placeholder: focus:bg-transparent focus:border-textGrey focus:outline-none"
                     placeholder="Email"
                     value={formik.values.email}
                     onChange={formik.handleChange}
@@ -94,7 +94,7 @@ const LogIn = () => {
                     type={`${showPassword ? "text" : "password"}`}
                     name="password"
                     id="password"
-                    className=" block w-full px-4 py-2 h-[50px] font-normal bg-transparent bg-clip-padding border-2 border-solid border-backgroundGrey rounded-md transition ease-in-out m-0 placeholder:text-backgroundGrey placeholder: focus:bg-transparent focus:border-textGrey focus:outline-none"
+                    className=" block w-full px-4 py-2 h-[50px] font-normal bg-transparent bg-clip-padding border-[2px] border-solid border-backgroundGrey rounded-md transition ease-in-out m-0 placeholder:text-backgroundGrey placeholder: focus:bg-transparent focus:border-textGrey focus:outline-none"
                     placeholder="Password"
                     value={formik.values.password}
                     onChange={formik.handleChange}
@@ -162,7 +162,7 @@ const LogIn = () => {
             <article className="flex items-center justify-between w-full mt-7">
               <button
                 type="submit"
-                className={`flex uppercase justify-center items-center px-4 h-12 w-24 grow font-bold text-white rounded-md bg-backgroundRed hover:brightness-90 tracking-wider font-poppins`}
+                className={`flex uppercase justify-center items-center px-4 h-12 w-24 grow font-bold text-white rounded-md bg-backgroundRed hover:brightness-90 tracking-widest font-poppins`}
               >
                 {loader ? <Loader /> : "log In"}
               </button>

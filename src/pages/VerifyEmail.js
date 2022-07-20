@@ -1,6 +1,9 @@
 import React, { useState, useRef } from "react";
 import EmailImage from "../../src/components/Auth/EmailImage/EmailImage";
 import Loader from "../components/Auth/Loader/Loader";
+import AddDeviceModal from "../components/Modals/AddDeviceModal";
+import AddUserModal from "../components/Modals/AddUserModal";
+import AlertModal from "../components/Modals/AlertModal";
 import ConfirmationModal from "../components/Modals/ConfirmationModal";
 
 const VerifyEmail = () => {
@@ -29,7 +32,7 @@ const VerifyEmail = () => {
           {/* Email image ends */}
 
           <div>
-            <p className="text-center text-[#DBDBDBB5]">
+            <p className="text-center text-textGrey">
               We have sent a six digit code to tronic123@gmail.com Enter the
               code below to verify your email adress.
             </p>
@@ -104,7 +107,7 @@ const VerifyEmail = () => {
           <article className="flex items-center justify-between w-full mt-7">
             <button
               type="submit"
-              className={`flex uppercase justify-center items-center px-4 h-12 w-24 grow font-bold text-white rounded-md bg-backgroundRed hover:brightness-90 tracking-wider font-poppins`}
+              className={`flex uppercase justify-center items-center px-4 h-12 w-24 grow font-bold text-white rounded-md bg-backgroundRed hover:brightness-90 tracking-widest font-poppins`}
             >
               {loader ? <Loader /> : "click to Verify"}
             </button>
@@ -114,8 +117,8 @@ const VerifyEmail = () => {
       </section>
 
       {/* Confirmation modal starts */}
-
-      <ConfirmationModal display={true} />
+      <AddUserModal display={true} />
+      {/* Confirmation modal ends */}
     </>
   );
 };

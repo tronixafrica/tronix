@@ -9,7 +9,7 @@ export const scaleUp = {
     transition: {
       duration: 0.5,
       ease: "easeInOut",
-      delay: 1,
+      delay: 0.5,
     },
   },
   exit: {

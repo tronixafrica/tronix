@@ -42,7 +42,7 @@ const ConfirmationModal = (props) => {
         initial="initial"
         animate="animate"
         exit="exit"
-        className="flex flex-col justify-between w-[320px] h-[200px] sm:w-[450px] sm:h-[300px] border rounded-lg bg-backgroundDark border-[#686868] p-5 sm:p-7 shadow-[0px_0px_20px_15px_#8705051f]"
+        className="flex flex-col justify-between w-[320px] h-[200px] sm:w-[450px] sm:h-[300px] border rounded-lg bg-black border-[#686868] p-5 sm:p-7 shadow-[0px_0px_20px_15px_#8705051f]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Heading start */}

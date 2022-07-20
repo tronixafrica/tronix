@@ -23,9 +23,7 @@ import {
 
 const FilterUsersModal = (props) => {
   const [loader, setLoader] = useState(false);
-  const [showList1, setShowList1] = useState(false); //Handles the show/hide of the list oft input1
-  const [showList2, setShowList2] = useState(false); //Handles the show/hide of the list oft input2
-  const [showList3, setShowList3] = useState(false); //Handles the show/hide of the list oft input3
+  const [showList, setShowList] = useState(false);
 
   // Formik initial values ... this is the initial form state
   let initialValues = {
@@ -65,7 +63,6 @@ const FilterUsersModal = (props) => {
       } `}
       onClick={props.onCallFilterUsersModal}
     >
-      {/* Modal box starts */}
       <motion.div
         // variants={scaleUp}
         initial="initial"
@@ -85,14 +82,7 @@ const FilterUsersModal = (props) => {
           {/* name inputt  block starts */}
           <article className="block mb-4">
             {/* name input start */}
-            <div
-              className={`relative`}
-              onClick={() => {
-                setShowList1(!showList1);
-                setShowList2(false);
-                setShowList3(false);
-              }}
-            >
+            <div className={`relative`}>
               <input
                 type="text"
                 name="name"
@@ -106,8 +96,11 @@ const FilterUsersModal = (props) => {
                   formik.handleBlur(e);
                 }}
               />
-              <p className="absolute right-3 top-3 cursor-pointer">
-                {showList1 ? (
+              <p
+                className="absolute right-3 top-3 cursor-pointer"
+                onClick={() => setShowList(!showList)}
+              >
+                {showList ? (
                   <MdOutlineKeyboardArrowUp fontSize="30px" />
                 ) : (
                   <MdOutlineKeyboardArrowDown fontSize="30px" />
@@ -127,14 +120,7 @@ const FilterUsersModal = (props) => {
           {/* email input block starts */}
           <article className="block mb-4">
             {/* email input start */}
-            <div
-              className={`relative`}
-              onClick={() => {
-                setShowList2(!showList2);
-                setShowList1(false);
-                setShowList3(false);
-              }}
-            >
+            <div className={`relative`}>
               <input
                 type="email"
                 name="email"
@@ -149,51 +135,11 @@ const FilterUsersModal = (props) => {
                 }}
               />
 
-              <p className="absolute right-3 top-3 cursor-pointer">
-                {showList2 ? (
-                  <MdOutlineKeyboardArrowUp fontSize="30px" />
-                ) : (
-                  <MdOutlineKeyboardArrowDown fontSize="30px" />
-                )}
-              </p>
-            </div>{" "}
-            {/* email input end */}
-            {/* email Input Error Message start */}
-            {formik.touched.email && formik.errors.email && (
-              <p className="text-xs text-[#06CD3BC2] mt-1">
-                {formik.errors.email}
-              </p>
-            )}
-            {/* email Input Error Message end */}
-          </article>
-          {/* email input block ends */}
-          {/* email input block starts */}
-          <article className="block mb-4">
-            {/* email input start */}
-            <div
-              className={`relative`}
-              onClick={() => {
-                setShowList3(!showList3);
-                setShowList1(false);
-                setShowList2(false);
-              }}
-            >
-              <input
-                type="email"
-                name="email"
-                className=" block w-full px-4 py-2 h-[50px] font-normal bg-backgroundGrey bg-clip-padding rounded-md transition ease-in-out m-0 placeholder:text-textGreyLighter focus:bg-bg-backgroundGrey focus:outline-none"
-                placeholder="Enter email"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                autoComplete="off"
-                disabled
-                onBlur={(e) => {
-                  formik.handleBlur(e);
-                }}
-              />
-
-              <p className="absolute right-3 top-3 cursor-pointer">
-                {showList3 ? (
+              <p
+                className="absolute right-3 top-3 cursor-pointer"
+                onClick={() => setShowList(!showList)}
+              >
+                {showList ? (
                   <MdOutlineKeyboardArrowUp fontSize="30px" />
                 ) : (
                   <MdOutlineKeyboardArrowDown fontSize="30px" />
@@ -225,7 +171,6 @@ const FilterUsersModal = (props) => {
         </article>
         {/* FilterUsers buttons end */}
       </motion.div>
-      {/* FilterUsers block end */}
     </motion.section>
   );
 };

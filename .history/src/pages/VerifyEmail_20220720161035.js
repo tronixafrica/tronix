@@ -8,6 +8,13 @@ import ConfirmationModal from "../components/Modals/ConfirmationModal";
 import FilterUsersModal from "../components/Modals/FilterUsersModal";
 
 const VerifyEmail = () => {
+  const firstInput = useRef(null);
+  const secondInput = useRef(null);
+  const thirdInput = useRef(null);
+  const fourthInput = useRef(null);
+  const fifthInput = useRef(null);
+  const sixthInput = useRef(null);
+
   const [loader, setLoader] = useState(false);
 
   return (

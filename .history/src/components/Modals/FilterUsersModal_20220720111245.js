@@ -23,9 +23,9 @@ import {
 
 const FilterUsersModal = (props) => {
   const [loader, setLoader] = useState(false);
-  const [showList1, setShowList1] = useState(false); //Handles the show/hide of the list oft input1
-  const [showList2, setShowList2] = useState(false); //Handles the show/hide of the list oft input2
-  const [showList3, setShowList3] = useState(false); //Handles the show/hide of the list oft input3
+  const [showList1, setShowList1] = useState(false);
+  const [showList2, setShowList2] = useState(false);
+  const [showList3, setShowList3] = useState(false);
 
   // Formik initial values ... this is the initial form state
   let initialValues = {
@@ -65,7 +65,6 @@ const FilterUsersModal = (props) => {
       } `}
       onClick={props.onCallFilterUsersModal}
     >
-      {/* Modal box starts */}
       <motion.div
         // variants={scaleUp}
         initial="initial"
@@ -85,14 +84,7 @@ const FilterUsersModal = (props) => {
           {/* name inputt  block starts */}
           <article className="block mb-4">
             {/* name input start */}
-            <div
-              className={`relative`}
-              onClick={() => {
-                setShowList1(!showList1);
-                setShowList2(false);
-                setShowList3(false);
-              }}
-            >
+            <div className={`relative`}>
               <input
                 type="text"
                 name="name"
@@ -106,7 +98,10 @@ const FilterUsersModal = (props) => {
                   formik.handleBlur(e);
                 }}
               />
-              <p className="absolute right-3 top-3 cursor-pointer">
+              <p
+                className="absolute right-3 top-3 cursor-pointer"
+                onClick={() => setShowList1(!showList1)}
+              >
                 {showList1 ? (
                   <MdOutlineKeyboardArrowUp fontSize="30px" />
                 ) : (
@@ -127,14 +122,7 @@ const FilterUsersModal = (props) => {
           {/* email input block starts */}
           <article className="block mb-4">
             {/* email input start */}
-            <div
-              className={`relative`}
-              onClick={() => {
-                setShowList2(!showList2);
-                setShowList1(false);
-                setShowList3(false);
-              }}
-            >
+            <div className={`relative`}>
               <input
                 type="email"
                 name="email"
@@ -149,7 +137,10 @@ const FilterUsersModal = (props) => {
                 }}
               />
 
-              <p className="absolute right-3 top-3 cursor-pointer">
+              <p
+                className="absolute right-3 top-3 cursor-pointer"
+                onClick={() => setShowList2(!showList2)}
+              >
                 {showList2 ? (
                   <MdOutlineKeyboardArrowUp fontSize="30px" />
                 ) : (
@@ -170,14 +161,7 @@ const FilterUsersModal = (props) => {
           {/* email input block starts */}
           <article className="block mb-4">
             {/* email input start */}
-            <div
-              className={`relative`}
-              onClick={() => {
-                setShowList3(!showList3);
-                setShowList1(false);
-                setShowList2(false);
-              }}
-            >
+            <div className={`relative`}>
               <input
                 type="email"
                 name="email"
@@ -192,7 +176,10 @@ const FilterUsersModal = (props) => {
                 }}
               />
 
-              <p className="absolute right-3 top-3 cursor-pointer">
+              <p
+                className="absolute right-3 top-3 cursor-pointer"
+                onClick={() => setShowList3(!showList3)}
+              >
                 {showList3 ? (
                   <MdOutlineKeyboardArrowUp fontSize="30px" />
                 ) : (
@@ -225,7 +212,6 @@ const FilterUsersModal = (props) => {
         </article>
         {/* FilterUsers buttons end */}
       </motion.div>
-      {/* FilterUsers block end */}
     </motion.section>
   );
 };

@@ -1,13 +1,9 @@
 import React, { useState, useRef } from "react";
-import EmailImage from "../../src/components/Auth/EmailImage/EmailImage";
 import Loader from "../components/Auth/Loader/Loader";
-import AddDeviceModal from "../components/Modals/AddDeviceModal";
-import AddUserModal from "../components/Modals/AddUserModal";
-import AlertModal from "../components/Modals/AlertModal";
-import ConfirmationModal from "../components/Modals/ConfirmationModal";
+import SuccessIcon from "../components/icons/SuccessIcon";
 import FilterUsersModal from "../components/Modals/FilterUsersModal";
 
-const VerifyEmail = () => {
+const SuccessPage = () => {
   const [loader, setLoader] = useState(false);
 
   return (
@@ -16,22 +12,33 @@ const VerifyEmail = () => {
         <div className="flex flex-col items-center space-y-7 w-[450px]  rounded-md  px-5 scrollbar-hide">
           {/*Start of Header */}
           <h2 className="text-2xl font-bold text-center font-raleway">
-            Verify Your Email Address
+            Success!
           </h2>
           {/* End of header */}
-          {/* Email image starts */}
-          <div>
-            <EmailImage />
+          {/* Alert status icon start */}
+          <div className="w-full flex justify-center items-center mb-4">
+            <SuccessIcon />
           </div>
-          {/* Email image ends */}
+          {/* Alert message start */}
           {/* Verification message */}
           <div>
             <p className="text-center text-textGrey">
-              We have sent a verification email to tronic123@gmail.com Follow
-              the link to verify your email adress.
+              {/* email verified successfully message */}
+              Your email address has been verified successfully.
             </p>
           </div>
           {/* Verification message ends */}
+
+          {/* Start of button block */}
+          <article className="flex items-center justify-between w-full mt-7">
+            <button
+              type="submit"
+              className={`flex uppercase justify-center items-center px-4 h-12 w-24 grow font-bold text-white rounded-md bg-backgroundRed hover:brightness-90 tracking-wider font-poppins`}
+            >
+              {loader ? <Loader /> : "click to Login"}
+            </button>
+          </article>
+          {/* End of button block */}
         </div>
       </section>
 
@@ -42,4 +49,4 @@ const VerifyEmail = () => {
   );
 };
 
-export default VerifyEmail;
+export default SuccessPage;

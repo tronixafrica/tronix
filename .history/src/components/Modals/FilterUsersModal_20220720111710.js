@@ -23,9 +23,9 @@ import {
 
 const FilterUsersModal = (props) => {
   const [loader, setLoader] = useState(false);
-  const [showList1, setShowList1] = useState(false); //Handles the show/hide of the list oft input1
-  const [showList2, setShowList2] = useState(false); //Handles the show/hide of the list oft input2
-  const [showList3, setShowList3] = useState(false); //Handles the show/hide of the list oft input3
+  const [showList1, setShowList1] = useState(false);
+  const [showList2, setShowList2] = useState(false);
+  const [showList3, setShowList3] = useState(false);
 
   // Formik initial values ... this is the initial form state
   let initialValues = {
@@ -65,7 +65,6 @@ const FilterUsersModal = (props) => {
       } `}
       onClick={props.onCallFilterUsersModal}
     >
-      {/* Modal box starts */}
       <motion.div
         // variants={scaleUp}
         initial="initial"
@@ -225,7 +224,6 @@ const FilterUsersModal = (props) => {
         </article>
         {/* FilterUsers buttons end */}
       </motion.div>
-      {/* FilterUsers block end */}
     </motion.section>
   );
 };

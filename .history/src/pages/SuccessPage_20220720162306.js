@@ -7,7 +7,7 @@ import AlertModal from "../components/Modals/AlertModal";
 import ConfirmationModal from "../components/Modals/ConfirmationModal";
 import FilterUsersModal from "../components/Modals/FilterUsersModal";
 
-const VerifyEmail = () => {
+const SuccessPage = () => {
   const [loader, setLoader] = useState(false);
 
   return (
@@ -42,4 +42,4 @@ const VerifyEmail = () => {
   );
 };
 
-export default VerifyEmail;
+export default SuccessPage;

@@ -8,6 +8,13 @@ import ConfirmationModal from "../components/Modals/ConfirmationModal";
 import FilterUsersModal from "../components/Modals/FilterUsersModal";
 
 const VerifyEmail = () => {
+  const firstInput = useRef(null);
+  const secondInput = useRef(null);
+  const thirdInput = useRef(null);
+  const fourthInput = useRef(null);
+  const fifthInput = useRef(null);
+  const sixthInput = useRef(null);
+
   const [loader, setLoader] = useState(false);
 
   return (
@@ -32,6 +39,15 @@ const VerifyEmail = () => {
             </p>
           </div>
           {/* Verification message ends */}
+
+          {/* Start of didn't get a code? */}
+          <div className="flex transition-[border] duration-300 w-full  justify-center">
+            <p className="">Didn't get a code?</p>
+            <p className="pl-2 transition-[border] text-backgroundRed duration-300 cursor-pointer hover:underline hover:underline-offset-1">
+              Resend code{" "}
+            </p>
+          </div>
+          {/* End of didn't get a code? */}
         </div>
       </section>
 

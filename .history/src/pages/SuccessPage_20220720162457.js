@@ -7,7 +7,7 @@ import AlertModal from "../components/Modals/AlertModal";
 import ConfirmationModal from "../components/Modals/ConfirmationModal";
 import FilterUsersModal from "../components/Modals/FilterUsersModal";
 
-const VerifyEmail = () => {
+const SuccessPage = () => {
   const [loader, setLoader] = useState(false);
 
   return (
@@ -32,6 +32,17 @@ const VerifyEmail = () => {
             </p>
           </div>
           {/* Verification message ends */}
+
+          {/* Start of button block */}
+          <article className="flex items-center justify-between w-full mt-7">
+            <button
+              type="submit"
+              className={`flex uppercase justify-center items-center px-4 h-12 w-24 grow font-bold text-white rounded-md bg-backgroundRed hover:brightness-90 tracking-wider font-poppins`}
+            >
+              {loader ? <Loader /> : "click to Verify"}
+            </button>
+          </article>
+          {/* End of button block */}
         </div>
       </section>
 
@@ -42,4 +53,4 @@ const VerifyEmail = () => {
   );
 };
 
-export default VerifyEmail;
+export default SuccessPage;

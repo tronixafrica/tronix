@@ -6,7 +6,6 @@ import Device from "./pages/Device";
 import LogIn from "./pages/LogIn";
 import Reports from "./pages/Reports";
 import SignUp from "./pages/SignUp";
-import SuccessPage from "./pages/SuccessPage";
 import VerifyEmail from "./pages/VerifyEmail";
 
 function App() {
@@ -33,7 +32,6 @@ function App() {
           <Route path="signup" element={<SignUp />} />
         </Route>
         <Route path="/auth/verify_email/:id" element={<VerifyEmail />} />
-        <Route path="/auth/success/:id" element={<SuccessPage />} />
 
         {/* Auth routes ends */}
       </Routes>

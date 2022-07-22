@@ -5,6 +5,7 @@ import Loader from "../components/Auth/Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import * as Yup from "yup";
+import GoToTop from "../components/GoToTop/GoToTop";
 
 const LogIn = () => {
   const [loader, setLoader] = useState(false);
@@ -189,6 +190,7 @@ const LogIn = () => {
         </div>
       </section>
       {/* End  of login page */}
+      <GoToTop />
     </>
   );
 };

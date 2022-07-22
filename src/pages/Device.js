@@ -2,6 +2,7 @@ import DeviceCardComp from "../components/Devices/DeviceCardComp";
 import { deviceItems } from "../../src/components/DataList/dummyData";
 import MobDeviceCard from "../components/Devices/MobDeviceCard";
 import { Link } from "react-router-dom";
+import GoToTop from "../components/GoToTop/GoToTop";
 
 const Device = () => {
   return (
@@ -97,6 +98,7 @@ const Device = () => {
           </div>
         ))}
       </div>
+      <GoToTop />
     </>
   );
 };

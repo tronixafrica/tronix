@@ -1,8 +1,38 @@
-import RoundWithMinus from "../icons/RoundWithMinus";
+import { useState } from "react";
+import RoundWithPlus from "../icons/RoundWithMinus";
+import AddDeviceModal from "../Modals/AddDeviceModal";
+import AddUserModal from "../Modals/AddUserModal";
+import AlertModal from "../Modals/AlertModal";
+import ConfirmationModal from "../Modals/ConfirmationModal";
 
 const DashboardComponent = () => {
+  const [onDisplay, setOnDisplay] = useState(false);
+  const [onAddDevice, setOnAddDevice] = useState(false);
+  const [onAddUser, setOnAddUser] = useState(false);
+  const [alertDisplay, setAlertDisplay] = useState(false);
+
+  const deleteNOtification = () => {};
   return (
     <div>
+      <ConfirmationModal
+        display={onDisplay}
+        onCallConfirmationModal={() => setOnDisplay(false)}
+        heading="Notification Details"
+        message="A new device Razor drill was added by James Charles 20 minutes ago."
+        leftButtonText="cancel"
+        rightButtonText="delete"
+        onClickLeftButton={() => setOnDisplay(false)}
+        onClickRightButton={() => setAlertDisplay(deleteNOtification)}
+      />
+      <AlertModal display={alertDisplay} />
+      <AddDeviceModal
+        display={onAddDevice}
+        onCallAddDeviceModal={() => setOnAddDevice(false)}
+      />
+      <AddUserModal
+        display={onAddUser}
+        onCallAddUserModal={() => setOnAddUser(false)}
+      />
       {/* START OF TAILWIND DIV */}
       <div className="bg-[#464646] p-0 m-0 box-border h-[80%] w-full flex flex-row justify-between">
         <div className="h-full w-[100%] bg-[#464646] flex flex-row justify-between">
@@ -44,7 +74,9 @@ const DashboardComponent = () => {
                         <h1 className="font-raleway text-base text-[#D4D4D4]">
                           TOTAL DEVICES
                         </h1>
-                        {<RoundWithMinus />}
+                        <p onClick={() => setOnAddDevice(true)}>
+                          {<RoundWithPlus />}
+                        </p>
                       </div>
                       <div className="flex flex-row items-center">
                         <h1 className="font-poppins text-[150%] mr-[1rem] text-[#D4D4D4] font-semibold">
@@ -83,7 +115,9 @@ const DashboardComponent = () => {
                         <h1 className="font-raleway text-base text-[#D4D4D4]">
                           TOTAL USERS
                         </h1>
-                        {<RoundWithMinus />}
+                        <p onClick={() => setOnAddUser(true)}>
+                          {<RoundWithPlus />}
+                        </p>
                       </div>
                       <div className="flex flex-row items-center">
                         <h1 className="font-poppins text-[150%] mr-[1rem] text-[#D4D4D4] font-semibold">
@@ -184,7 +218,10 @@ const DashboardComponent = () => {
                 19, 20,
               ].map((i) => (
                 <div className="border-t border-[#555] flex items-center justify-between p-[10px] transition ease-in-out duration-300 hover:bg-[#D20202] bg-[#121212]">
-                  <div>
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => setOnDisplay(true)}
+                  >
                     <h1 className="font-poppins text-[#D4D4D4] flex flex-col text-[100%]">
                       New device added
                     </h1>

@@ -20,6 +20,4 @@ export const userItems = [
   { name: "Mary Jane", loc: "mary@gmail.com", stat: "Online" },
   { name: "John Doe", loc: "john@gmail.com", stat: "Online" },
   { name: "Manhattan", loc: "manhattan@gmail.com", stat: "Online" },
-  { name: "pussy", loc: "pussy@gmail.com", stat: "Online" },
-  { name: "boobs", loc: "boobs@gmail.com", stat: "Online" },
 ];

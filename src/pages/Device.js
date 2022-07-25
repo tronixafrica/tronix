@@ -4,6 +4,7 @@ import { deviceItems } from "../../src/components/DataList/dummyData";
 import MobDeviceCard from "../components/Devices/MobDeviceCard";
 import { Link } from "react-router-dom";
 import AddDeviceModal from "../components/Modals/AddDeviceModal";
+import GoToTop from "../components/GoToTop/GoToTop";
 
 const Device = () => {
   const [onDisplay, setOnDisplay] = useState(false);
@@ -102,6 +103,7 @@ const Device = () => {
           </div>
         ))}
       </div>
+      <GoToTop />
     </>
   );
 };

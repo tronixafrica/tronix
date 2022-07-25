@@ -1,6 +1,7 @@
 import UsersCardComp from "../components/users/UsersCardComp";
 import { userItems } from "../../src/components/DataList/dummyData";
 import MobUsersCard from "../components/users/MobUsersCard";
+import GoToTop from "../components/GoToTop/GoToTop";
 
 const Users = () => {
   return (
@@ -92,6 +93,7 @@ const Users = () => {
           </div>
         ))}
       </div>
+      <GoToTop />
     </>
   );
 };

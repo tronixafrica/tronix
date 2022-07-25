@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { DisplaySidebarContext } from "../../state/contexts/DisplaySidebarContext";
 import { HeaderContext } from "../../state/contexts/HeaderContext";
 
@@ -88,13 +88,16 @@ const Header = () => {
           {/* end notificaton icon */}
 
           {/* start profile image */}
-          <div>
-            <img
-              src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-              className="rounded-full w-[2rem]"
-              alt="Avatar"
-            />
-          </div>
+          <Link to="/profile">
+            <div title="profile">
+              <img
+                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                className="rounded-full w-[2rem]"
+                alt="Avatar"
+              />
+            </div>
+          </Link>
+
           {/* end profile image */}
         </div>
         {/* end notification icon and profile image */}

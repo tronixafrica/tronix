@@ -8,7 +8,7 @@ import MobileSideNav from "../components/Navbar/MobileSideNav";
 
 const Main = () => {
   return (
-    <div className="flex relative">
+    <div className="flex min-h-[100vh] relative">
       {/* start desktop sidenav */}
       <SideNav />
       {/* end desktop sidenav */}

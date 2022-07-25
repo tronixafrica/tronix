@@ -14,6 +14,7 @@ import TestSignUp from "./pages/testSignup";
 import ParentIframe from "./pages/ParentIframe";
 import ChildIframe from "./pages/ChildIframe";
 import NotificationsPage from "./pages/NotificationsPage";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/iframe" element={<ParentIframe />} />
           <Route path="http://192.168.4.1/" element={<ChildIframe />} />
           <Route path="/notifications" element={<NotificationsPage />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
         {/* end routes using the default layout */}
 

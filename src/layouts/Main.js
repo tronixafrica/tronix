@@ -16,7 +16,7 @@ const Main = () => {
       <MobileSideNav />
 
       {/* start header and page route content */}
-      <div className="sm:ml-[15rem] w-full bg-backgroundGrey relative ">
+      <div className="sm:ml-[15rem] w-full relative bg-backgroundGrey">
         {/* start header */}
         <Header />
         {/* end header */}

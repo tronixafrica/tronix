@@ -10,6 +10,10 @@ import SignUp from "./pages/SignUp";
 import Users from "./pages/users";
 import SuccessPage from "./pages/SuccessPage";
 import VerifyEmail from "./pages/VerifyEmail";
+import TestSignUp from "./pages/testSignup";
+import ParentIframe from "./pages/ParentIframe";
+import ChildIframe from "./pages/ChildIframe";
+import NotificationsPage from "./pages/NotificationsPage";
 import Profile from "./pages/Profile";
 
 function App() {
@@ -18,7 +22,7 @@ function App() {
       <Routes>
         {/* start routes excluding the default layout */}
         {/* ROUTES GOES IN HERE */}
-        {/* <Route path="/signup" element={<SignUp />} /> */}
+        <Route path="/sig" element={<TestSignUp />} />
         {/* end routes excluding the default layout */}
 
         {/* start routes using the default layout */}
@@ -28,6 +32,9 @@ function App() {
           <Route path="/devices" element={<Device />} />
           <Route path="/singledevice" element={<SingleDevice />} />
           <Route path="/users" element={<Users />} />
+          <Route path="/iframe" element={<ParentIframe />} />
+          <Route path="http://192.168.4.1/" element={<ChildIframe />} />
+          <Route path="/notifications" element={<NotificationsPage />} />
           <Route path="/profile" element={<Profile />} />
         </Route>
         {/* end routes using the default layout */}

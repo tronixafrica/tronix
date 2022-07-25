@@ -1,23 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import ConfirmationModal from "../Modals/ConfirmationModal";
 
 const MobDeviceCard = ({ device }) => {
+  const [onDisplay, setOnDisplay] = useState(false);
   return (
     <div className="border border-solid border-[#717171] mt-4 mr-2 rounded-lg bg-backgroundDark text-white text-sm">
-      <div className="flex items-center justify-between border-b border-solid border-[#717171] p-3">
-        <p>Name Of Device</p>
-        <p>{device?.name}</p>
-      </div>
-      <div className="flex items-center justify-between p-3 border-b border-solid border-[#717171]">
-        <p>Location</p>
-        <p>{device?.loc}</p>
-      </div>
-      <div className="flex items-center justify-between p-3 border-b border-solid border-[#717171]">
-        <p>Status</p>
-        <p className="text-[#717171]">{device?.stat}</p>
-      </div>
+      <ConfirmationModal
+        display={onDisplay}
+        onCallConfirmationModal={() => setOnDisplay(false)}
+        heading="Remove Devices"
+        message="Are you sure you want to remove Razor from your devices?"
+        leftButtonText="cancel"
+        rightButtonText="remove"
+        onClickLeftButton={() => setOnDisplay(false)}
+      />
+      <Link to="/singledevice">
+        <div className="flex items-center justify-between border-b border-solid border-[#717171] p-3">
+          <p>Name Of Device</p>
+          <p>{device?.name}</p>
+        </div>
+        <div className="flex items-center justify-between p-3 border-b border-solid border-[#717171]">
+          <p>Location</p>
+          <p>{device?.loc}</p>
+        </div>
+        <div className="flex items-center justify-between p-3 border-b border-solid border-[#717171]">
+          <p>Status</p>
+          <p className="text-[#717171]">{device?.stat}</p>
+        </div>
+      </Link>
       <div className="flex items-center justify-between p-3 border-b border-solid border-[#717171]">
         <p>Remove Device</p>
-        <p>
+        <p className="cursor-pointer" onClick={() => setOnDisplay(true)}>
           <svg
             style={{ width: "1.5rem", height: "1.5rem", color: "#717171" }}
             xmlns="http://www.w3.org/2000/svg"

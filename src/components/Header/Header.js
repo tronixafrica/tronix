@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { DisplaySidebarContext } from "../../state/contexts/DisplaySidebarContext";
 import { HeaderContext } from "../../state/contexts/HeaderContext";
 
@@ -10,6 +10,8 @@ const Header = () => {
   const [dashboardPageTitle, setdashboardPageTitle] = useState(true);
 
   const { toggleSideNav } = useContext(DisplaySidebarContext);
+
+  const navigate = useNavigate();
 
   // observe the pageTitle state for the dashboard
   useEffect(() => {
@@ -66,7 +68,10 @@ const Header = () => {
         <div className="flex items-center">
           {/* start notificaton icon */}
           <div className="mr-6 inline-flex items-center">
-            <span className="relative inline-block">
+            <span
+              className="relative inline-block"
+              onClick={() => navigate("/notifications")}
+            >
               <svg
                 className="sm:w-6 sm:h-6 w-5 h-5 text-white"
                 fill="currentColor"

@@ -5,13 +5,13 @@ const UsersCardComp = ({ user }) => {
   return (
     <div className="flex items-center py-4 justify-between border-t border-[#717171] border-solid hover:bg-backgroundRed hover:text-white hover:border-none text-[#FEFDFD] text-sm">
       {/* Start of List of Users Card */}
-      <div>
-        <p>{user?.name}</p>
+      <div className="sm:w-14">
+        <p className="w-12">{user?.name}</p>
       </div>
-      <div>
+      <div className="sm:w-14">
         <p>{user?.loc}</p>
       </div>
-      <div>
+      <div className="sm:w-14">
         <p className="">{user?.stat}</p>
       </div>
       <p className="mr-4">

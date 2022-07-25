@@ -1,30 +1,39 @@
+import { useState } from "react";
 import DeviceCardComp from "../components/Devices/DeviceCardComp";
 import { deviceItems } from "../../src/components/DataList/dummyData";
 import MobDeviceCard from "../components/Devices/MobDeviceCard";
 import { Link } from "react-router-dom";
+import AddDeviceModal from "../components/Modals/AddDeviceModal";
 import GoToTop from "../components/GoToTop/GoToTop";
 
 const Device = () => {
+  const [onDisplay, setOnDisplay] = useState(false);
   return (
     <>
+      <AddDeviceModal
+        display={onDisplay}
+        onCallAddDeviceModal={() => setOnDisplay(false)}
+      />
       {/* Start of Device header */}
       <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-3">
         <div className="w-full border border-solid border-[#7A7878] flex-1 flex items-center justify-between p-4 rounded-lg px-6 bg-backgroundDark">
           <p className="text-white">40 Devices</p>
-          <svg
-            style={{ color: "#686868", width: "1.5rem", height: "1.5rem" }}
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
+          <div className="cursor-pointer" onClick={() => setOnDisplay(true)}>
+            <svg
+              style={{ color: "#686868", width: "1.5rem", height: "1.5rem" }}
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
         </div>
         <div className="w-full border border-solid border-[#7A7878] flex-1 p-4 rounded-lg flex items-center bg-backgroundDark px-6">
           <svg
@@ -48,7 +57,7 @@ const Device = () => {
             className="border-none bg-transparent text-white w-full"
           />
           <svg
-            style={{ color: "white" }}
+            style={{ color: "white", transform: "rotate(90deg)" }}
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
             fill="none"
@@ -80,9 +89,7 @@ const Device = () => {
         <div className="h-[25.63rem] overflow-auto scroll">
           {deviceItems.map((device, index) => (
             <div key={index}>
-              <Link to="/singledevice">
-                <DeviceCardComp device={device} />
-              </Link>
+              <DeviceCardComp device={device} />
             </div>
           ))}
         </div>
@@ -92,9 +99,7 @@ const Device = () => {
       <div className="block sm:hidden mt-5 h-[25.63rem] overflow-auto scroll">
         {deviceItems.map((device, index) => (
           <div key={index}>
-            <Link to="/singledevice">
-              <MobDeviceCard device={device} />
-            </Link>
+            <MobDeviceCard device={device} />
           </div>
         ))}
       </div>

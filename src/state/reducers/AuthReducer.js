@@ -2,7 +2,15 @@ import { ACTIONS } from "../actions/authActions"
 
 
 export const initialState = {
-    username: 'james'
+    device: {
+        qty: 0,
+        proxie: null,
+        airsyn: null
+    },
+    account: {
+        userId: 'jskjs',
+        email: 'p@gmail.com'
+    }
 }
 
 const authReducer = (state, action) => {
@@ -12,6 +20,7 @@ const authReducer = (state, action) => {
         case ACTIONS.SIGNUP:
             // return { username: state.username = 'precious' }
             return state
+
         case ACTIONS.LOGIN:
             console.log('login ')
             return
@@ -20,9 +29,30 @@ const authReducer = (state, action) => {
             console.log('VERFIY EMAIL');
             return
 
+        case ACTIONS.UPDATE_USER_ACCOUNT_EMAIL_USERID:
+            console.log(action.payload)
+            // ...state, object: { ...state.object, courseName: "Science"}
+            return { 
+                account: { 
+                    ...state.account, 
+                    email: action.payload.email, 
+                    userId: action.payload.userId
+                }
+            };
+
         default:
             console.log('this is the default state')
     }
 }
 
 export default authReducer
+
+// do this for updating one state in the object
+// return { 
+//     ...state, 
+//     account: { 
+//         ...state.account, 
+//         email: action.payload.email, 
+//         // userId: action.payload.userId
+//     }
+// };

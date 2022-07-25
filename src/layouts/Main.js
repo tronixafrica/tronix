@@ -8,7 +8,7 @@ import MobileSideNav from "../components/Navbar/MobileSideNav";
 
 const Main = () => {
   return (
-    <div className="flex h-[100vh] relative">
+    <div className="flex relative">
       {/* start desktop sidenav */}
       <SideNav />
       {/* end desktop sidenav */}
@@ -16,7 +16,7 @@ const Main = () => {
       <MobileSideNav />
 
       {/* start header and page route content */}
-      <div className="sm:ml-[15rem] w-full bg-backgroundGrey relative ">
+      <div className="sm:ml-[15rem] w-full relative bg-backgroundGrey">
         {/* start header */}
         <Header />
         {/* end header */}

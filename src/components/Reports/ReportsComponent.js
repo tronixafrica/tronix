@@ -4,13 +4,13 @@ import { TimeIntervalCard } from "./TimeIntervalCard";
 
 const ReportsComponent = () => {
   return (
-    <div className="bg-[#464646] w-full flex-row sm:flex h-full pb-10 ">
+    <div className="bg-backgroundGrey w-full flex-row sm:flex h-full pb-10 ">
       {/* TIME FRAME + POLLUTANT CONTAINER STARTS HERE */}
-      <div className="bg-[#464646] flex flex-col mb-10 justify-between h-[90%] w-full sm:w-[70%]">
+      <div className="bg-backgroundGrey flex flex-col mb-10 justify-between h-[90%] w-full sm:w-[70%]">
         {/* TIME FRAME DIV STARTS HERE */}
-        <div className="bg-[#121212] border border-[#777] rounded-lg flex flex-col justify-between h-40 sm:h-[35%] w-full sm:w-full font-poppins text-base text-[white] p-5 sm:p-8">
+        <div className="bg-backgroundDark border border-[#777] rounded-lg flex flex-col justify-between h-40 sm:h-[35%] w-full sm:w-full font-poppins text-base text-textGreyLighter p-5 sm:p-8">
           <h1 className="text-[150%]">Time frame</h1>
-          <div className="bg-[#121212] w-[95%] flex flex-row justify-between">
+          <div className="bg-backgroundDark w-[95%] flex flex-row justify-between">
             <div className="w-[45%]">
               <p>From</p>
               <input
@@ -58,26 +58,26 @@ const ReportsComponent = () => {
           <TimeIntervalCard />
         </div>
         {/* POLLUTATNTS DIV STARTS HERE */}
-        <div className="bg-[#121212] border border-[#777] mt-8 rounded-lg flex flex-col h-[45%] w-full font-poppins text-base text-[white]">
+        <div className="bg-backgroundDark border border-[#777] mt-8 rounded-lg flex flex-col h-[45%] w-full font-poppins text-base text-textGreyLighter">
           <h1 className="text-[150%] p-6 sm:p-8">Pollutant</h1>
-          <div className="border-[#777] border-t transition ease-in-out duration-300 hover:bg-[#D20202]">
-            <p className="font-poppins text-[#D4D4D4] text-[120%] p-3 sm:p-5 flex flex-row items-center">
+          <div className="border-[#777] border-t transition ease-in-out duration-300 hover:bg-backgroundRed">
+            <p className="font-poppins text-textGreyLighter text-[120%] p-3 sm:p-5 flex flex-row items-center">
               CO<sub>2</sub>
             </p>
           </div>
-          <div className="border-[#777] border-t transition ease-in-out duration-300 hover:bg-[#D20202]">
-            <p className="font-poppins text-[#D4D4D4] text-[120%] p-3 sm:p-5 flex flex-row items-center">
+          <div className="border-[#777] border-t transition ease-in-out duration-300 hover:bg-backgroundRed">
+            <p className="font-poppins text-textGreyLighter text-[120%] p-3 sm:p-5 flex flex-row items-center">
               CO
             </p>
           </div>
-          <div className="border-[#777] border-t flex flex-row items-center transition ease-in-out duration-300 hover:bg-[#D20202] hover:rounded-b-lg">
-            <p className="font-poppins text-[#D4D4D4] text-[120%] p-3 sm:p-5 flex flex-row items-center">
+          <div className="border-[#777] border-t flex flex-row items-center transition ease-in-out duration-300 hover:bg-backgroundRed hover:rounded-b-lg">
+            <p className="font-poppins text-textGreyLighter text-[120%] p-3 sm:p-5 flex flex-row items-center">
               PM1
             </p>
           </div>
         </div>
         {/* POLLUTATNTS DIV ENDS HERE */}
-        <button className="bg-[#D20202] rounded-md font-poppins text-base text-[white] p-3 mt-8 w-full">
+        <button className="bg-backgroundRed rounded-md font-poppins text-base text-textGreyLighter p-3 mt-8 w-full">
           Dowload Report
         </button>
       </div>

@@ -4,8 +4,8 @@ const DashboardComponent = () => {
   return (
     <div>
       {/* START OF TAILWIND DIV */}
-      <div className="bg-[#464646] p-0 m-0 box-border h-[80%] w-full flex flex-row justify-between">
-        <div className="h-full w-[100%] bg-[#464646] flex flex-row justify-between">
+      <div className="bg-backgroundGrey p-0 m-0 box-border h-[80%] w-full flex flex-row justify-between">
+        <div className="h-full w-[100%] bg-backgroundGrey flex flex-row justify-between">
           {/* DIV HOLDING CARDS DIV AND DEVICES+USERS DIV */}
           <div className="flex flex-col  sm:w-[69%] w-full">
             {/* TOTAL DEVICES + TOTAL USERS CARDS DIV */}
@@ -78,7 +78,7 @@ const DashboardComponent = () => {
                     aria-controls="tabs-profile"
                     aria-selected="false"
                   >
-                    <div className="h-full transition ease-in-out duration-300 hover:bg-[#D20202] bg-[#121212] w-[100%] p-[2rem] cursor-pointer rounded-lg border border-solid border-[#777]">
+                    <div className="h-full transition ease-in-out duration-300 hover:bg-backgroundRed bg-backgroundDark w-[100%] p-[2rem] cursor-pointer rounded-lg border border-solid border-[#777]">
                       <div className="flex flex-row justify-between">
                         <h1 className="font-raleway text-base text-[#D4D4D4]">
                           TOTAL USERS
@@ -174,18 +174,18 @@ const DashboardComponent = () => {
           </div>
           {/* END OF DIV HOLDING CARDS DIV AND DEVICES+USERS DIV */}
           {/* START OF NOTIFICATIONS DIV */}
-          <div className="bg-[#121212] h-[40rem] w-[29%] p-[1rem] hidden sm:block border border-[#777] rounded-lg">
-            <div className="p-2 overflow-auto scroll h-[38rem]">
-              <h1 className="text-[160%] font-poppins text-[#D4D4D4] mb-[20px] ml-[8px]">
+          <div className="bg-backgroundDark h-[40rem] w-[29%] p-[1rem] hidden sm:block border border-[#777] rounded-lg">
+            <div className="p-2 overflow-auto scroll h-[100%]">
+              <h1 className="text-[160%] font-poppins text-textAuthGrey mb-[20px] ml-[8px]">
                 Notifications
               </h1>
               {[
                 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
                 19, 20,
               ].map((i) => (
-                <div className="border-t border-[#555] flex items-center justify-between p-[10px] transition ease-in-out duration-300 hover:bg-[#D20202] bg-[#121212]">
+                <div className="border-t border-[#777] flex items-center justify-between p-[10px] transition ease-in-out duration-300 hover:bg-backgroundRed bg-backgroundDark">
                   <div>
-                    <h1 className="font-poppins text-[#D4D4D4] flex flex-col text-[100%]">
+                    <h1 className="font-poppins text-textAuthGrey flex flex-col text-[100%]">
                       New device added
                     </h1>
                     <p className="font-poppins text-[#777] text-[70%]">

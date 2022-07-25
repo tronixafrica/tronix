@@ -6,7 +6,7 @@ export const Notifications = () => {
       {" "}
       <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-3">
         <div className="w-full border border-solid border-[#7A7878] flex-1 flex items-center justify-between p-4 rounded-lg px-6 bg-backgroundDark">
-          <p className="text-white">60 Notifications</p>
+          <p className="text-textGreyLighter">60 Notifications</p>
           <svg
             style={{ color: "#686868", width: "1.5rem", height: "1.5rem" }}
             xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@ export const Notifications = () => {
           <input
             type="text"
             placeholder="Search"
-            className="border-none bg-transparent text-white w-full"
+            className="border-none bg-transparent text-textGreyLighter w-full"
           />
           <svg
             style={{ color: "white" }}
@@ -60,18 +60,18 @@ export const Notifications = () => {
           </svg>
         </div>
       </div>
-      <div className="bg-[#121212] h-full w-full p-[1rem] sm:block sm:h-full border border-[#777] rounded-lg mt-4">
+      <div className="bg-backgroundDark h-full w-full p-[1rem] sm:block sm:h-full border border-[#777] rounded-lg mt-4">
         <div className="p-2 overflow-auto scroll h-[38rem]">
-          <h1 className="text-[160%] font-poppins text-[#D4D4D4] mb-[20px] ml-[8px]">
+          <h1 className="text-[160%] font-poppins text-textGreyLighter mb-[20px] ml-[8px]">
             Notifications
           </h1>
           {[
             1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
             20,
           ].map((i) => (
-            <div className="border-t border-[#555] flex items-center justify-between p-[10px] transition ease-in-out duration-300 hover:bg-[#D20202] bg-[#121212]">
+            <div className="border-t border-[#555] flex items-center justify-between p-[10px] transition ease-in-out duration-300 hover:bg-backgroundRed bg-backgroundDark">
               <div>
-                <h1 className="font-poppins text-[#D4D4D4] flex flex-col text-[100%]">
+                <h1 className="font-poppins text-textGreyLighter flex flex-col text-[100%]">
                   New device added
                 </h1>
                 <p className="font-poppins text-[#777] text-[70%]">

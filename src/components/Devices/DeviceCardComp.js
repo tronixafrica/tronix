@@ -3,7 +3,7 @@ import "../../../src/App.css";
 
 const DeviceCardComp = ({ device }) => {
   return (
-    <div className="flex items-center justify-between py-4 border-b border-[#717171] border-solid hover:bg-backgroundRed hover:text-white hover:border-none text-[#FEFDFD] text-sm">
+    <div className="flex items-center justify-between py-4 border-b border-[#777] border-solid hover:bg-backgroundRed hover:text-white hover:border-none text-textAuthGrey text-sm">
       {/* Start of List of Devices Card */}
       <p>{device?.name}</p>
       <p>{device?.loc}</p>

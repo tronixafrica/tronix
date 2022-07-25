@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../state/contexts/AuthContext";
 import { HeaderContext } from "../../state/contexts/HeaderContext";
 import RoundWithPlus from "../icons/RoundWithMinus";
-import AddDeviceModal from "../Modals/AddDeviceModal";
 import AddUserModal from "../Modals/AddUserModal";
 import AlertModal from "../Modals/AlertModal";
 import ConfirmationModal from "../Modals/ConfirmationModal";
@@ -116,9 +115,9 @@ const DashboardComponent = () => {
                     aria-controls="tabs-home"
                     aria-selected="true"
                   >
-                    <div className="h-full transition ease-in-out duration-300 hover:bg-[#D20202] bg-[#121212] w-[100%] p-[2rem] cursor-pointer rounded-lg border border-solid border-[#777]">
+                    <div className="h-full transition ease-in-out duration-300 hover:bg-backgroundRed bg-backgroundDark w-[100%] p-[2rem] cursor-pointer rounded-lg border border-solid border-[#777]">
                       <div className="flex flex-row justify-between">
-                        <h1 className="font-raleway text-base text-[#D4D4D4]">
+                        <h1 className="font-raleway sm:text-base text-textGreyLighter">
                           TOTAL DEVICES
                         </h1>
                         <p onClick={toggleDevice}>{<RoundWithPlus />}</p>
@@ -127,7 +126,7 @@ const DashboardComponent = () => {
                         <h1 className="font-poppins text-[150%] mr-[1rem] text-[#D4D4D4] font-semibold">
                           {devicesArr.length}
                         </h1>
-                        <p className="text-[70%] text-[#D4D4D4]">12 ON</p>
+                        <p className="text-[70%] text-textGreyLighter">12 ON</p>
                       </div>
                     </div>
                   </a>
@@ -157,7 +156,7 @@ const DashboardComponent = () => {
                   >
                     <div className="h-full transition ease-in-out duration-300 hover:bg-backgroundRed bg-backgroundDark w-[100%] p-[2rem] cursor-pointer rounded-lg border border-solid border-[#777]">
                       <div className="flex flex-row justify-between">
-                        <h1 className="font-raleway text-base text-[#D4D4D4]">
+                        <h1 className="font-raleway text-base text-textGreyLighter">
                           TOTAL USERS
                         </h1>
                         <p onClick={() => setOnAddUser(true)}>
@@ -165,7 +164,7 @@ const DashboardComponent = () => {
                         </p>
                       </div>
                       <div className="flex flex-row items-center">
-                        <h1 className="font-poppins text-[150%] mr-[1rem] text-[#D4D4D4] font-semibold">
+                        <h1 className="font-poppins text-[150%] mr-[1rem] text-textGreyLighter font-semibold">
                           30
                         </h1>
                         <p className="text-[70%] text-[#059D1D]">6 Online</p>
@@ -185,9 +184,9 @@ const DashboardComponent = () => {
                 role="tabpanel"
                 aria-labelledby="tabs-home-tab"
               >
-                <div className="bg-[#121212] h-[32rem] mt-[4%] p-[1rem] border border-[#777] rounded-lg">
+                <div className="bg-backgroundDark h-[32rem] mt-[4%] p-[1rem] border border-[#777] rounded-lg">
                   <div className="p-3 overflow-auto scroll h-[28rem]">
-                    <h1 className="text-[160%] font-poppins text-[#D4D4D4] mb-[20px] ml-[8px]">
+                    <h1 className="text-[160%] font-poppins text-textGreyLighter mb-[20px] ml-[8px]">
                       Devices
                     </h1>
                     {devicesArr
@@ -241,26 +240,23 @@ const DashboardComponent = () => {
                 role="tabpanel"
                 aria-labelledby="tabs-profile-tab"
               >
-                <div className="bg-[#121212] h-[32rem] mt-[4%] p-[1rem] border border-[#777] rounded-lg">
+                <div className="bg-backgroundDark h-[32rem] mt-[4%] p-[1rem] border border-[#777] rounded-lg">
                   <div className="p-3 overflow-auto scroll h-[28rem]">
-                    <h1 className="text-[160%] font-poppins text-[#D4D4D4] mb-[20px] ml-[8px]">
+                    <h1 className="text-[160%] font-poppins text-textGreyLighter mb-[20px] ml-[8px]">
                       Users
                     </h1>
                     {[
                       1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
                       18, 19, 20,
                     ].map((i) => (
-                      <div className="border-t border-[#555] flex items-center justify-between p-[10px] transition ease-in-out duration-300 hover:bg-[#D20202] bg-[#121212]">
+                      <div className="border-t border-[#555] flex items-center justify-between p-[10px] transition ease-in-out duration-300 hover:bg-backgroundRed bg-backgroundDark">
                         <div>
-                          <h1 className="font-poppins text-[#D4D4D4] flex flex-col text-[100%]">
+                          <h1 className="font-poppins text-textGreyLighter flex flex-col text-[100%]">
                             Austin is connected to a device
                           </h1>
                           <p className="font-poppins text-[#777] text-[70%]">
                             5 mins ago
                           </p>
-                        </div>
-                        <div>
-                          <div className="bg-[green] w-1 h-1 p-2 mr-6 rounded-[100%]"></div>
                         </div>
                       </div>
                     ))}

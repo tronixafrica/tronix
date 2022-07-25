@@ -1,14 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "../../../src/App.css";
+import ConfirmationModal from "../Modals/ConfirmationModal";
 
 const DeviceCardComp = ({ device }) => {
+  const [onDisplay, setOnDisplay] = useState(false);
   return (
-    <div className="flex items-center justify-between py-4 border-b border-[#777] border-solid hover:bg-backgroundRed hover:text-white hover:border-none text-textAuthGrey text-sm">
+    <div className="flex items-center justify-between py-4 border-b border-[#717171] border-solid hover:bg-backgroundRed hover:text-white hover:border-none text-[#FEFDFD] text-sm">
+      <ConfirmationModal
+        display={onDisplay}
+        onCallConfirmationModal={() => setOnDisplay(false)}
+        heading="Remove Devices"
+        message="Are you sure you want to remove Razor from your devices?"
+        leftButtonText="cancel"
+        rightButtonText="remove"
+        onClickLeftButton={() => setOnDisplay(false)}
+      />
       {/* Start of List of Devices Card */}
-      <p>{device?.name}</p>
+      <Link to="/singledevice">
+        <p>{device?.name}</p>
+      </Link>
       <p>{device?.loc}</p>
-      <p className="">{device?.stat}</p>
-      <p className="mr-4">
+      <p>{device?.stat}</p>
+      <p className="mr-4 cursor-pointer" onClick={() => setOnDisplay(true)}>
         <svg
           style={{ width: "1.5rem", height: "1.5rem" }}
           xmlns="http://www.w3.org/2000/svg"

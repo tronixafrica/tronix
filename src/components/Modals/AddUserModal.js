@@ -52,7 +52,7 @@ const AddUserModal = (props) => {
           delay: 2,
         },
       }}
-      className={`w-full h-screen bg-[#121212B2] shadow-sm text-textGrey fixed inset-0 z-30 flex items-center  justify-center ${
+      className={`w-full h-screen bg-[#121212B2] shadow-sm text-textGrey fixed inset-0 z-[30000] flex items-center  justify-center ${
         props.display ? "flex" : "hidden"
       } `}
       onClick={props.onCallAddUserModal}

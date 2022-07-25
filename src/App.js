@@ -10,6 +10,7 @@ import SignUp from "./pages/SignUp";
 import Users from "./pages/users";
 import SuccessPage from "./pages/SuccessPage";
 import VerifyEmail from "./pages/VerifyEmail";
+import NotificationsPage from "./pages/NotificationsPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/devices" element={<Device />} />
           <Route path="/singledevice" element={<SingleDevice />} />
           <Route path="/users" element={<Users />} />
+          <Route path="/notifications" element={<NotificationsPage />} />
         </Route>
         {/* end routes using the default layout */}
 

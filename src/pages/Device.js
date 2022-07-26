@@ -2,17 +2,43 @@ import { useState } from "react";
 import DeviceCardComp from "../components/Devices/DeviceCardComp";
 import { deviceItems } from "../../src/components/DataList/dummyData";
 import MobDeviceCard from "../components/Devices/MobDeviceCard";
-import { Link } from "react-router-dom";
-import AddDeviceModal from "../components/Modals/AddDeviceModal";
 import GoToTop from "../components/GoToTop/GoToTop";
+import DeviceTypeModal from "../components/Modals/DeviceTypeModal";
+import ConnectDeviceModal from "../components/Modals/ConnectDeviceModal";
 
 const Device = () => {
   const [onDisplay, setOnDisplay] = useState(false);
+  const [onConnect, setOnConnect] = useState(false);
+  const [deviceName, setDeviceName] = useState("");
+
+  // check device type and display the connection modal
+  function setDeviceType(deviceName) {
+    console.log(deviceName, "device");
+    setOnDisplay(false);
+    setDeviceName(deviceName);
+    setOnConnect(true);
+  }
+
   return (
     <>
-      <AddDeviceModal
+      <DeviceTypeModal
         display={onDisplay}
         onCallAddDeviceModal={() => setOnDisplay(false)}
+        onClickAirsynButton={() => {
+          setDeviceType("airsyn");
+        }}
+        onClickProxieButton={() => {
+          setDeviceType("proxie");
+        }}
+      />
+      <ConnectDeviceModal
+        display={onConnect}
+        onCallAddDeviceModal={() => setOnConnect(false)}
+        deviceName={deviceName}
+        onGoBack={() => {
+          setOnConnect(false);
+          setOnDisplay(true);
+        }}
       />
       {/* Start of Device header */}
       <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -79,16 +105,17 @@ const Device = () => {
       <div className="hidden sm:block border border-solid border-[#454545] mt-6 rounded-lg px-6 p-4 bg-backgroundDark">
         {/* Start of Device List Items Header */}
         <div className=" flex items-center justify-between gap-2 py-4 text-white">
-          <p>User Name</p>
+          <p>Device Name</p>
           <p>Device Location</p>
+          <p>Device Type</p>
           <p>Status</p>
           <p>Remove</p>
         </div>
         {/* End of Device List Items Header */}
 
         <div className="h-[25.63rem] overflow-auto scroll">
-          {deviceItems.map((device, index) => (
-            <div key={index}>
+          {deviceItems.map((device) => (
+            <div key={device.id}>
               <DeviceCardComp device={device} />
             </div>
           ))}
@@ -97,8 +124,8 @@ const Device = () => {
 
       {/* Mobile Device Card Components */}
       <div className="block sm:hidden mt-5 h-[25.63rem] overflow-auto scroll">
-        {deviceItems.map((device, index) => (
-          <div key={index}>
+        {deviceItems.map((device) => (
+          <div key={device.id}>
             <MobDeviceCard device={device} />
           </div>
         ))}

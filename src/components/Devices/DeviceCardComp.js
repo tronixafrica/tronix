@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../../../src/App.css";
 import ConfirmationModal from "../Modals/ConfirmationModal";
 
 const DeviceCardComp = ({ device }) => {
   const [onDisplay, setOnDisplay] = useState(false);
+  const navigate = useNavigate();
   return (
     <div className="flex items-center justify-between py-4 border-b border-[#717171] border-solid hover:bg-backgroundRed hover:text-white hover:border-none text-[#FEFDFD] text-sm">
       <ConfirmationModal
@@ -17,11 +18,50 @@ const DeviceCardComp = ({ device }) => {
         onClickLeftButton={() => setOnDisplay(false)}
       />
       {/* Start of List of Devices Card */}
-      <Link to="/singledevice">
-        <p>{device?.name}</p>
-      </Link>
-      <p>{device?.loc}</p>
-      <p>{device?.stat}</p>
+      {/* <Link to="/singledevice"> */}
+      <p
+        className="cursor-pointer"
+        onClick={() => {
+          device?.prod === "proxie"
+            ? navigate(`/proxydevice/${device?.id}`)
+            : navigate(`/singledevice/${device?.id}`);
+        }}
+      >
+        {device?.name}
+      </p>
+      {/* </Link> */}
+      <p
+        className="cursor-pointer"
+        onClick={() => {
+          device?.prod === "proxie"
+            ? navigate(`/proxydevice/${device?.id}`)
+            : navigate(`/singledevice/${device?.id}`);
+        }}
+      >
+        {device?.loc}
+      </p>
+      {/* <Link to="/proxydevice"> */}
+      <p
+        className="cursor-pointer"
+        onClick={() => {
+          device?.prod === "proxie"
+            ? navigate(`/proxydevice/${device?.id}`)
+            : navigate(`/singledevice/${device?.id}`);
+        }}
+      >
+        {device?.prod}
+      </p>
+      {/* </Link> */}
+      <p
+        className="cursor-pointer"
+        onClick={() => {
+          device?.prod === "proxie"
+            ? navigate(`/proxydevice/${device?.id}`)
+            : navigate(`/singledevice/${device?.id}`);
+        }}
+      >
+        {device?.stat}
+      </p>
       <p className="mr-4 cursor-pointer" onClick={() => setOnDisplay(true)}>
         <svg
           style={{ width: "1.5rem", height: "1.5rem" }}

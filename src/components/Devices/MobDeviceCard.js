@@ -1,11 +1,19 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ConfirmationModal from "../Modals/ConfirmationModal";
 
 const MobDeviceCard = ({ device }) => {
   const [onDisplay, setOnDisplay] = useState(false);
+  const navigate = useNavigate();
   return (
-    <div className="border border-solid border-[#717171] mt-4 mr-2 rounded-lg bg-backgroundDark text-white text-sm">
+    <div
+      className="border border-solid border-[#717171] mt-4 mr-2 rounded-lg bg-backgroundDark text-white text-sm cursor-pointer"
+      onClick={() => {
+        device?.prod === "proxie"
+          ? navigate(`/proxydevice/${device?.id}`)
+          : navigate(`/singledevice/${device?.id}`);
+      }}
+    >
       <ConfirmationModal
         display={onDisplay}
         onCallConfirmationModal={() => setOnDisplay(false)}
@@ -15,20 +23,22 @@ const MobDeviceCard = ({ device }) => {
         rightButtonText="remove"
         onClickLeftButton={() => setOnDisplay(false)}
       />
-      <Link to="/singledevice">
-        <div className="flex items-center justify-between border-b border-solid border-[#717171] p-3">
-          <p>Name Of Device</p>
-          <p>{device?.name}</p>
-        </div>
-        <div className="flex items-center justify-between p-3 border-b border-solid border-[#717171]">
-          <p>Location</p>
-          <p>{device?.loc}</p>
-        </div>
-        <div className="flex items-center justify-between p-3 border-b border-solid border-[#717171]">
-          <p>Status</p>
-          <p className="text-[#717171]">{device?.stat}</p>
-        </div>
-      </Link>
+      <div className="flex items-center justify-between border-b border-solid border-[#717171] p-3">
+        <p>Name Of Device</p>
+        <p>{device?.name}</p>
+      </div>
+      <div className="flex items-center justify-between p-3 border-b border-solid border-[#717171]">
+        <p>Location</p>
+        <p>{device?.loc}</p>
+      </div>
+      <div className="flex items-center justify-between p-3 border-b border-solid border-[#717171]">
+        <p>Device Type</p>
+        <p>{device?.prod}</p>
+      </div>
+      <div className="flex items-center justify-between p-3 border-b border-solid border-[#717171]">
+        <p>Status</p>
+        <p className="text-[#717171]">{device?.stat}</p>
+      </div>
       <div className="flex items-center justify-between p-3 border-b border-solid border-[#717171]">
         <p>Remove Device</p>
         <p className="cursor-pointer" onClick={() => setOnDisplay(true)}>

@@ -16,7 +16,11 @@ import ParentIframe from "./pages/ParentIframe";
 import ChildIframe from "./pages/ChildIframe";
 import NotificationsPage from "./pages/NotificationsPage";
 import Profile from "./pages/Profile";
+<<<<<<< HEAD
 import AddDeviceModal from "./components/Modals/AddDeviceModal";
+=======
+import ProxyDevice from "./components/Devices/ProxyDevice";
+>>>>>>> origin/austin
 
 function App() {
   return (
@@ -37,7 +41,8 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/devices" element={<Device />} />
-          <Route path="/singledevice" element={<SingleDevice />} />
+          <Route path="/singledevice/:id" element={<SingleDevice />} />
+          <Route path="/proxydevice/:id" element={<ProxyDevice />} />
           <Route path="/users" element={<Users />} />
           {/* <Route path="/iframe" element={<ParentIframe />} /> */}
           {/* <Route path="http://127.0.0.1:5500/index.html" element= {<ChildIframe />} /> */}

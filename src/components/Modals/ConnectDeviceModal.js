@@ -63,23 +63,37 @@ const ConnectDeviceModal = (props) => {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Heading start */}
-        <article className="w-full  mb-7">
-          <button
+        <article className="w-full  mb-7 text-center">
+          {/* <button
             className="border border-[#686868] mb-5 p-2 text-xs font-semibold rounded-md"
             onClick={() => {
               props.onGoBack();
             }}
           >
             BACK
-          </button>
-          <p className="font-semibold text-center font-raleway  text-textGreyLight text-xl">
+          </button> */}
+          <h4 className="text-white">Get Started</h4>
+          <h2 className="font-semibold text-center font-raleway  text-textGreyLight text-xl mt-9">
+            Connect to network
+          </h2>
+          <p className="mt-4">
             Kindly connect your device to the {props.deviceName} network.
           </p>
         </article>
         {/* Heading end */}
 
-        <div className="w-full h-[50px] border border-backgroundRed bg-backgroundRed text-white border-solid flex items-center justify-center rounded-lg font-semibold cursor-pointer">
-          CONNECT DEVICE
+        <div className="w-full flex gap-3">
+          <button
+            className="w-full p-3 border border-white bg-white text-black border-solid rounded-md text-xs font-semibold uppercase"
+            onClick={() => {
+              props.onGoBack();
+            }}
+          >
+            back
+          </button>
+          <button className="w-full p-3 border border-backgroundRed bg-backgroundRed text-white border-solid rounded-md text-xs font-semibold uppercase">
+            connect
+          </button>
         </div>
       </motion.div>
     </motion.section>

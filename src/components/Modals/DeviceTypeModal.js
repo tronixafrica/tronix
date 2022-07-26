@@ -62,23 +62,30 @@ const DeviceTypeModal = (props) => {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Heading start */}
-        <article className="w-full flex justify-center  mb-7">
+        <div className="w-full text-center mt-14">
           <p className="font-bold font-raleway  text-textGreyLight text-xl">
-            What type of Device?{" "}
+            Welcome James
           </p>
-        </article>
+          <p className="mt-2">Let's help you get started, choose a device</p>
+        </div>
         {/* Heading end */}
 
         <div className="flex gap-4 w-full">
-          <div className="border border-backgroundRed bg-backgroundRed w-full h-[50px] text-center cursor-pointer flex items-center justify-center rounded-lg font-semibold" onClick={() => {
+          <div
+            className="border border-white bg-white text-black w-full h-[70px] text-center cursor-pointer flex items-center justify-center rounded-lg font-semibold"
+            onClick={() => {
               props.onClickAirsynButton();
-            }}>
-            AIR SYN
+            }}
+          >
+            Airsyn
           </div>
-          <div className="border border-backgroundRed bg-backgroundRed text-white w-full h-[50px] text-center cursor-pointer flex items-center justify-center rounded-lg font-semibold" onClick={() => {
+          <div
+            className="border border-white bg-white text-black w-full h-[70px] text-center cursor-pointer flex items-center justify-center rounded-lg font-semibold"
+            onClick={() => {
               props.onClickProxieButton();
-            }}>
-            PROXIE
+            }}
+          >
+            Proxie
           </div>
         </div>
       </motion.div>

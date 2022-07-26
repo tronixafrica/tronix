@@ -3,12 +3,9 @@ import DeviceCardComp from "../components/Devices/DeviceCardComp";
 import { deviceItems } from "../../src/components/DataList/dummyData";
 import MobDeviceCard from "../components/Devices/MobDeviceCard";
 import GoToTop from "../components/GoToTop/GoToTop";
-<<<<<<< HEAD
 import IFrameModals from "../components/Modals/IFrameModal";
-=======
 import DeviceTypeModal from "../components/Modals/DeviceTypeModal";
 import ConnectDeviceModal from "../components/Modals/ConnectDeviceModal";
->>>>>>> origin/austin
 
 const Device = () => {
   const [onDisplay, setOnDisplay] = useState(false);

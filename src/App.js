@@ -16,11 +16,8 @@ import ParentIframe from "./pages/ParentIframe";
 import ChildIframe from "./pages/ChildIframe";
 import NotificationsPage from "./pages/NotificationsPage";
 import Profile from "./pages/Profile";
-<<<<<<< HEAD
 import AddDeviceModal from "./components/Modals/AddDeviceModal";
-=======
 import ProxyDevice from "./components/Devices/ProxyDevice";
->>>>>>> origin/austin
 
 function App() {
   return (

@@ -5,6 +5,7 @@ import MobDeviceCard from "../components/Devices/MobDeviceCard";
 import { Link } from "react-router-dom";
 import AddDeviceModal from "../components/Modals/AddDeviceModal";
 import GoToTop from "../components/GoToTop/GoToTop";
+import IFrameModals from "../components/Modals/IFrameModal";
 
 const Device = () => {
   const [onDisplay, setOnDisplay] = useState(false);
@@ -14,6 +15,9 @@ const Device = () => {
         display={onDisplay}
         onCallAddDeviceModal={() => setOnDisplay(false)}
       />
+
+      {/* <IFrameModals /> */}
+
       {/* Start of Device header */}
       <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-3">
         <div className="w-full border border-solid border-[#7A7878] flex-1 flex items-center justify-between p-4 rounded-lg px-6 bg-backgroundDark">

@@ -17,6 +17,7 @@ const DeviceCardComp = ({ device }) => {
         rightButtonText="remove"
         onClickLeftButton={() => setOnDisplay(false)}
       />
+
       {/* Start of List of Devices Card */}
       {/* <Link to="/singledevice"> */}
       <p

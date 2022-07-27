@@ -4,12 +4,17 @@ import AddDeviceModal from "../Modals/AddDeviceModal";
 import AddUserModal from "../Modals/AddUserModal";
 import AlertModal from "../Modals/AlertModal";
 import ConfirmationModal from "../Modals/ConfirmationModal";
+import DeviceTypeModal from "../Modals/DeviceTypeModal";
 
 const DashboardComponent = () => {
   const [onDisplay, setOnDisplay] = useState(false);
   const [onAddDevice, setOnAddDevice] = useState(false);
   const [onAddUser, setOnAddUser] = useState(false);
   const [alertDisplay, setAlertDisplay] = useState(false);
+
+  const toggleDevice = () => {
+    setOnAddDevice(!onAddDevice);
+  };
 
   const deleteNOtification = () => {};
   return (
@@ -25,10 +30,13 @@ const DashboardComponent = () => {
         onClickRightButton={() => setAlertDisplay(deleteNOtification)}
       />
       <AlertModal display={alertDisplay} />
-      <AddDeviceModal
+      {onAddDevice && (
+        <DeviceTypeModal display={onAddDevice} toggleDevice={toggleDevice} />
+      )}
+      {/* <AddDeviceModal
         display={onAddDevice}
         onCallAddDeviceModal={() => setOnAddDevice(false)}
-      />
+      /> */}
       <AddUserModal
         display={onAddUser}
         onCallAddUserModal={() => setOnAddUser(false)}
@@ -74,9 +82,7 @@ const DashboardComponent = () => {
                         <h1 className="font-raleway text-base text-[#D4D4D4]">
                           TOTAL DEVICES
                         </h1>
-                        <p onClick={() => setOnAddDevice(true)}>
-                          {<RoundWithPlus />}
-                        </p>
+                        <p onClick={toggleDevice}>{<RoundWithPlus />}</p>
                       </div>
                       <div className="flex flex-row items-center">
                         <h1 className="font-poppins text-[150%] mr-[1rem] text-[#D4D4D4] font-semibold">

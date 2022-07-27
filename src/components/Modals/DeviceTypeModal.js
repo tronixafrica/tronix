@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-target-blank */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 //For Choosing a Device.
 
 // Props:
@@ -9,16 +11,18 @@
 // onClickButton: function
 // display: boolean
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { authLeft } from "../../animations/animations";
 import { scaleUp } from "../../animations/animations";
 import { motion } from "framer-motion";
 import Loader from "../Auth/Loader/Loader";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { AddDeviceContext } from "../../state/contexts/AddDeviceContext";
 
 const DeviceTypeModal = (props) => {
   const [loader, setLoader] = useState(false);
+  const { deviceType, switchDevice } = useContext(AddDeviceContext);
   // Formik initial values ... this is the initial form state
   let initialValues = {
     name: "",
@@ -48,11 +52,10 @@ const DeviceTypeModal = (props) => {
           delay: 2,
         },
       }}
-      className={`w-full h-screen shadow-sm text-textGrey fixed inset-0 z-[300000] flex items-center  justify-center ${
-        props.display ? "flex" : "flex"
-      } `}
-      onClick={props.onCallAddDeviceModal}
+      className={`w-full h-screen shadow-sm text-textGrey fixed inset-0 z-[300000] flex items-center  justify-center `}
+      onClick={props.toggleDevice}
     >
+      {deviceType.deviceName}
       <motion.div
         variants={scaleUp}
         initial="initial"
@@ -62,24 +65,32 @@ const DeviceTypeModal = (props) => {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Heading start */}
-        <article className="w-full flex justify-center  mb-7">
+        <div className="w-full text-center mt-14">
           <p className="font-bold font-raleway  text-textGreyLight text-xl">
-            What type of Device?{" "}
+            Welcome James
           </p>
-        </article>
+          {/* <p className="mt-2">Let's help you get started, choose a device</p> */}
+        </div>
         {/* Heading end */}
 
-        <div className="flex gap-4 w-full">
-          <div className="border border-backgroundRed bg-backgroundRed w-full h-[50px] text-center cursor-pointer flex items-center justify-center rounded-lg font-semibold" onClick={() => {
-              props.onClickAirsynButton();
-            }}>
-            AIR SYN
+        <div className=" w-full border border-white bg-white text-black h-[70px] text-center cursor-pointer flex items-center justify-center rounded-lg font-semibold">
+          <a href="https://tronix.africa/" target="_blank">
+            Click here to get started!!!
+          </a>
+          {/* <div
+            className="border border-white bg-white text-black w-full h-[70px] text-center cursor-pointer flex items-center justify-center rounded-lg font-semibold"
+            onClick={() => {
+              switchDevice("airsyn", "/connect_device");
+            }}
+          >
+            Airsyn
           </div>
-          <div className="border border-backgroundRed bg-backgroundRed text-white w-full h-[50px] text-center cursor-pointer flex items-center justify-center rounded-lg font-semibold" onClick={() => {
-              props.onClickProxieButton();
-            }}>
-            PROXIE
-          </div>
+          <div
+            className="border border-white bg-white text-black w-full h-[70px] text-center cursor-pointer flex items-center justify-center rounded-lg font-semibold"
+            onClick={() => switchDevice("proxie", "/connect_device")}
+          >
+            Proxie
+          </div> */}
         </div>
       </motion.div>
     </motion.section>

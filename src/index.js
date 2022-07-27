@@ -10,6 +10,7 @@ import DisplaySidebarProvider from './state/contexts/DisplaySidebarContext';
 import AuthProvider from './state/contexts/AuthContext';
 
 import "swiper/css/bundle";
+import AddDeviceProvider from './state/contexts/AddDeviceContext';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -18,7 +19,9 @@ root.render(
       <DisplaySidebarProvider>
         <HeaderContextProvider>
           <AuthProvider>
-            <App />
+            <AddDeviceProvider>
+              <App />
+            </AddDeviceProvider>
           </AuthProvider>
         </HeaderContextProvider>
       </DisplaySidebarProvider>

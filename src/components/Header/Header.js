@@ -1,11 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { AuthContext } from "../../state/contexts/AuthContext";
 import { DisplaySidebarContext } from "../../state/contexts/DisplaySidebarContext";
 import { HeaderContext } from "../../state/contexts/HeaderContext";
+import { UserAccountProfileContext } from "../../state/contexts/UserAccountProfileContext";
 
 const Header = () => {
   // Header context state for the header
   const { pageTitle } = useContext(HeaderContext);
+  const { userProfile } = useContext(AuthContext);
+  console.log(userProfile?.account, "hello there");
+  // Dashboard context state for the sidebar
   // dashboard page title state
   const [dashboardPageTitle, setdashboardPageTitle] = useState(true);
 
@@ -91,7 +96,7 @@ const Header = () => {
           <Link to="/profile">
             <div title="profile">
               <img
-                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                src={userProfile?.account?.profilePic}
                 className="rounded-full w-[2rem]"
                 alt="Avatar"
               />

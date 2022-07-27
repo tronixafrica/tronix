@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useFormik } from "formik";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import Loader from "../components/Auth/Loader/Loader";
@@ -6,13 +6,42 @@ import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import * as Yup from "yup";
 import GoToTop from "../components/GoToTop/GoToTop";
+import { AuthContext } from "../state/contexts/AuthContext";
+import AlertModal from "../components/Modals/AlertModal";
 
 const LogIn = () => {
   const [loader, setLoader] = useState(false);
+  const [displayAlert, setDisplayAlert] = useState(false);
+  const [alertHeading, setAlertHeading] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertStatus, setAlertStatus] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
   //   Initialize the navigate hook
   const navigate = useNavigate();
+
+  // Auth context
+  const { state, authSuccess, signIn, updateState, error } =
+    useContext(AuthContext);
+
+  // Listen for error
+  useEffect(() => {
+    if (error.isError) {
+      setDisplayAlert(true);
+      setAlertHeading("Error");
+      setAlertMessage(error.errorMsg);
+      setAlertStatus("error");
+    }
+  }, [error.isError]);
+
+  // Console log context
+  // console.log(state);
+  // console.log(error);
+  // console.log(authSuccess);
+
+  // handle Sign up
+  const handleSignIn = (email, password) => {
+    signIn(email, password);
+  };
 
   // Formik initial values ... this is the initial form state
   let initialValues = {
@@ -40,12 +69,10 @@ const LogIn = () => {
     // onSubmit,
     validationSchema,
   });
-  console.log(formik, "The  formik");
 
   return (
     <>
       {/* Start of login page */}
-
       <section className="bg-backgroundDark overflow-y-auto w-full flex h-full items-center justify-center py-7">
         <div className="w-[450px] h-full rounded-md  px-5 scrollbar-hide">
           {/*Start of Header */}
@@ -58,6 +85,7 @@ const LogIn = () => {
             onSubmit={(e) => {
               e.preventDefault();
               formik.handleSubmit(e);
+              handleSignIn(formik.values.email, formik.values.password);
             }}
           >
             <article className="mb-4 ">
@@ -165,7 +193,7 @@ const LogIn = () => {
                 type="submit"
                 className={`flex uppercase justify-center items-center px-4 h-12 w-24 grow font-bold text-white rounded-md bg-backgroundRed hover:brightness-90 tracking-widest font-poppins`}
               >
-                {loader ? <Loader /> : "log In"}
+                {authSuccess ? <Loader /> : "log In"}
               </button>
             </article>
             {/* Login button ends */}
@@ -190,7 +218,19 @@ const LogIn = () => {
         </div>
       </section>
       {/* End  of login page */}
-      <GoToTop />
+      {displayAlert && (
+        <AlertModal
+          display={displayAlert}
+          heading={alertHeading}
+          message={alertMessage}
+          status={alertStatus}
+          onClickButton={() => {
+            setDisplayAlert(false);
+          }}
+          onCallAlertModal={() => setDisplayAlert(false)}
+          ButtonText="OK, I got it"
+        />
+      )}{" "}
     </>
   );
 };

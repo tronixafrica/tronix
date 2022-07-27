@@ -1,10 +1,12 @@
 import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import Loader from "../components/Auth/Loader/Loader";
 import SuccessIcon from "../components/icons/SuccessIcon";
 import FilterUsersModal from "../components/Modals/FilterUsersModal";
 
 const SuccessPage = () => {
   const [loader, setLoader] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -34,6 +36,7 @@ const SuccessPage = () => {
             <button
               type="submit"
               className={`flex uppercase justify-center items-center px-4 h-12 w-24 grow font-bold text-white rounded-md bg-backgroundRed hover:brightness-90 tracking-wider font-poppins`}
+              onClick={() => navigate("/auth/login", { replace: true })}
             >
               {loader ? <Loader /> : "click to Login"}
             </button>

@@ -97,7 +97,7 @@ const FilterUsersModal = (props) => {
                 type="text"
                 name="name"
                 className=" block w-full px-4 py-2 h-[50px] font-normal bg-backgroundGrey bg-clip-padding rounded-md transition ease-in-out m-0 placeholder:text-textGreyLighter focus:bg-bg-backgroundGrey focus:outline-none"
-                placeholder="Enter Full Name"
+                placeholder="Order By"
                 value={formik.values.name}
                 onChange={formik.handleChange}
                 autoComplete="off"

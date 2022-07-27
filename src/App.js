@@ -21,54 +21,44 @@ import ProxyDevice from "./components/Devices/ProxyDevice";
 import DeviceTypeModal from "./components/Modals/DeviceTypeModal";
 import { useState } from "react";
 import ConnectDeviceModal from "./components/Modals/ConnectDeviceModal";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   return (
     <div>
-      <Routes>
-        {/* start routes excluding the default layout */}
-        {/* ROUTES GOES IN HERE */}
-        <Route path="/sig" element={<TestSignUp />} />
-        {/* <Route path="/add_device" element={<DeviceTypeModal />} /> */}
-        {/* end routes excluding the default layout */}
+      <AnimatePresence exitBeforeEnter>
+        <Routes>
+          {/* start routes excluding the default layout */}
+          {/* ROUTES GOES IN HERE */}
+          <Route path="/sig" element={<TestSignUp />} />
+          {/* end routes excluding the default layout */}
 
-        {/* start routes using the default layout */}
-        <Route path="/" element={<Main />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/reports" element={<Reports />} />
-          <Route path="/devices" element={<Device />} />
-          <Route path="/singledevice/:id" element={<SingleDevice />} />
-          <Route path="/proxydevice/:id" element={<ProxyDevice />} />
-          <Route path="/users" element={<Users />} />
-          {/* <Route path="/iframe" element={<ParentIframe />} /> */}
-          {/* <Route path="http://127.0.0.1:5500/index.html" element= {<ChildIframe />} /> */}
-          {/* <Route path="http://192.168.4.1/" element={<ChildIframe />} /> */}
-          <Route path="/notifications" element={<NotificationsPage />} />
+          {/* start routes using the default layout */}
+          <Route path="/" element={<Main />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/reports" element={<Reports />} />
+            <Route path="/devices" element={<Device />} />
+            <Route path="/singledevice" element={<SingleDevice />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/iframe" element={<ParentIframe />} />
+            <Route path="http://192.168.4.1/" element={<ChildIframe />} />
+            <Route path="/notifications" element={<NotificationsPage />} />
+            <Route path="/profile" element={<Profile />} />
+          </Route>
+          {/* end routes using the default layout */}
 
-          <Route path="/profile" element={<Profile />} />
-        </Route>
-        {/* end routes using the default layout */}
+          {/* This route does not use the default layout */}
+          {/* Auth routes starts */}
+          <Route path="auth" element={<Auth />}>
+            <Route path="login" element={<LogIn />} />
+            <Route path="signup" element={<SignUp />} />
+          </Route>
+          <Route path="/auth/verify_email" element={<VerifyEmail />} />
+          <Route path="/auth/success" element={<SuccessPage />} />
 
-        {/* This route does not use the default layout */}
-        {/* Auth routes starts */}
-        <Route path="auth" element={<Auth />}>
-          <Route path="login" element={<LogIn />} />
-          <Route path="signup" element={<SignUp />} />
-        </Route>
-        <Route path="/auth/verify_email/:id" element={<VerifyEmail />} />
-        <Route path="/auth/success/:id" element={<SuccessPage />} />
-
-        {/* Auth routes ends */}
-
-        {/* Start Modals route */}
-        {/* start device type modal */}
-        <Route path="/add_device" element={<DeviceTypeModal />} />
-        {/* end device type modal */}
-        
-        {/* start device type modal */}
-        <Route path="/connect_device" element={<ConnectDeviceModal />} />
-        {/* end device type modal */}
-      </Routes>
+          {/* Auth routes ends */}
+        </Routes>
+      </AnimatePresence>
     </div>
   );
 }

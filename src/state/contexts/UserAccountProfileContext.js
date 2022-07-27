@@ -1,17 +1,25 @@
-import { createContext } from "react";
+import { createContext, useReducer } from "react";
+import UserAccountProfileReducer, {
+  initialProfileState,
+} from "../reducers/UserAccountProfileReducer";
 
+export const UserAccountProfileContext = createContext();
 
-const UserAccountProfile = createContext()
+const UserAccountProfileProvider = ({ children }) => {
+  const [userProfile, dipsatchUserProfile] = useReducer(
+    UserAccountProfileReducer,
+    initialProfileState
+  );
 
-const UserAccountProfileProvider = ({children}) => {
+  console.log(userProfile, "userProfile");
 
-    const getUserAccountProfile = (userId) => {
-        console.log(userId, 'the user id')
-    }
+  return (
+    <UserAccountProfileContext.Provider
+      value={{ userProfile, dipsatchUserProfile }}
+    >
+      {children}
+    </UserAccountProfileContext.Provider>
+  );
+};
 
-    return (
-        <UserAccountProfile.Provider>
-            {children}
-        </UserAccountProfile.Provider>
-    )
-}
+export default UserAccountProfileProvider;

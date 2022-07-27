@@ -1,194 +1,314 @@
-import { createContext, useReducer, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 import authReducer, { initialState } from "../reducers/AuthReducer";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, sendEmailVerification } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+  sendEmailVerification,
+  updateCurrentUser,
+} from "firebase/auth";
 import { auth } from "../../firebase/firebase";
-import { getDatabase, ref, set } from "firebase/database";
-import { db } from '../../firebase/firebase'
+import { getDatabase, ref, set, get, onValue } from "firebase/database";
+import { db } from "../../firebase/firebase";
 import { ACTIONS } from "../actions/authActions";
-import UserAccountProfileReducer, { initialProfileState } from "../reducers/UserAccountProfileReducer";
+import { ACTIONS as PROFILE_ACTIONS } from "../actions/userProfileActions";
+import UserAccountProfileReducer, {
+  initialProfileState,
+} from "../reducers/UserAccountProfileReducer";
+import { useNavigate } from "react-router-dom";
 
-export const AuthContext = createContext()
+export const AuthContext = createContext();
 
-const AuthProvider = ({children}) => {
-    const [ state, dispatch ] = useReducer(authReducer, initialState)
-    const [ profileState, dispatchProfileState ] = useReducer(UserAccountProfileReducer, initialProfileState)
-    const [ authSuccess, setAuthSuccess ] = useState(false)
-    const [ error, setError ] = useState({
-        isError: false,
-        errorMsg: ''
-    })
+const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
+  const [state, dispatch] = useReducer(authReducer, initialState);
+  const [userProfile, dipsatchUserProfile] = useReducer(
+    UserAccountProfileReducer,
+    initialProfileState
+  );
+  const [authSuccess, setAuthSuccess] = useState(false);
+  const [verifyEmailSuccess, setVerifyEmailSuccess] = useState(false);
+  const [formattedEmailState, setFormattedEmailState] = useState("");
+  const [error, setError] = useState({
+    isError: false,
+    errorMsg: "",
+  });
 
-
-    // sign up user
-    const signUp = (email, password) => {
-
-        // if error state is false: do not update error state
-        if(error.isError) {
-            setError(prevState => {
-                return { ...prevState, isError: false, errorMsg: ''}
-            })
+  // Check for update on airsyn and proxie in db
+  const airsynStateRef = ref(db, "/users/itzmeruz31gmailcom/device/airsyn");
+  const proxieStateRef = ref(db, "/users/itzmeruz31gmailcom/device/proxie");
+  useEffect(() => {
+    return () => {
+      onValue(airsynStateRef, (snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          console.log(data, "airsyn");
+          // Dispatch to userAccountProfileReducer
+          dipsatchUserProfile({
+            type: PROFILE_ACTIONS.UPDATE_AIRSYN,
+            userProfile: data,
+          });
+        } else {
+          console.log("no data", formattedEmailState);
+          return null;
         }
-
-        // updating the authSuccess state
-        setAuthSuccess(prevState => prevState = !prevState)
-
-        // creating the account for user
-        createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-            const { user } = userCredential
-            console.log(user.uid, 'user id')
-
-            if(auth.currentUser) {
-                // updating the auth success: if signup is successfull
-                setAuthSuccess(prevState => prevState = !prevState)
-
-                // calling the verification email function
-                sendVerificationEmail()
-                console.log(user)
-
-            }
-            
-        }).catch((err) => {
-            if(err.code == 'auth/invalid-email') {
-                errorFunc('Email is invalid')
-                console.log('Email is invalid')
-
-            } else if (err.code == 'auth/network-request-failed') {
-                errorFunc('Please check your internet connection')
-                console.log('Please check your internet connection');
-
-            } else if (err.code == 'auth/email-already-in-use') {
-                errorFunc('Email already exists')
-                console.log('Email already exists');
-                
-            } else if (err.code == 'auth/weak-password') {
-                errorFunc('Password should be at least 6 characters ')
-
-            } else {
-                console.log(err.code, '=>', err.message, 'something went wrong')
-                errorFunc('Something went wrong')
-            }
-        })
-         
-    }
-
-    // verify user email
-    const sendVerificationEmail = () => {
-
-        // continue url for email verified
-        const actionCodeSettings = {
-            url: 'http://localhost:3000/dashboard',
-            handleCodeInApp: true   
-        };
-
-        // sending the verification email with firebase
-        sendEmailVerification(auth.currentUser, actionCodeSettings)
-        .then(() => {
-            // Email verification sent!
-            console.log('email verification success')
-            // ...
-        }).catch((err) => {
-            console.log('email verification no go', err)
-        });
-    }
-
-    // sign in user
-    const signIn = (email, password) => {
-        // if error state is false: do not update error state
-        if(error.isError) {
-            setError(prevState => {
-                return { ...prevState, isError: false, errorMsg: ''}
-            })
+      });
+    };
+  }, []);
+  useEffect(() => {
+    return () => {
+      onValue(proxieStateRef, (snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          console.log(data, "proxie");
+          // Dispatch to userAccountProfileReducer
+          dipsatchUserProfile({
+            type: PROFILE_ACTIONS.UPDATE_PROXIE,
+            userProfile: data,
+          });
+        } else {
+          console.log("no data");
+          return null;
         }
+      });
+    };
+  }, []);
 
-        // updating the authSuccess state
-        setAuthSuccess(prevState => prevState = !prevState)
-
-        signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            console.log(user.uid)
-
-            // update auth success state: if sign in is successfull
-            setAuthSuccess(prevState => prevState = !prevState)
-
-            // updating the user account state with the current email
-            dispatch({
-                type: ACTIONS.UPDATE_USER_ACCOUNT_EMAIL_USERID,
-                payload: { 
-                    email: email,
-                    userId: user.uid 
-                }
-            })
-
-        })
-        .catch((error) => {
-            if (error.code === 'auth/wrong-password') {
-                errorFunc('Wrong password')
-
-            } else if (error.code === 'auth/user-not-found') {
-                errorFunc('Email does not exist')
-                
-            } else if (error.code === 'auth/invalid-email') {
-                errorFunc('Email is Invalid')
-            } else if (error.code === 'auth/network-request-failed') {
-                errorFunc('Please check your internet connection')
-            } else {
-                errorFunc('ooopppss something went wrong')
-            }
-
-            console.log(error.code, 'error message')
-        });
-
-        console.log(state, 'this is the updated state')
-
+  // sign up user
+  const signUp = (email, password) => {
+    // if error state is false: do not update error state
+    if (error.isError) {
+      setError((prevState) => {
+        return { ...prevState, isError: false, errorMsg: "" };
+      });
     }
 
-    // create user account profile
-    const createAccount = (email, userId) => {
-        const profileAccount = {
-            device: {
-                qty: 0,
-                proxie: null,
-                airsyn: null
+    // updating the authSuccess state
+    setAuthSuccess((prevState) => (prevState = !prevState));
+
+    // creating the account for user
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const { user } = userCredential;
+        console.log(user.uid, "user id");
+
+        if (auth.currentUser) {
+          // updating the auth success: if signup is successfull
+          setAuthSuccess((prevState) => (prevState = !prevState));
+
+          // updating the user account state with the current email
+          dispatch({
+            type: ACTIONS.UPDATE_USER_ACCOUNT_EMAIL_USERID,
+            payload: {
+              email: email,
+              userId: user.uid,
             },
-            account: {
-                userId: userId,
-                email: email
-            }
+          });
+
+          // create profile for user
+          createAccount(
+            email,
+            user.uid,
+            "https://res.cloudinary.com/zichygraphs/image/upload/v1648953021/1_ljgwqe.png"
+          );
+
+          console.log(user);
+        }
+      })
+      .catch((err) => {
+        if (err.code === "auth/invalid-email") {
+          errorFunc("Email is invalid");
+          console.log("Email is invalid");
+        } else if (err.code === "auth/network-request-failed") {
+          errorFunc("Please check your internet connection");
+          console.log("Please check your internet connection");
+        } else if (err.code === "auth/email-already-in-use") {
+          errorFunc("Email already exists");
+          console.log("Email already exists");
+        } else if (err.code === "auth/weak-password") {
+          errorFunc("Password should be at least 6 characters ");
+        } else {
+          console.log(err.code, "=>", err.message, "something went wrong");
+          errorFunc("Something went wrong");
+        }
+      });
+  };
+
+  // verify user email
+  const sendVerificationEmail = () => {
+    // continue url for email verified
+    const actionCodeSettings = {
+      url: "http://localhost:3000/auth/success",
+      handleCodeInApp: true,
+    };
+
+    // sending the verification email with firebase
+    sendEmailVerification(auth.currentUser, actionCodeSettings)
+      .then(() => {
+        // Email verification sent!
+        console.log("email verification success");
+        setVerifyEmailSuccess((prevState) => (prevState = !prevState));
+        // ...
+      })
+      .catch((err) => {
+        console.log("email verification no go", err);
+      });
+  };
+
+  // sign in user
+  const signIn = (email, password) => {
+    // if error state is false: do not update error state
+    if (error.isError) {
+      setError((prevState) => {
+        return { ...prevState, isError: false, errorMsg: "" };
+      });
+    }
+
+    // updating the authSuccess state
+    setAuthSuccess((prevState) => (prevState = !prevState));
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log("user", user);
+
+        // Check if user is verified
+        if (user.emailVerified) {
+          // Fetch the profile data from the database
+          fetchProfileAndUpdateState(user.displayName);
+          //Redirect to the dashboard
+          navigate("/dashboard");
+        } else {
+          // Email is not verified
+          sendVerificationEmail();
+          navigate("/auth/verify_email");
         }
 
-        
-        console.log(email, userId, 'creating the account');
-        set(ref(db, 'users/' + userId), profileAccount);
-    }
+        // update auth success state: if sign in is successfull
+        setAuthSuccess((prevState) => (prevState = !prevState));
 
-    // error function for auth 
-    const errorFunc = (msg) => {
-        // changing the auth state
-        setAuthSuccess(prevState => prevState = !prevState)
-        
-        // changing the error state
-        setError(prevState => {
-            return { ...prevState, isError: true, errorMsg: msg }
-        })
-    }
+        // updating the user account state with the current email
+        dispatch({
+          type: ACTIONS.UPDATE_USER_ACCOUNT_EMAIL_USERID,
+          payload: {
+            email: email,
+            userId: user.uid,
+          },
+        });
+      })
+      .catch((error) => {
+        if (error.code === "auth/wrong-password") {
+          errorFunc("Wrong password");
+        } else if (error.code === "auth/user-not-found") {
+          errorFunc("Email does not exist");
+        } else if (error.code === "auth/invalid-email") {
+          errorFunc("Email is Invalid");
+        } else if (error.code === "auth/network-request-failed") {
+          errorFunc("Please check your internet connection");
+        } else {
+          errorFunc("ooopppss something went wrong");
+        }
 
+        console.log(error.code, "error message");
+      });
 
-    const authStates = {
-        state,
-        signUp,
-        authSuccess,
-        signIn,
-        error,
-        createAccount
-    }
+    console.log(state, "this is the updated state");
+  };
 
-    return ( 
-        <AuthContext.Provider value={authStates}>
-            {children}
-        </AuthContext.Provider>
-    );
-}
- 
+  // create user account profile
+  const createAccount = (email, userId, profilePic) => {
+    const profileAccount = {
+      device: {
+        qty: 0,
+        proxie: null,
+        airsyn: null,
+      },
+      account: {
+        userId: userId,
+        email: email,
+        profilePic: profilePic,
+      },
+    };
+
+    // return every character in the email before "@"
+    const emailSplit = email.split("");
+    const formattedArr = [];
+    // map through the emailsplit and remove every special character
+    emailSplit.map((char, i) => {
+      return [".", "/", "-", "+", "_", "@", ",", "#", "*", "(", ")"].includes(
+        char
+      )
+        ? null
+        : formattedArr.push(char);
+    });
+
+    // join the array back to a string
+    const formattedEmail = formattedArr.join("");
+    console.log(email, formattedEmail, "creating the account");
+    // set the formatted email
+    setFormattedEmailState(formattedEmail);
+
+    set(ref(db, "users/" + formattedEmail), profileAccount);
+
+    // Update the users profile ... set the formattedEmail as the displayName
+    updateProfile(auth.currentUser, {
+      displayName: formattedEmail,
+      photoURL:
+        "https://res.cloudinary.com/zichygraphs/image/upload/v1648953021/1_ljgwqe.png",
+    });
+
+    // calling the verification email function
+    sendVerificationEmail();
+  };
+
+  // Fetch profile and redirect
+  const fetchProfileAndUpdateState = (displayName) => {
+    // Fetch the profile data from the database
+    get(ref(db, "users/" + displayName))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          console.log(snapshot.val(), "snapshot");
+          // Dispatch to userAccountProfileReducer
+          dipsatchUserProfile({
+            type: PROFILE_ACTIONS.CREATE_USER_PROFILE,
+            userProfile: snapshot.val(),
+          });
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  // error function for auth
+  const errorFunc = (msg) => {
+    // changing the auth state
+    setAuthSuccess((prevState) => (prevState = !prevState));
+
+    // changing the error state
+    setError((prevState) => {
+      return { ...prevState, isError: true, errorMsg: msg };
+    });
+  };
+
+  const authStates = {
+    state,
+    signUp,
+    authSuccess,
+    signIn,
+    error,
+    createAccount,
+    verifyEmailSuccess,
+    userProfile,
+  };
+
+  return (
+    <AuthContext.Provider value={authStates}>{children}</AuthContext.Provider>
+  );
+};
+
 export default AuthProvider;

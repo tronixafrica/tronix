@@ -98,84 +98,83 @@
   transform: none;
 }
 .carousels-fade .carousels-item.active {
-
   opacity: 1;
 }
 @media (prefers-reduced-motion: reduce) {
   .form-control::file-selector-button {
-      -webkit-transition: none;
-      transition: none;
+    -webkit-transition: none;
+    transition: none;
   }
   .form-control::-webkit-file-upload-button {
-      -webkit-transition: none;
-      transition: none;
+    -webkit-transition: none;
+    transition: none;
   }
   .form-switch .form-check-input {
-      -webkit-transition: none;
-      transition: none;
+    -webkit-transition: none;
+    transition: none;
   }
   .form-range::-webkit-slider-thumb {
-      -webkit-transition: none;
-      transition: none;
+    -webkit-transition: none;
+    transition: none;
   }
   .form-range::-moz-range-thumb {
-      -webkit-transition: none;
-      transition: none;
+    -webkit-transition: none;
+    transition: none;
   }
   .form-floating > label {
-      -webkit-transition: none;
-      transition: none;
+    -webkit-transition: none;
+    transition: none;
   }
   .fade {
-      -webkit-transition: none;
-      transition: none;
+    -webkit-transition: none;
+    transition: none;
   }
   .collapsing {
-      -webkit-transition: none;
-      transition: none;
+    -webkit-transition: none;
+    transition: none;
   }
   .collapsing.collapse-horizontal {
-      -webkit-transition: none;
-      transition: none;
+    -webkit-transition: none;
+    transition: none;
   }
   .accordion-button::after {
-      -webkit-transition: none;
-      transition: none;
+    -webkit-transition: none;
+    transition: none;
   }
   .modal.fade .modal-dialog {
-      -webkit-transition: none;
-      transition: none;
+    -webkit-transition: none;
+    transition: none;
   }
   .carousel-item {
-      -webkit-transition: none;
-      transition: none;
+    -webkit-transition: none;
+    transition: none;
   }
   .carousel-fade .active.carousel-item-start {
-      -webkit-transition: none;
-      transition: none;
+    -webkit-transition: none;
+    transition: none;
   }
   .carousel-fade .active.carousel-item-end {
-      -webkit-transition: none;
-      transition: none;
+    -webkit-transition: none;
+    transition: none;
   }
   .carousel-control-prev {
-      -webkit-transition: none;
-      transition: none;
+    -webkit-transition: none;
+    transition: none;
   }
   .carousel-control-next {
-      -webkit-transition: none;
-      transition: none;
+    -webkit-transition: none;
+    transition: none;
   }
   .carousel-indicators [data-bs-target] {
-      -webkit-transition: none;
-      transition: none;
+    -webkit-transition: none;
+    transition: none;
   }
   .spinner-border {
-      -webkit-animation-duration: 1.5s;
-      animation-duration: 1.5s;
+    -webkit-animation-duration: 1.5s;
+    animation-duration: 1.5s;
   }
   .spinner-grow {
-      -webkit-animation-duration: 1.5s;
-      animation-duration: 1.5s;
+    -webkit-animation-duration: 1.5s;
+    animation-duration: 1.5s;
   }
 }

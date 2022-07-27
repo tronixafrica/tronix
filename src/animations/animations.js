@@ -7,9 +7,9 @@ export const scaleUp = {
     opacity: 1,
     scale: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.2,
       ease: "easeInOut",
-      delay: 0.5,
+      delay: 0.1,
     },
   },
   exit: {
@@ -30,14 +30,14 @@ export const authLeft = {
   animate: {
     opacity: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.1,
       ease: "easeInOut",
     },
   },
   exit: {
     opacity: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.2,
       ease: "easeInOut",
     },
   },

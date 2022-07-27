@@ -1,15 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router } from 'react-router-dom'
-import 'tw-elements'
-import HeaderContextProvider from './state/contexts/HeaderContext';
-import DisplaySidebarProvider from './state/contexts/DisplaySidebarContext';
-import AuthProvider from './state/contexts/AuthContext';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter as Router } from "react-router-dom";
+import "tw-elements";
+import HeaderContextProvider from "./state/contexts/HeaderContext";
+import DisplaySidebarProvider from "./state/contexts/DisplaySidebarContext";
+import AuthProvider from "./state/contexts/AuthContext";
 
 import "swiper/css/bundle";
+import UserAccountProfileProvider from "./state/contexts/UserAccountProfileContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -18,7 +19,13 @@ root.render(
       <DisplaySidebarProvider>
         <HeaderContextProvider>
           <AuthProvider>
-            <App />
+            <UserAccountProfileProvider>
+              {/* <AirsynContext>
+                <ProxieContext> */}
+              <App />
+              {/* </ProxieContext>
+              </AirsynContext> */}
+            </UserAccountProfileProvider>
           </AuthProvider>
         </HeaderContextProvider>
       </DisplaySidebarProvider>

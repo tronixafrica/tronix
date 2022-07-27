@@ -14,16 +14,18 @@ const DashboardComponent = () => {
   const deleteNOtification = () => {};
   return (
     <div>
-      <ConfirmationModal
-        display={onDisplay}
-        onCallConfirmationModal={() => setOnDisplay(false)}
-        heading="Notification Details"
-        message="A new device Razor drill was added by James Charles 20 minutes ago."
-        leftButtonText="cancel"
-        rightButtonText="delete"
-        onClickLeftButton={() => setOnDisplay(false)}
-        onClickRightButton={() => setAlertDisplay(deleteNOtification)}
-      />
+      {onDisplay && (
+        <ConfirmationModal
+          display={onDisplay}
+          onCallConfirmationModal={() => setOnDisplay(false)}
+          heading="Notification Details"
+          message="A new device Razor drill was added by James Charles 20 minutes ago."
+          leftButtonText="cancel"
+          rightButtonText="delete"
+          onClickLeftButton={() => setOnDisplay(false)}
+          onClickRightButton={() => setAlertDisplay(deleteNOtification)}
+        />
+      )}
       <AlertModal display={alertDisplay} />
       <AddDeviceModal
         display={onAddDevice}

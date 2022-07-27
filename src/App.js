@@ -15,41 +15,44 @@ import ParentIframe from "./pages/ParentIframe";
 import ChildIframe from "./pages/ChildIframe";
 import NotificationsPage from "./pages/NotificationsPage";
 import Profile from "./pages/Profile";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   return (
     <div>
-      <Routes>
-        {/* start routes excluding the default layout */}
-        {/* ROUTES GOES IN HERE */}
-        <Route path="/sig" element={<TestSignUp />} />
-        {/* end routes excluding the default layout */}
+      <AnimatePresence exitBeforeEnter>
+        <Routes>
+          {/* start routes excluding the default layout */}
+          {/* ROUTES GOES IN HERE */}
+          <Route path="/sig" element={<TestSignUp />} />
+          {/* end routes excluding the default layout */}
 
-        {/* start routes using the default layout */}
-        <Route path="/" element={<Main />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/reports" element={<Reports />} />
-          <Route path="/devices" element={<Device />} />
-          <Route path="/singledevice" element={<SingleDevice />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="/iframe" element={<ParentIframe />} />
-          <Route path="http://192.168.4.1/" element={<ChildIframe />} />
-          <Route path="/notifications" element={<NotificationsPage />} />
-          <Route path="/profile" element={<Profile />} />
-        </Route>
-        {/* end routes using the default layout */}
+          {/* start routes using the default layout */}
+          <Route path="/" element={<Main />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/reports" element={<Reports />} />
+            <Route path="/devices" element={<Device />} />
+            <Route path="/singledevice" element={<SingleDevice />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/iframe" element={<ParentIframe />} />
+            <Route path="http://192.168.4.1/" element={<ChildIframe />} />
+            <Route path="/notifications" element={<NotificationsPage />} />
+            <Route path="/profile" element={<Profile />} />
+          </Route>
+          {/* end routes using the default layout */}
 
-        {/* This route does not use the default layout */}
-        {/* Auth routes starts */}
-        <Route path="auth" element={<Auth />}>
-          <Route path="login" element={<LogIn />} />
-          <Route path="signup" element={<SignUp />} />
-        </Route>
-        <Route path="/auth/verify_email/:id" element={<VerifyEmail />} />
-        <Route path="/auth/success/:id" element={<SuccessPage />} />
+          {/* This route does not use the default layout */}
+          {/* Auth routes starts */}
+          <Route path="auth" element={<Auth />}>
+            <Route path="login" element={<LogIn />} />
+            <Route path="signup" element={<SignUp />} />
+          </Route>
+          <Route path="/auth/verify_email" element={<VerifyEmail />} />
+          <Route path="/auth/success" element={<SuccessPage />} />
 
-        {/* Auth routes ends */}
-      </Routes>
+          {/* Auth routes ends */}
+        </Routes>
+      </AnimatePresence>
     </div>
   );
 }

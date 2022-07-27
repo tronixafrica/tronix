@@ -50,7 +50,7 @@ const ConnectDeviceModal = (props) => {
         },
       }}
       className={`w-full h-screen shadow-sm text-textGrey fixed inset-0 z-[300000] flex items-center  justify-center ${
-        props.display ? "flex" : "hidden"
+        props.display ? "flex" : "flex"
       } `}
       onClick={props.onCallAddDeviceModal}
     >

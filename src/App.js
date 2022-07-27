@@ -18,6 +18,8 @@ import NotificationsPage from "./pages/NotificationsPage";
 import Profile from "./pages/Profile";
 import AddDeviceModal from "./components/Modals/AddDeviceModal";
 import ProxyDevice from "./components/Devices/ProxyDevice";
+import DeviceTypeModal from "./components/Modals/DeviceTypeModal";
+import ConnectDeviceModal from "./components/Modals/ConnectDeviceModal";
 
 function App() {
   return (
@@ -28,7 +30,7 @@ function App() {
         {/* start routes excluding the default layout */}
         {/* ROUTES GOES IN HERE */}
         <Route path="/sig" element={<TestSignUp />} />
-        <Route path="/add_device" element={<AddDeviceModal />} />
+        
 
 
         {/* end routes excluding the default layout */}
@@ -60,6 +62,15 @@ function App() {
         <Route path="/auth/success/:id" element={<SuccessPage />} />
 
         {/* Auth routes ends */}
+
+        {/* Start Modals route */}
+        {/* start device type modal */}
+        <Route path="/add_device" element={<DeviceTypeModal />} />
+        {/* end device type modal */}
+        
+        {/* start device type modal */}
+        <Route path="/connect_device" element={<ConnectDeviceModal />} />
+        {/* end device type modal */}
       </Routes>
     </div>
   );

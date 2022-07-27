@@ -9,7 +9,7 @@ const IFrameModals = () => {
                 <iframe 
                 ref={iFrameRef}
                 // src="http://127.0.0.1:5500/index.html" 
-                src="/add_device"
+                src={"/add_device"}
                 width='1000'
                 height='600'
                 frameborder="0"></iframe>

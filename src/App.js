@@ -18,19 +18,18 @@ import NotificationsPage from "./pages/NotificationsPage";
 import Profile from "./pages/Profile";
 import AddDeviceModal from "./components/Modals/AddDeviceModal";
 import ProxyDevice from "./components/Devices/ProxyDevice";
+import DeviceTypeModal from "./components/Modals/DeviceTypeModal";
+import { useState } from "react";
+import ConnectDeviceModal from "./components/Modals/ConnectDeviceModal";
 
 function App() {
   return (
     <div>
-
-    
       <Routes>
         {/* start routes excluding the default layout */}
         {/* ROUTES GOES IN HERE */}
         <Route path="/sig" element={<TestSignUp />} />
-        <Route path="/add_device" element={<AddDeviceModal />} />
-
-
+        {/* <Route path="/add_device" element={<DeviceTypeModal />} /> */}
         {/* end routes excluding the default layout */}
 
         {/* start routes using the default layout */}

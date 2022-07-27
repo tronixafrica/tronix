@@ -11,28 +11,35 @@ const Device = () => {
   const [onDisplay, setOnDisplay] = useState(false);
   const [onConnect, setOnConnect] = useState(false);
   const [deviceName, setDeviceName] = useState("");
+  // const [onShow, setOnShow] = useState(false);
+
+  const toggleDevice = () => {
+    console.log("This is an iframe", onDisplay);
+    setOnDisplay(!onDisplay);
+  };
 
   // check device type and display the connection modal
-  function setDeviceType(deviceName) {
-    console.log(deviceName, "device");
-    setOnDisplay(false);
-    setDeviceName(deviceName);
-    setOnConnect(true);
-  }
+  // function setDeviceType(deviceName) {
+  //   console.log(deviceName, "device");
+  //   setOnDisplay(false);
+  //   setDeviceName(deviceName);
+  //   setOnConnect(true);
+  // }
 
   return (
     <>
-      <DeviceTypeModal
+      {onDisplay && <DeviceTypeModal
         display={onDisplay}
-        onCallAddDeviceModal={() => setOnDisplay(false)}
-        onClickAirsynButton={() => {
-          setDeviceType("airsyn");
-        }}
-        onClickProxieButton={() => {
-          setDeviceType("proxie");
-        }}
-      />
-      <ConnectDeviceModal
+        toggleDevice={toggleDevice}
+        // onCallAddDeviceModal={() => setOnDisplay(false)}
+        // onClickAirsynButton={() => {
+        //   setDeviceType("airsyn");
+        // }}
+        // onClickProxieButton={() => {
+        //   setDeviceType("proxie");
+        // }}
+      />}
+      {/* <ConnectDeviceModal
         display={onConnect}
         onCallAddDeviceModal={() => setOnConnect(false)}
         deviceName={deviceName}
@@ -40,15 +47,15 @@ const Device = () => {
           setOnConnect(false);
           setOnDisplay(true);
         }}
-      />
+      /> */}
 
-      {/* <IFrameModals /> */}
+      {/* {onShow && <IFrameModals toggleDevice={toggleDevice} display={onShow} />} */}
 
       {/* Start of Device header */}
       <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-3">
         <div className="w-full border border-solid border-[#7A7878] flex-1 flex items-center justify-between p-4 rounded-lg px-6 bg-backgroundDark">
           <p className="text-white">40 Devices</p>
-          <div className="cursor-pointer" onClick={() => setOnDisplay(true)}>
+          <div className="cursor-pointer" onClick={toggleDevice}>
             <svg
               style={{ color: "#686868", width: "1.5rem", height: "1.5rem" }}
               xmlns="http://www.w3.org/2000/svg"

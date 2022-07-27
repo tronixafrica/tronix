@@ -49,9 +49,7 @@ const ConnectDeviceModal = (props) => {
           delay: 2,
         },
       }}
-      className={`w-full h-screen shadow-sm text-textGrey fixed inset-0 z-[300000] flex items-center  justify-center ${
-        props.display ? "flex" : "hidden"
-      } `}
+      className={`w-full h-screen shadow-sm text-textGrey fixed inset-0 z-[300000] flex items-center  justify-center `}
       onClick={props.onCallAddDeviceModal}
     >
       <motion.div

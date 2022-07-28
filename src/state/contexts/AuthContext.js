@@ -56,52 +56,6 @@ const AuthProvider = ({ children }) => {
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
   }, []);
 
-  // // Check for update on airsyn and proxie in db
-  // const airsynStateRef = ref(
-  //   db,
-  //   "/users/" + authState?.displayName + "/device/airsyn"
-  // );
-  // const proxieStateRef = ref(
-  //   db,
-  //   "/users/" + authState?.displayName + "/device/proxie"
-  // );
-  // useEffect(() => {
-  //   return () => {
-  //     onValue(airsynStateRef, (snapshot) => {
-  //       if (snapshot.exists()) {
-  //         const data = snapshot.val();
-  //         console.log(data, "airsyn");
-  //         // Dispatch to userAccountProfileReducer
-  //         dipsatchUserProfile({
-  //           type: PROFILE_ACTIONS.UPDATE_AIRSYN,
-  //           userProfile: data,
-  //         });
-  //       } else {
-  //         console.log("no data", authState?.displayName);
-  //         return null;
-  //       }
-  //     });
-  //   };
-  // }, []);
-  // useEffect(() => {
-  //   return () => {
-  //     onValue(proxieStateRef, (snapshot) => {
-  //       if (snapshot.exists()) {
-  //         const data = snapshot.val();
-  //         console.log(data, "proxie");
-  //         // Dispatch to userAccountProfileReducer
-  //         dipsatchUserProfile({
-  //           type: PROFILE_ACTIONS.UPDATE_PROXIE,
-  //           userProfile: data,
-  //         });
-  //       } else {
-  //         console.log("no data");
-  //         return null;
-  //       }
-  //     });
-  //   };
-  // }, []);
-
   // sign up user
   const signUp = (email, password) => {
     // if error state is false: do not update error state

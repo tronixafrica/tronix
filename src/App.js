@@ -56,6 +56,7 @@ function App() {
           <Route path="/auth/success" element={<SuccessPage />} />
 
           {/* Auth routes ends */}
+          <Route index element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </AnimatePresence>
     </div>

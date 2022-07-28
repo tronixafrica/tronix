@@ -37,8 +37,11 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/devices" element={<Device />} />
-            <Route path="/singledevice/:id" element={<SingleDevice />} />
-            <Route path="/proxydevice/:id" element={<ProxyDevice />} />
+            <Route
+              path="/singledevice/:deviceName"
+              element={<SingleDevice />}
+            />
+            <Route path="/proxydevice/:deviceName" element={<ProxyDevice />} />
             <Route path="/users" element={<Users />} />
             <Route path="/iframe" element={<ParentIframe />} />
             <Route path="http://192.168.4.1/" element={<ChildIframe />} />

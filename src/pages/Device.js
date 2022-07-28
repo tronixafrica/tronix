@@ -7,6 +7,7 @@ import IFrameModals from "../components/Modals/IFrameModal";
 import DeviceTypeModal from "../components/Modals/DeviceTypeModal";
 import ConnectDeviceModal from "../components/Modals/ConnectDeviceModal";
 import { AuthContext } from "../state/contexts/AuthContext";
+import { HeaderContext } from "../state/contexts/HeaderContext";
 
 const Device = () => {
   const [onDisplay, setOnDisplay] = useState(false);
@@ -14,6 +15,7 @@ const Device = () => {
   const [deviceName, setDeviceName] = useState("");
   const [searchDevice, setSearchDevice] = useState("");
   const { userProfile } = useContext(AuthContext);
+
   // const [onShow, setOnShow] = useState(false);
 
   console.log(userProfile?.device, "user devices");

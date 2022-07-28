@@ -34,16 +34,19 @@ const DashboardComponent = () => {
   };
   console.log(userProfile?.device, "user devices");
   const devicesArr = [];
+  const prx = userProfile?.device?.proxie || {};
+  const asn = userProfile?.device?.airsyn || {};
 
-  Object.values(userProfile?.device?.proxie).map((item, index) => {
+  // Check if object is null or undefined
+
+  Object.values(prx).map((item, index) => {
     console.log(item, "item sss");
     return devicesArr.push(item);
   });
-  Object.values(userProfile?.device?.airsyn).map((item, index) => {
+  Object.values(asn).map((item, index) => {
     console.log(item, "item sss");
     return devicesArr.push(item);
   });
-
   console.log(devicesArr, "deviceArrrtt");
 
   const toggleDevice = () => {

@@ -260,6 +260,40 @@ const AuthProvider = ({ children }) => {
       .catch((error) => {
         console.error(error);
       });
+    // Check for update on airsyn and proxie in db
+    const airsynStateRef = ref(db, "/users/" + displayName + "/device/airsyn");
+    const proxieStateRef = ref(db, "/users/" + displayName + "/device/proxie");
+
+    onValue(airsynStateRef, (snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        console.log(data, "airsyn");
+        // Dispatch to userAccountProfileReducer
+        dipsatchUserProfile({
+          type: PROFILE_ACTIONS.UPDATE_AIRSYN,
+          userProfile: data,
+        });
+        console.log("data", displayName);
+      } else {
+        console.log("no data", displayName);
+        return null;
+      }
+    });
+    onValue(proxieStateRef, (snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        console.log(data, "proxie");
+        // Dispatch to userAccountProfileReducer
+        dipsatchUserProfile({
+          type: PROFILE_ACTIONS.UPDATE_PROXIE,
+          userProfile: data,
+        });
+        console.log("data", displayName);
+      } else {
+        console.log("no data", displayName);
+        return null;
+      }
+    });
   };
 
   // error function for auth

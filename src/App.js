@@ -12,14 +12,9 @@ import SuccessPage from "./pages/SuccessPage";
 import VerifyEmail from "./pages/VerifyEmail";
 import TestSignUp from "./pages/testSignup";
 //NOTE: remove this later
-import ParentIframe from "./pages/ParentIframe";
-import ChildIframe from "./pages/ChildIframe";
 import NotificationsPage from "./pages/NotificationsPage";
 import Profile from "./pages/Profile";
-import AddDeviceModal from "./components/Modals/AddDeviceModal";
 import ProxyDevice from "./components/Devices/ProxyDevice";
-import DeviceTypeModal from "./components/Modals/DeviceTypeModal";
-import ConnectDeviceModal from "./components/Modals/ConnectDeviceModal";
 import { AnimatePresence } from "framer-motion";
 
 function App() {
@@ -43,8 +38,6 @@ function App() {
             />
             <Route path="/proxydevice/:deviceName" element={<ProxyDevice />} />
             <Route path="/users" element={<Users />} />
-            <Route path="/iframe" element={<ParentIframe />} />
-            <Route path="http://192.168.4.1/" element={<ChildIframe />} />
             <Route path="/notifications" element={<NotificationsPage />} />
             <Route path="/profile" element={<Profile />} />
           </Route>

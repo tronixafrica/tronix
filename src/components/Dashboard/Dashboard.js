@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../state/contexts/AuthContext";
 import RoundWithPlus from "../icons/RoundWithMinus";
 import AddDeviceModal from "../Modals/AddDeviceModal";
 import AddUserModal from "../Modals/AddUserModal";
@@ -11,6 +13,22 @@ const DashboardComponent = () => {
   const [onAddDevice, setOnAddDevice] = useState(false);
   const [onAddUser, setOnAddUser] = useState(false);
   const [alertDisplay, setAlertDisplay] = useState(false);
+  const { userProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  console.log(userProfile?.device, "user devices");
+  const devicesArr = [];
+
+  Object.values(userProfile?.device?.proxie).map((item, index) => {
+    console.log(item, "item sss");
+    return devicesArr.push(item);
+  });
+  Object.values(userProfile?.device?.airsyn).map((item, index) => {
+    console.log(item, "item sss");
+    return devicesArr.push(item);
+  });
+
+  console.log(devicesArr, "deviceArrrtt");
 
   const toggleDevice = () => {
     setOnAddDevice(!onAddDevice);
@@ -88,7 +106,7 @@ const DashboardComponent = () => {
                       </div>
                       <div className="flex flex-row items-center">
                         <h1 className="font-poppins text-[150%] mr-[1rem] text-[#D4D4D4] font-semibold">
-                          40
+                          {devicesArr.length}
                         </h1>
                         <p className="text-[70%] text-[#D4D4D4]">12 ON</p>
                       </div>
@@ -153,26 +171,38 @@ const DashboardComponent = () => {
                     <h1 className="text-[160%] font-poppins text-[#D4D4D4] mb-[20px] ml-[8px]">
                       Devices
                     </h1>
-                    {[
-                      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
-                      18, 19, 20,
-                    ].map((i) => (
-                      <div className="border-t border-[#555] flex items-center justify-between p-[10px] transition ease-in-out duration-300 hover:bg-[#D20202] bg-[#121212]">
-                        <div>
-                          <h1 className="font-poppins text-[#D4D4D4] flex flex-col text-[100%]">
-                            Razor drill
-                          </h1>
-                          <p className="font-poppins text-[#777] text-[70%]">
-                            Office Lounge
-                          </p>
+                    {devicesArr
+                      .sort((a, b) =>
+                        a.deviceLocation > b.deviceLocation ? 1 : -1
+                      )
+                      .map((device) => (
+                        <div
+                          className="border-t border-[#555] flex items-center justify-between p-[10px] transition ease-in-out duration-300 hover:border-none hover:bg-[#D20202] bg-[#121212] cursor-pointer"
+                          key={device.deviceName}
+                          onClick={() => {
+                            device?.deviceType === "proxie"
+                              ? navigate(`/proxydevice/${device?.deviceName}`)
+                              : navigate(`/singledevice/${device?.deviceName}`);
+                          }}
+                        >
+                          <div className="flex-1">
+                            <h1 className="font-poppins text-[#D4D4D4] flex flex-col text-[100%]">
+                              {device?.deviceName}
+                            </h1>
+                            <p className="font-poppins text-[#777] text-[70%]">
+                              {device?.deviceLocation}
+                            </p>
+                            <p className="font-poppins text-[#777] text-[70%]">
+                              {device?.deviceType}
+                            </p>
+                          </div>
+                          <div className="flex-1 text-end">
+                            <h1 className="font-poppins text-[#059D1D] text-[100%]">
+                              {device?.deviceState}
+                            </h1>
+                          </div>
                         </div>
-                        <div>
-                          <h1 className="font-poppins text-[#059D1D] text-[100%]">
-                            ON
-                          </h1>
-                        </div>
-                      </div>
-                    ))}
+                      ))}
                   </div>
                 </div>
               </div>

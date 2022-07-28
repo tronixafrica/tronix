@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import DeviceCardComp from "../components/Devices/DeviceCardComp";
 import { deviceItems } from "../../src/components/DataList/dummyData";
 import MobDeviceCard from "../components/Devices/MobDeviceCard";
@@ -6,12 +6,29 @@ import GoToTop from "../components/GoToTop/GoToTop";
 import IFrameModals from "../components/Modals/IFrameModal";
 import DeviceTypeModal from "../components/Modals/DeviceTypeModal";
 import ConnectDeviceModal from "../components/Modals/ConnectDeviceModal";
+import { AuthContext } from "../state/contexts/AuthContext";
 
 const Device = () => {
   const [onDisplay, setOnDisplay] = useState(false);
   const [onConnect, setOnConnect] = useState(false);
   const [deviceName, setDeviceName] = useState("");
+  const [searchDevice, setSearchDevice] = useState("");
+  const { userProfile } = useContext(AuthContext);
   // const [onShow, setOnShow] = useState(false);
+
+  console.log(userProfile?.device, "user devices");
+  const devicesArr = [];
+
+  Object.values(userProfile?.device?.proxie).map((item, index) => {
+    console.log(item, "item sss");
+    return devicesArr.push(item);
+  });
+  Object.values(userProfile?.device?.airsyn).map((item, index) => {
+    console.log(item, "item sss");
+    return devicesArr.push(item);
+  });
+
+  console.log(devicesArr, "deviceArrrtt");
 
   const toggleDevice = () => {
     console.log("This is an iframe", onDisplay);
@@ -28,17 +45,19 @@ const Device = () => {
 
   return (
     <>
-      {onDisplay && <DeviceTypeModal
-        display={onDisplay}
-        toggleDevice={toggleDevice}
-        // onCallAddDeviceModal={() => setOnDisplay(false)}
-        // onClickAirsynButton={() => {
-        //   setDeviceType("airsyn");
-        // }}
-        // onClickProxieButton={() => {
-        //   setDeviceType("proxie");
-        // }}
-      />}
+      {onDisplay && (
+        <DeviceTypeModal
+          display={onDisplay}
+          toggleDevice={toggleDevice}
+          // onCallAddDeviceModal={() => setOnDisplay(false)}
+          // onClickAirsynButton={() => {
+          //   setDeviceType("airsyn");
+          // }}
+          // onClickProxieButton={() => {
+          //   setDeviceType("proxie");
+          // }}
+        />
+      )}
       {/* <ConnectDeviceModal
         display={onConnect}
         onCallAddDeviceModal={() => setOnConnect(false)}
@@ -54,7 +73,7 @@ const Device = () => {
       {/* Start of Device header */}
       <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-3">
         <div className="w-full border border-solid border-[#7A7878] flex-1 flex items-center justify-between p-4 rounded-lg px-6 bg-backgroundDark">
-          <p className="text-white">40 Devices</p>
+          <p className="text-white">{devicesArr.length} Devices</p>
           <div className="cursor-pointer" onClick={toggleDevice}>
             <svg
               style={{ color: "#686868", width: "1.5rem", height: "1.5rem" }}
@@ -72,7 +91,7 @@ const Device = () => {
             </svg>
           </div>
         </div>
-        <div className="w-full border border-solid border-[#7A7878] flex-1 p-4 rounded-lg flex items-center bg-backgroundDark px-6">
+        <div className="w-full border border-solid border-[#7A7878] flex-1 rounded-lg flex items-center bg-backgroundDark px-6">
           <svg
             style={{ color: "#686868", marginRight: ".7rem" }}
             xmlns="http://www.w3.org/2000/svg"
@@ -91,7 +110,10 @@ const Device = () => {
           <input
             type="text"
             placeholder="Search"
-            className="border-none bg-transparent text-white w-full"
+            className="border-none bg-transparent p-4 text-white w-full"
+            onChange={(event) => {
+              setDeviceName(event.target.value);
+            }}
           />
           <svg
             style={{ color: "white", transform: "rotate(90deg)" }}
@@ -116,30 +138,46 @@ const Device = () => {
       <div className="hidden sm:block border border-solid border-[#454545] mt-6 rounded-lg px-6 p-4 bg-backgroundDark">
         {/* Start of Device List Items Header */}
         <div className=" flex items-center justify-between gap-2 py-4 text-white">
-          <p>Device Name</p>
-          <p>Device Location</p>
-          <p>Device Type</p>
-          <p>Status</p>
+          <p className="flex-1">Device Name</p>
+          <p className="flex-1">Device Location</p>
+          <p className="flex-1">Device Type</p>
+          <p className="flex-1">Status</p>
           <p>Remove</p>
         </div>
         {/* End of Device List Items Header */}
-
+        {/* if (searchDevice === "") {
+                return device;
+              } else if (
+                device?.deviceName
+                  .toLowerCase()
+                  .includes(searchDevice.toLowerCase())
+              ) {
+                return device;
+              } */}
+        {/* device.deviceName.includes(searchDevice */}
         <div className="h-[25.63rem] overflow-auto scroll">
-          {deviceItems.map((device) => (
-            <div key={device.id}>
-              <DeviceCardComp device={device} />
-            </div>
-          ))}
+          {devicesArr
+            .sort((a, b) => (a.deviceLocation > b.deviceLocation ? 1 : -1))
+            .map((device) => {
+              console.log(device, "ppppp");
+              return (
+                <div key={device.deviceName}>
+                  <DeviceCardComp device={device} />
+                </div>
+              );
+            })}
         </div>
       </div>
 
       {/* Mobile Device Card Components */}
       <div className="block sm:hidden mt-5 h-[25.63rem] overflow-auto scroll">
-        {deviceItems.map((device) => (
-          <div key={device.id}>
-            <MobDeviceCard device={device} />
-          </div>
-        ))}
+        {devicesArr
+          .sort((a, b) => (a.deviceLocation > b.deviceLocation ? 1 : -1))
+          .map((device) => (
+            <div key={device.deviceName}>
+              <MobDeviceCard device={device} />
+            </div>
+          ))}
       </div>
       <GoToTop />
     </>

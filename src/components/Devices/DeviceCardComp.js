@@ -6,6 +6,7 @@ import ConfirmationModal from "../Modals/ConfirmationModal";
 const DeviceCardComp = ({ device }) => {
   const [onDisplay, setOnDisplay] = useState(false);
   const navigate = useNavigate();
+
   return (
     <div className="flex items-center justify-between py-4 border-b border-[#717171] border-solid hover:bg-backgroundRed hover:text-white hover:border-none text-[#FEFDFD] text-sm">
       <ConfirmationModal
@@ -21,47 +22,47 @@ const DeviceCardComp = ({ device }) => {
       {/* Start of List of Devices Card */}
       {/* <Link to="/singledevice"> */}
       <p
-        className="cursor-pointer"
+        className="cursor-pointer flex-1"
         onClick={() => {
-          device?.prod === "proxie"
-            ? navigate(`/proxydevice/${device?.id}`)
-            : navigate(`/singledevice/${device?.id}`);
+          device?.deviceType === "proxie"
+            ? navigate(`/proxydevice/${device?.deviceName}`)
+            : navigate(`/singledevice/${device?.deviceName}`);
         }}
       >
-        {device?.name}
+        {device?.deviceName}
       </p>
       {/* </Link> */}
       <p
-        className="cursor-pointer"
+        className="cursor-pointer flex-1"
         onClick={() => {
-          device?.prod === "proxie"
-            ? navigate(`/proxydevice/${device?.id}`)
-            : navigate(`/singledevice/${device?.id}`);
+          device?.deviceType === "proxie"
+            ? navigate(`/proxydevice/${device?.deviceName}`)
+            : navigate(`/singledevice/${device?.deviceName}`);
         }}
       >
-        {device?.loc}
+        {device?.deviceLocation}
       </p>
       {/* <Link to="/proxydevice"> */}
       <p
-        className="cursor-pointer"
+        className="cursor-pointer flex-1"
         onClick={() => {
-          device?.prod === "proxie"
-            ? navigate(`/proxydevice/${device?.id}`)
-            : navigate(`/singledevice/${device?.id}`);
+          device?.deviceType === "proxie"
+            ? navigate(`/proxydevice/${device?.deviceName}`)
+            : navigate(`/singledevice/${device?.deviceName}`);
         }}
       >
-        {device?.prod}
+        {device?.deviceType}
       </p>
       {/* </Link> */}
       <p
-        className="cursor-pointer"
+        className="cursor-pointer flex-1"
         onClick={() => {
-          device?.prod === "proxie"
+          device?.deviceType === "proxie"
             ? navigate(`/proxydevice/${device?.id}`)
             : navigate(`/singledevice/${device?.id}`);
         }}
       >
-        {device?.stat}
+        {device?.deviceState}
       </p>
       <p className="mr-4 cursor-pointer" onClick={() => setOnDisplay(true)}>
         <svg

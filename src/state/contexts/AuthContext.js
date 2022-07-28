@@ -7,6 +7,7 @@ import {
   updateProfile,
   sendEmailVerification,
   updateCurrentUser,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import { getDatabase, ref, set, get, onValue } from "firebase/database";
@@ -23,56 +24,36 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(authReducer, initialState);
+  const [authState, setAuthState] = useState();
   const [userProfile, dipsatchUserProfile] = useReducer(
     UserAccountProfileReducer,
     initialProfileState
   );
   const [authSuccess, setAuthSuccess] = useState(false);
   const [verifyEmailSuccess, setVerifyEmailSuccess] = useState(false);
-  const [formattedEmailState, setFormattedEmailState] = useState("");
   const [error, setError] = useState({
     isError: false,
     errorMsg: "",
   });
 
-  // Check for update on airsyn and proxie in db
-  const airsynStateRef = ref(db, "/users/itzmeruz31gmailcom/device/airsyn");
-  const proxieStateRef = ref(db, "/users/itzmeruz31gmailcom/device/proxie");
+  // Listen to the Firebase Auth state and set the.
+  const getUserAuth = getAuth();
   useEffect(() => {
-    return () => {
-      onValue(airsynStateRef, (snapshot) => {
-        if (snapshot.exists()) {
-          const data = snapshot.val();
-          console.log(data, "airsyn");
-          // Dispatch to userAccountProfileReducer
-          dipsatchUserProfile({
-            type: PROFILE_ACTIONS.UPDATE_AIRSYN,
-            userProfile: data,
-          });
-        } else {
-          console.log("no data", formattedEmailState);
-          return null;
+    const unregisterAuthObserver = onAuthStateChanged(
+      getUserAuth,
+      (userAuth) => {
+        setAuthState(userAuth);
+        if (!userAuth) {
+          navigate("/auth/login", { replace: true });
         }
-      });
-    };
-  }, []);
-  useEffect(() => {
-    return () => {
-      onValue(proxieStateRef, (snapshot) => {
-        if (snapshot.exists()) {
-          const data = snapshot.val();
-          console.log(data, "proxie");
-          // Dispatch to userAccountProfileReducer
-          dipsatchUserProfile({
-            type: PROFILE_ACTIONS.UPDATE_PROXIE,
-            userProfile: data,
-          });
-        } else {
-          console.log("no data");
-          return null;
+        // Check if user email is verified
+        if (userAuth && !userAuth?.emailVerified) {
+          //  navigate to the dashboard
+          navigate("/auth/verify_email", { replace: true });
         }
-      });
-    };
+      }
+    );
+    return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
   }, []);
 
   // sign up user
@@ -176,8 +157,6 @@ const AuthProvider = ({ children }) => {
 
         // Check if user is verified
         if (user.emailVerified) {
-          // Fetch the profile data from the database
-          fetchProfileAndUpdateState(user.displayName);
           //Redirect to the dashboard
           navigate("/dashboard");
         } else {
@@ -248,7 +227,6 @@ const AuthProvider = ({ children }) => {
     const formattedEmail = formattedArr.join("");
     console.log(email, formattedEmail, "creating the account");
     // set the formatted email
-    setFormattedEmailState(formattedEmail);
 
     set(ref(db, "users/" + formattedEmail), profileAccount);
 
@@ -297,6 +275,7 @@ const AuthProvider = ({ children }) => {
 
   const authStates = {
     state,
+    authState,
     signUp,
     authSuccess,
     signIn,
@@ -304,6 +283,7 @@ const AuthProvider = ({ children }) => {
     createAccount,
     verifyEmailSuccess,
     userProfile,
+    fetchProfileAndUpdateState,
   };
 
   return (

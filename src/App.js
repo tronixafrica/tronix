@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import SingleDevice from "./components/Devices/SingleDevice";
 import Main from "./layouts/Main";
 import Auth from "./pages/Auth";
@@ -19,7 +19,6 @@ import Profile from "./pages/Profile";
 import AddDeviceModal from "./components/Modals/AddDeviceModal";
 import ProxyDevice from "./components/Devices/ProxyDevice";
 import DeviceTypeModal from "./components/Modals/DeviceTypeModal";
-import { useState } from "react";
 import ConnectDeviceModal from "./components/Modals/ConnectDeviceModal";
 import { AnimatePresence } from "framer-motion";
 
@@ -57,6 +56,7 @@ function App() {
           <Route path="/auth/success" element={<SuccessPage />} />
 
           {/* Auth routes ends */}
+          <Route index element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </AnimatePresence>
     </div>

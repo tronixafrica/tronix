@@ -7,10 +7,10 @@ const SwitchProxy = ({toggleSwitch, deviceId, userId, deviceState}) => {
   return (
     <div className="flex items-center justify-center">
       {/* Start of Switch Card */}
-      <div className="border border-backgroundDark bg-backgroundDark w-full sm:w-[60%] h-[285px] rounded-lg p-6 mt-4 px-6 sm:px-16">
+      <div className="border border-backgroundDark bg-backgroundDark font-poppins w-full sm:w-[60%] h-[285px] rounded-lg p-6 mt-4 px-6 sm:px-16">
         {/* Start of Switch header */}
-        <div className="border border-[#686868] w-full flex justify-between mt-1 p-3 rounded-lg">
-          <p className="text-white font-semibold">Power</p>
+        <div className="border border-[#686868] w-full flex font-poppins justify-between mt-1 p-3 rounded-lg">
+          <p className="text-white font-semibold font-poppins">Power</p>
           <div className="flex items-center justify-center gap-2">
             <div className={`w-2 h-2 border border-solid ${deviceState === 'off' ? 'bg-green-700 border-green-700' :  'bg-[#555756] border-[#555756]'}  rounded-full`}></div>
             <p className="text-white font-semibold">{deviceState === 'off' ? 'ON' : 'OFF'}</p>

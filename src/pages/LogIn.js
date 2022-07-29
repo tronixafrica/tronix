@@ -45,8 +45,8 @@ const LogIn = () => {
 
   // Formik initial values ... this is the initial form state
   let initialValues = {
-    email: "",
-    password: "",
+    email: "itzmeruz31@gmail.com",
+    password: "Password1#",
   };
 
   // Yup validation schema... this is for form validation
@@ -94,7 +94,7 @@ const LogIn = () => {
                 {/* Email input start */}
                 <div className={``}>
                   <input
-                    type="email"
+                    type="password"
                     name="email"
                     className=" block w-full px-4 py-2 h-[50px] font-normal bg-transparent bg-clip-padding border-[2px] border-solid border-backgroundGrey rounded-md transition ease-in-out m-0 placeholder:text-backgroundGrey placeholder: focus:bg-transparent focus:border-textGrey focus:outline-none"
                     placeholder="Email"

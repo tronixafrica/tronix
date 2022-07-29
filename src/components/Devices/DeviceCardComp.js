@@ -25,12 +25,12 @@ const DeviceCardComp = ({ device }) => {
   };
 
   return (
-    <div className="flex items-center justify-between py-4 border-b border-[#717171] border-solid hover:bg-backgroundRed hover:text-white hover:border-none text-[#FEFDFD] text-sm">
+    <div className="flex items-center justify-between py-4 border-b border-[#717171] border-solid hover:bg-backgroundRed font-poppins hover:text-white hover:border-none text-[#FEFDFD] text-sm">
       <ConfirmationModal
         display={onDisplay}
         onCallConfirmationModal={() => setOnDisplay(false)}
         heading="Remove Devices"
-        message="Are you sure you want to remove Razor from your devices?"
+        message="Are you sure you want to remove this device?"
         leftButtonText="cancel"
         rightButtonText="remove"
         onClickLeftButton={() => setOnDisplay(false)}
@@ -39,7 +39,7 @@ const DeviceCardComp = ({ device }) => {
       {/* Start of List of Devices Card */}
       {/* <Link to="/singledevice"> */}
       <p
-        className="cursor-pointer flex-1"
+        className="cursor-pointer flex-1 font-poppins"
         onClick={() => {
           device?.deviceType === "proxie"
             ? handleRoute(
@@ -58,7 +58,7 @@ const DeviceCardComp = ({ device }) => {
       </p>
       {/* </Link> */}
       <p
-        className="cursor-pointer flex-1"
+        className="cursor-pointer flex-1 font-poppins"
         onClick={() => {
           device?.deviceType === "proxie"
             ? handleRoute(
@@ -77,7 +77,7 @@ const DeviceCardComp = ({ device }) => {
       </p>
       {/* <Link to="/proxydevice"> */}
       <p
-        className="cursor-pointer flex-1"
+        className="cursor-pointer flex-1 font-poppins"
         onClick={() => {
           device?.deviceType === "proxie"
             ? handleRoute(
@@ -96,7 +96,7 @@ const DeviceCardComp = ({ device }) => {
       </p>
       {/* </Link> */}
       <p
-        className="cursor-pointer flex-1"
+        className="cursor-pointer flex-1 font-poppins"
         onClick={() => {
           device?.deviceType === "proxie"
             ? handleRoute(
@@ -113,7 +113,10 @@ const DeviceCardComp = ({ device }) => {
       >
         {device?.deviceState}
       </p>
-      <p className="mr-4 cursor-pointer" onClick={() => setOnDisplay(true)}>
+      <p
+        className="mr-4 cursor-pointer font-poppins"
+        onClick={() => setOnDisplay(true)}
+      >
         <svg
           style={{ width: "1.5rem", height: "1.5rem" }}
           xmlns="http://www.w3.org/2000/svg"

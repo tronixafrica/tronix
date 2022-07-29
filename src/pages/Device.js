@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DeviceCardComp from "../components/Devices/DeviceCardComp";
 import { deviceItems } from "../../src/components/DataList/dummyData";
 import MobDeviceCard from "../components/Devices/MobDeviceCard";
@@ -12,9 +12,10 @@ const Device = () => {
   const [onDisplay, setOnDisplay] = useState(false);
   const [onConnect, setOnConnect] = useState(false);
   const [deviceName, setDeviceName] = useState("");
-  const [searchDevice, setSearchDevice] = useState("");
+  const [val, setVal] = useState("");
+  const [allDevice, setAllDevice] = useState();
+  const [searchDevice, setSearchDevice] = useState(allDevice);
   const { userProfile } = useContext(AuthContext);
-  // const [onShow, setOnShow] = useState(false);
 
   console.log(userProfile?.device, "user devices");
   const devicesArr = [];
@@ -29,6 +30,19 @@ const Device = () => {
   });
 
   console.log(devicesArr, "deviceArrrtt");
+  // setAllDevice(devicesArr);
+
+  const handleSearch = (value) => {
+    let result = [];
+    result = allDevice?.filter((data) => {
+      return data?.deviceName.includes(value);
+    });
+    setSearchDevice(result);
+  };
+
+  // useEffect(() => {
+  //   handleSearch(val);
+  // }, [val]);
 
   const toggleDevice = () => {
     console.log("This is an iframe", onDisplay);
@@ -41,6 +55,24 @@ const Device = () => {
   //   setOnDisplay(false);
   //   setDeviceName(deviceName);
   //   setOnConnect(true);
+  // }
+
+  // function myFunction() {
+  // var input, filter, ul, li, a, i, txtValue;
+  // input = document.getElementById('myInput');
+  // filter = input.value.toUpperCase();
+  // ul = document.getElementById("myUL");
+  // li = ul.getElementsByTagName('li');
+
+  // Loop through all list items, and hide those who don't match the search query
+  // for (i = 0; i < li.length; i++) {
+  //   a = li[i].getElementsByTagName("a")[0];
+  //   txtValue = a.textContent || a.innerText;
+  //   if (txtValue.toUpperCase().indexOf(filter) > -1) {
+  //     li[i].style.display = "";
+  //   } else {
+  //     li[i].style.display = "none";
+  //   }
   // }
 
   return (
@@ -109,10 +141,11 @@ const Device = () => {
           </svg>
           <input
             type="text"
+            value={val}
             placeholder="Search"
             className="border-none bg-transparent p-4 text-white w-full"
             onChange={(event) => {
-              setDeviceName(event.target.value);
+              setVal(event.target.value);
             }}
           />
           <svg

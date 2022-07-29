@@ -31,15 +31,18 @@ const UserAccountProfileReducer = (state = initialProfileState, action) => {
         },
       };
 
-    case ACTIONS.UPDATE_AIRSYN_READINGS:
-      console.log(state, "this is mer state");
-      return {
-        ...state,
-        device: {
-          ...state.device,
-          airsyn: action.userProfile,
-        },
-      };
+    // case ACTIONS.UPDATE_AIRSYN_READINGS:
+    //   console.log(state, "this is mer state");
+    //   return {
+    //     ...state,
+    //     device: {
+    //       ...state.device,
+    //       airsyn: {
+    //         ...state.device.airsyn,
+    //         deviceReadings: action.userProfile,
+    //       },
+    //     },
+    //   };
 
     default:
       return state;

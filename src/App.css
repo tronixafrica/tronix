@@ -79,6 +79,15 @@
   background: #555;
 }
 
+/* .swiper-pagination {
+  margin-top: 8rem !important;
+  border: 2px solid red;
+} */
+
+.swiper-pagination-bullet-active {
+  background-color: #fff !important;
+}
+
 .carousel-item {
   display: none;
   margin-right: -100%;

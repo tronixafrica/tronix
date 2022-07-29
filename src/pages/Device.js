@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import DeviceCardComp from "../components/Devices/DeviceCardComp";
 import MobDeviceCard from "../components/Devices/MobDeviceCard";
 import GoToTop from "../components/GoToTop/GoToTop";
@@ -10,7 +10,7 @@ const Device = () => {
   const [onDisplay, setOnDisplay] = useState(false);
   // const [onConnect, setOnConnect] = useState(false);
   // const [deviceName, setDeviceName] = useState("");
-  const [val, setVal] = useState("");
+  // const [val, setVal] = useState("");
   // const [allDevice, setAllDevice] = useState("");
 
   const { userProfile } = useContext(AuthContext);
@@ -19,7 +19,7 @@ const Device = () => {
 
   console.log(userProfile?.device, "user devices");
   const devicesArr = [];
-  const [filteredData, setfilteredData] = useState(devicesArr);
+  // const [filteredData, setfilteredData] = useState(devicesArr);
   const prx = userProfile?.device?.proxie || {};
   const asn = userProfile?.device?.airsyn || {};
 
@@ -36,13 +36,13 @@ const Device = () => {
 
   console.log(devicesArr, "deviceArrrtt");
 
-  const handleSearch = (value) => {
-    let result = [];
-    result = devicesArr?.filter((data) => {
-      return data?.deviceName.includes(value);
-    });
-    setfilteredData(result);
-  };
+  // const handleSearch = (value) => {
+  //   let result = [];
+  //   result = devicesArr?.filter((data) => {
+  //     return data?.deviceName.includes(value);
+  //   });
+  //   setfilteredData(result);
+  // };
 
   // useEffect(() => {
   //   console.log(val, "rrrrruu");
@@ -57,9 +57,9 @@ const Device = () => {
   //   handleSearch(val);
   // }, []);
 
-  useEffect(() => {
-    handleSearch(val);
-  }, [val]);
+  // useEffect(() => {
+  //   handleSearch(val);
+  // }, [val]);
 
   const toggleDevice = () => {
     console.log("This is an iframe", onDisplay);
@@ -140,12 +140,12 @@ const Device = () => {
           </svg>
           <input
             type="text"
-            value={val}
+            // value={val}
             placeholder="Search"
             className="border-none bg-transparent p-4 text-white w-full"
-            onChange={(event) => {
-              setVal(event.target.value);
-            }}
+            // onChange={(event) => {
+            //   setVal(event.target.value);
+            // }}
           />
           {/* <svg
             style={{ color: "white", transform: "rotate(90deg)" }}
@@ -188,7 +188,7 @@ const Device = () => {
               } */}
         {/* device.deviceName.includes(searchDevice */}
         <div className="h-[25.63rem] overflow-auto scroll">
-          {filteredData
+          {devicesArr
             .sort((a, b) => (a.deviceLocation > b.deviceLocation ? 1 : -1))
             .map((device) => {
               console.log(device, "ppppp");

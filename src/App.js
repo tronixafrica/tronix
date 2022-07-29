@@ -45,12 +45,12 @@ function App() {
 
           {/* This route does not use the default layout */}
           {/* Auth routes starts */}
-          <Route path="auth" element={<Auth />}>
+          {/* /    <Route path="auth" element={<Auth />}>
             <Route path="login" element={<LogIn />} />
             <Route path="signup" element={<SignUp />} />
           </Route>
           <Route path="/auth/verify_email" element={<VerifyEmail />} />
-          <Route path="/auth/success" element={<SuccessPage />} />
+          <Route path="/auth/success" element={<SuccessPage />} /> */}
 
           {/* Auth routes ends */}
           <Route index element={<Navigate to="/dashboard" replace />} />

@@ -105,7 +105,10 @@ const DashboardComponent = () => {
       leading-tight
       uppercase
       border-x-0 border-t-0 border-transparent
-      focus:border-transparent
+      focus:border-transparent 
+      focus:bg-backgroundRed
+      bg-backgroundDark
+      rounded-lg
       active
     "
                     id="tabs-home-tab"
@@ -115,7 +118,7 @@ const DashboardComponent = () => {
                     aria-controls="tabs-home"
                     aria-selected="true"
                   >
-                    <div className="h-full transition ease-in-out duration-300 hover:bg-backgroundRed bg-backgroundDark w-[100%] p-[2rem] cursor-pointer rounded-lg border border-solid border-[#777]">
+                    <div className="h-full transition ease-in-out duration-300 hover:bg-backgroundRed bg-transparent w-[100%] p-[2rem] cursor-pointer rounded-lg border border-solid border-[#777]">
                       <div className="flex flex-row justify-between">
                         <h1 className="font-raleway sm:text-base text-textGreyLighter">
                           TOTAL DEVICES
@@ -145,7 +148,10 @@ const DashboardComponent = () => {
       leading-tight
       uppercase
       border-x-0 border-t-0 border-transparent
+      focus:bg-backgroundRed
+      bg-backgroundDark
       focus:border-transparent
+      rounded-lg
     "
                     id="tabs-profile-tab"
                     data-bs-toggle="pill"
@@ -154,7 +160,7 @@ const DashboardComponent = () => {
                     aria-controls="tabs-profile"
                     aria-selected="false"
                   >
-                    <div className="h-full transition ease-in-out duration-300 hover:bg-backgroundRed bg-backgroundDark w-[100%] p-[2rem] cursor-pointer rounded-lg border border-solid border-[#777]">
+                    <div className="h-full transition ease-in-out duration-300 hover:bg-backgroundRed bg-transparent w-[100%] p-[2rem] cursor-pointer rounded-lg border border-solid border-[#777]">
                       <div className="flex flex-row justify-between">
                         <h1 className="font-raleway text-base text-textGreyLighter">
                           TOTAL USERS

@@ -20,9 +20,13 @@ const AirQualityCard = (props) => {
         <div className="w-full">
           {/* Start of Pollutant Card */}
           <div className="bg-backgroundDark w-full p-4 sm:h-[350px] rounded-lg border border-[#686868]">
-            <div className="flex justify-between mb-3 px-3">
-              <p className="font-semibold text-lg text-white">Pollutants</p>
-              <p className="font-semibold text-lg text-backgroundRed">Unsafe</p>
+            <div className="flex font-poppins justify-between mb-3 px-3">
+              <p className="font-semibold text-lg font-poppins text-white">
+                Pollutants
+              </p>
+              <p className="font-semibold text-lg font-poppins text-backgroundRed">
+                Unsafe
+              </p>
             </div>
             <hr className="border border-[#e2b6b6]" />
 
@@ -32,10 +36,10 @@ const AirQualityCard = (props) => {
             >
               {/* First Item */}
               <div className="border border-backgroundRed bg-backgroundRed sm:w-[30%] w-full rounded-lg flex items-center justify-center">
-                <div className="text-center text-white space-y-2 ">
-                  <p className="font-thin text-sm">CO2</p>
+                <div className="text-center font-poppins text-white space-y-2 ">
+                  <p className="text-sm">CO2</p>
                   <p className="text-xl font-semibold">0.33</p>
-                  <p className="font-thin text-sm">ONSAFE</p>
+                  <p className="text-sm">UNSAFE</p>
                 </div>
               </div>
               {/* Second Item */}
@@ -52,10 +56,10 @@ const AirQualityCard = (props) => {
                         className="border border-[#059D1D] bg-[#059D1D] w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto"
                         key={i}
                       >
-                        <div className="text-center text-white space-y-2">
-                          <p className="text-sm font-thin">CO2</p>
+                        <div className="text-center font-poppins text-white space-y-2">
+                          <p className="text-sm">CO2</p>
                           <p className="text-xl font-semibold">0.33</p>
-                          <p className="text-sm font-thin">ONSAFE</p>
+                          <p className="text-sm">SAFE</p>
                         </div>
                       </div>
                     ))}
@@ -68,10 +72,10 @@ const AirQualityCard = (props) => {
                         className="border border-[#059D1D] bg-[#059D1D] w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto"
                         key={i}
                       >
-                        <div className="text-center text-white space-y-2">
-                          <p className="text-sm font-thin">CO2</p>
+                        <div className="text-center font-poppins text-white space-y-2">
+                          <p className="text-sm">CO2</p>
                           <p className="text-xl font-semibold">0.33</p>
-                          <p className="text-sm font-thin">ONSAFE</p>
+                          <p className="text-sm">SAFE</p>
                         </div>
                       </div>
                     ))}
@@ -84,10 +88,10 @@ const AirQualityCard = (props) => {
                         className="border border-[#059D1D] bg-[#059D1D] w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto"
                         key={i}
                       >
-                        <div className="text-center text-white space-y-2">
-                          <p className="text-sm font-thin">CO2</p>
+                        <div className="text-center font-poppins text-white space-y-2">
+                          <p className="text-sm">CO2</p>
                           <p className="text-xl font-semibold">0.33</p>
-                          <p className="text-sm font-thin">ONSAFE</p>
+                          <p className="text-sm">SAFE</p>
                         </div>
                       </div>
                     ))}
@@ -100,14 +104,14 @@ const AirQualityCard = (props) => {
 
           {/* Start of Device Details Card */}
           <div className="flex sm:flex-row flex-col sm:h-[10.63rem] mt-5 gap-3">
-            <div className="w-full border border-[#686868] bg-backgroundDark text-white p-4 rounded-lg">
+            <div className="w-full border border-[#686868] bg-backgroundDark text-white font-poppins p-4 rounded-lg">
               <p className="font-semibold text-lg mb-2">Details</p>
               <hr className="mb-2 border border-[#686868]" />
-              <div className="flex justify-between">
+              <div className="flex font-poppins justify-between">
                 <p className="text-sm font-semibold">Name of device</p>
                 <p className="text-sm font-semibold">Location</p>
               </div>
-              <div className="flex justify-between">
+              <div className="flex font-poppins justify-between">
                 <p className="text-sm font-thin capitalize">
                   {
                     userProfile?.device?.airsyn[`${props.deviceName}`]
@@ -122,11 +126,11 @@ const AirQualityCard = (props) => {
                   }
                 </p>
               </div>
-              <div className="flex justify-between mt-4">
+              <div className="flex font-poppins justify-between mt-4">
                 <p className="text-sm font-semibold">ID NUMBER</p>
                 <p className="text-sm font-semibold">Group</p>
               </div>
-              <div className="flex justify-between">
+              <div className="flex font-poppins justify-between">
                 <p className="text-sm font-thin">123456789</p>
                 <p className="text-sm font-thin">Air Quality</p>
               </div>
@@ -135,11 +139,11 @@ const AirQualityCard = (props) => {
               <div className="flex items-center justify-center">
                 <img src="/images/sun_logo.svg" width={70} alt="" />
               </div>
-              <div className="flex justify-between">
+              <div className="flex font-poppins justify-between">
                 <p className="font-extrabold text-2xl">32&#176;C</p>
-                <p className="font-bold text-[#C0B6FA]">Rainy</p>
+                <p className="font-bold text-[#f5f5f5]">Sunny</p>
               </div>
-              <p className="text-center uppercase text-sm font-semibold">
+              <p className="text-center uppercase font-poppins text-sm font-semibold">
                 port harcourt
               </p>
             </div>
@@ -150,19 +154,19 @@ const AirQualityCard = (props) => {
         {/* Start of Notification Tab */}
         <div className="w-[40%] hidden sm:block h-[33.5rem] overflow-auto scroll">
           <div className=" bg-backgroundDark text-white p-4 rounded-lg">
-            <div className="flex items-center justify-between px-3">
+            <div className="flex items-center font-poppins justify-between px-3">
               <p className="text-3xl font-semibold text-backgroundRed">
                 unsafe
               </p>
               <p className="w-[30px] h-[30px] border border-solid border-red-600 rounded-full bg-backgroundRed"></p>
             </div>
             <hr className="mt-3 border border-[#686868]" />
-            <div className="text-2xl font-semibold mt-4 px-3">
+            <div className="text-2xl font-poppins font-semibold mt-4 px-3">
               Notifications
             </div>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-              <div className="px-3 mt-4 pt-3 border-t border-[#686868]">
-                <p className="text-sm font-thin">High level of co2 detected</p>
+              <div className="px-3 mt-4 pt-3 font-poppins border-t border-[#686868]">
+                <p className="text-sm">High level of co2 detected</p>
                 <p className="font-thin text-xs">5mins ago</p>
               </div>
             ))}

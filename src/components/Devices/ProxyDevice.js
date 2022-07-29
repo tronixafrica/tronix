@@ -28,6 +28,7 @@ const ProxyDevice = () => {
       focus:bg-backgroundRed
       rounded-tl-md
       rounded-bl-md
+      font-poppins
       text-center
       p-2
       my-2
@@ -60,6 +61,7 @@ const ProxyDevice = () => {
       hover:bg-backgroundRed
       focus:bg-backgroundRed
       rounded-tr-md
+      font-poppins
       rounded-br-md
       text-center
       p-2

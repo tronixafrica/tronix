@@ -49,7 +49,7 @@ const WifiCardList = () => {
       <div className="mt-4">
         <p className="font-semibold">Device Identification</p>
         <div className="border border-[#686868] w-full p-3 mt-3 flex items-center justify-between">
-          <p>Port hotspot</p>
+          <p>Portable hotspot</p>
           <p>
             <IoMdArrowDropdown fontSize="20px" />
           </p>

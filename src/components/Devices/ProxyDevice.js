@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useParams } from "react-router-dom";
+import { AuthContext } from "../../state/contexts/AuthContext";
+import { UserAccountProfileContext } from "../../state/contexts/UserAccountProfileContext";
 import SwitchProxy from "./Switch/SwitchProxy";
 
 const ProxyDevice = () => {
+  const { deviceName:id } = useParams()
+  const { toggleSwitch } = useContext(UserAccountProfileContext)
+  const { userProfile } = useContext(AuthContext)
+  const userId = userProfile?.account?.userId
+  const deviceState = userProfile?.device?.proxie[id].deviceState === 'on' ? 'off' : 'on'
+
+  console.log(userProfile?.device?.proxie[id].deviceState, 'this is the device')
+  console.log(userProfile, 'this is thsfsdfe device')
+
+  
+
   return (
     <>
       {/* Start of Proxy Device */}
@@ -85,7 +99,11 @@ const ProxyDevice = () => {
           aria-labelledby="tabs-home-tab"
         >
           {/* Switch Tab */}
-          <SwitchProxy />
+          <SwitchProxy 
+          toggleSwitch={toggleSwitch}
+          deviceId={id}
+          userId={userId}
+          deviceState={deviceState}/>
         </div>
         <div
           className="tab-pane fade"

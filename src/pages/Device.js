@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import DeviceCardComp from "../components/Devices/DeviceCardComp";
 import MobDeviceCard from "../components/Devices/MobDeviceCard";
 import GoToTop from "../components/GoToTop/GoToTop";
@@ -7,17 +7,14 @@ import { AuthContext } from "../state/contexts/AuthContext";
 
 const Device = () => {
   const [onDisplay, setOnDisplay] = useState(false);
-  const [onConnect, setOnConnect] = useState(false);
-  const [deviceName, setDeviceName] = useState("");
+  // const [onConnect, setOnConnect] = useState(false);
+  // const [deviceName, setDeviceName] = useState("");
   const [val, setVal] = useState("");
-  const [allDevice, setAllDevice] = useState();
-  const [searchDevice, setSearchDevice] = useState(allDevice);
+  // const [allDevice, setAllDevice] = useState();
+  // const [searchDevice, setSearchDevice] = useState(allDevice);
   const { userProfile } = useContext(AuthContext);
-<<<<<<< HEAD
-=======
 
   // const [onShow, setOnShow] = useState(false);
->>>>>>> 550627ae410268de5920916e2ad7b368c2097104
 
   console.log(userProfile?.device, "user devices");
   const devicesArr = [];
@@ -38,13 +35,13 @@ const Device = () => {
   console.log(devicesArr, "deviceArrrtt");
   // setAllDevice(devicesArr);
 
-  const handleSearch = (value) => {
-    let result = [];
-    result = allDevice?.filter((data) => {
-      return data?.deviceName.includes(value);
-    });
-    setSearchDevice(result);
-  };
+  // const handleSearch = (value) => {
+  //   let result = [];
+  //   result = allDevice?.filter((data) => {
+  //     return data?.deviceName.includes(value);
+  //   });
+  //   setSearchDevice(result);
+  // };
 
   // useEffect(() => {
   //   handleSearch(val);

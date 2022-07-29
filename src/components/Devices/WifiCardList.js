@@ -22,7 +22,7 @@ const WifiCardList = () => {
           <input
             className=" w-full p-3 bg-transparent"
             type={`${showPassword ? "text" : "password"}`}
-            placeholder="Enter Password"
+            placeholder="************"
           />
           <p
             className="cursor-pointer"

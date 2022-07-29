@@ -122,7 +122,7 @@ const Device = () => {
             </svg>
           </div>
         </div>
-        <div className="w-full border border-solid border-[#7A7878] flex-1 rounded-lg flex items-center bg-backgroundDark px-6">
+        <div className="w-full p-2 border border-solid border-[#7A7878] flex-1 rounded-lg flex items-center bg-backgroundDark px-6">
           <svg
             style={{ color: "#686868", marginRight: ".7rem" }}
             xmlns="http://www.w3.org/2000/svg"
@@ -142,7 +142,7 @@ const Device = () => {
             type="text"
             // value={val}
             placeholder="Search"
-            className="border-none bg-transparent p-4 text-white w-full"
+            className="border-none bg-transparent p-2 text-white w-full"
             // onChange={(event) => {
             //   setVal(event.target.value);
             // }}

@@ -52,7 +52,7 @@ const DeviceTypeModal = (props) => {
           delay: 2,
         },
       }}
-      className={`w-full h-screen shadow-sm text-textGrey fixed inset-0 z-[300000] flex items-center  justify-center `}
+      className={`w-full h-screen bg-[#121212B2] shadow-sm text-textGrey fixed inset-0 z-[300000] flex items-center  justify-center `}
       onClick={props.toggleDevice}
     >
       {deviceType.deviceName}
@@ -61,11 +61,11 @@ const DeviceTypeModal = (props) => {
         initial="initial"
         animate="animate"
         exit="exit"
-        className="flex flex-col justify-between w-[320px] min-h-[200px] sm:w-[450px] sm:min-h-[300px] border rounded-lg bg-backgroundDark border-[#686868] p-5 sm:p-7 shadow-[0px_0px_20px_15px_#8705051f]"
+        className="flex flex-col items-center justify-between w-[320px] min-h-[200px] sm:w-[450px] sm:min-h-[300px] border rounded-lg bg-backgroundDark border-[#686868] p-5 sm:p-7 shadow-[0px_0px_20px_15px_#8705051f]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Heading start */}
-        <div className="w-full text-center mt-14">
+        <div className="w-full text-center sm:mt-14">
           <p className="font-bold font-raleway  text-textGreyLight text-xl">
             Welcome James
           </p>

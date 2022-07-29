@@ -120,14 +120,14 @@ const AirQualityCard = (props) => {
               <div className="flex font-poppins justify-between">
                 <p className="text-sm font-thin capitalize">
                   {
-                    userProfile?.device?.airsyn[`${props.deviceName}`]
+                    userProfile?.device?.airsyn[`${props?.deviceName}`]
                       .deviceName
                   }
                 </p>
                 <p className="text-sm font-thin">
                   {" "}
                   {
-                    userProfile?.device?.airsyn[`${props.deviceName}`]
+                    userProfile?.device?.airsyn[`${props?.deviceName}`]
                       .deviceLocation
                   }
                 </p>

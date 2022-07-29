@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../state/contexts/AuthContext";
+import { HeaderContext } from "../../state/contexts/HeaderContext";
 import RoundWithPlus from "../icons/RoundWithMinus";
 import AddDeviceModal from "../Modals/AddDeviceModal";
 import AddUserModal from "../Modals/AddUserModal";
@@ -14,20 +15,38 @@ const DashboardComponent = () => {
   const [onAddUser, setOnAddUser] = useState(false);
   const [alertDisplay, setAlertDisplay] = useState(false);
   const { userProfile } = useContext(AuthContext);
+  const { dipsatchPageTitle } = useContext(HeaderContext);
+
+  // instance of Navigate hook
   const navigate = useNavigate();
 
+  // routing to other routes
+  const handleRoute = (route, action, title) => {
+    // routing to the desired route
+    navigate(route);
+
+    // dispatching the title of the header,
+    // depending on the route
+    dipsatchPageTitle({
+      type: action,
+      pageTitle: title,
+    });
+  };
   console.log(userProfile?.device, "user devices");
   const devicesArr = [];
+  const prx = userProfile?.device?.proxie || {};
+  const asn = userProfile?.device?.airsyn || {};
 
-  Object.values(userProfile?.device?.proxie).map((item, index) => {
+  // Check if object is null or undefined
+
+  Object.values(prx).map((item, index) => {
     console.log(item, "item sss");
     return devicesArr.push(item);
   });
-  Object.values(userProfile?.device?.airsyn).map((item, index) => {
+  Object.values(asn).map((item, index) => {
     console.log(item, "item sss");
     return devicesArr.push(item);
   });
-
   console.log(devicesArr, "deviceArrrtt");
 
   const toggleDevice = () => {
@@ -181,8 +200,16 @@ const DashboardComponent = () => {
                           key={device.deviceName}
                           onClick={() => {
                             device?.deviceType === "proxie"
-                              ? navigate(`/proxydevice/${device?.deviceName}`)
-                              : navigate(`/singledevice/${device?.deviceName}`);
+                              ? handleRoute(
+                                  `/proxydevice/${device.deviceName}`,
+                                  "DISPLAY_DEVICE_NAME",
+                                  `${device?.deviceName}`
+                                )
+                              : handleRoute(
+                                  `/singledevice/${device.deviceName}`,
+                                  "DISPLAY_DEVICE_NAME",
+                                  `${device?.deviceName}`
+                                );
                           }}
                         >
                           <div className="flex-1">

@@ -1,11 +1,28 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../../src/App.css";
+import { HeaderContext } from "../../state/contexts/HeaderContext";
 import ConfirmationModal from "../Modals/ConfirmationModal";
 
 const DeviceCardComp = ({ device }) => {
   const [onDisplay, setOnDisplay] = useState(false);
+  const { dipsatchPageTitle } = useContext(HeaderContext);
+
+  // instance of Navigate hook
   const navigate = useNavigate();
+
+  // routing to other routes
+  const handleRoute = (route, action, title) => {
+    // routing to the desired route
+    navigate(route);
+
+    // dispatching the title of the header,
+    // depending on the route
+    dipsatchPageTitle({
+      type: action,
+      pageTitle: title,
+    });
+  };
 
   return (
     <div className="flex items-center justify-between py-4 border-b border-[#717171] border-solid hover:bg-backgroundRed hover:text-white hover:border-none text-[#FEFDFD] text-sm">
@@ -25,8 +42,16 @@ const DeviceCardComp = ({ device }) => {
         className="cursor-pointer flex-1"
         onClick={() => {
           device?.deviceType === "proxie"
-            ? navigate(`/proxydevice/${device?.deviceName}`)
-            : navigate(`/singledevice/${device?.deviceName}`);
+            ? handleRoute(
+                `/proxydevice/${device.deviceName}`,
+                "DISPLAY_DEVICE_NAME",
+                `${device?.deviceName}`
+              )
+            : handleRoute(
+                `/singledevice/${device.deviceName}`,
+                "DISPLAY_DEVICE_NAME",
+                `${device?.deviceName}`
+              );
         }}
       >
         {device?.deviceName}
@@ -36,8 +61,16 @@ const DeviceCardComp = ({ device }) => {
         className="cursor-pointer flex-1"
         onClick={() => {
           device?.deviceType === "proxie"
-            ? navigate(`/proxydevice/${device?.deviceName}`)
-            : navigate(`/singledevice/${device?.deviceName}`);
+            ? handleRoute(
+                `/proxydevice/${device.deviceName}`,
+                "DISPLAY_DEVICE_NAME",
+                `${device?.deviceName}`
+              )
+            : handleRoute(
+                `/singledevice/${device.deviceName}`,
+                "DISPLAY_DEVICE_NAME",
+                `${device?.deviceName}`
+              );
         }}
       >
         {device?.deviceLocation}
@@ -47,8 +80,16 @@ const DeviceCardComp = ({ device }) => {
         className="cursor-pointer flex-1"
         onClick={() => {
           device?.deviceType === "proxie"
-            ? navigate(`/proxydevice/${device?.deviceName}`)
-            : navigate(`/singledevice/${device?.deviceName}`);
+            ? handleRoute(
+                `/proxydevice/${device.deviceName}`,
+                "DISPLAY_DEVICE_NAME",
+                `${device?.deviceName}`
+              )
+            : handleRoute(
+                `/singledevice/${device.deviceName}`,
+                "DISPLAY_DEVICE_NAME",
+                `${device?.deviceName}`
+              );
         }}
       >
         {device?.deviceType}
@@ -58,8 +99,16 @@ const DeviceCardComp = ({ device }) => {
         className="cursor-pointer flex-1"
         onClick={() => {
           device?.deviceType === "proxie"
-            ? navigate(`/proxydevice/${device?.id}`)
-            : navigate(`/singledevice/${device?.id}`);
+            ? handleRoute(
+                `/proxydevice/${device.deviceName}`,
+                "DISPLAY_DEVICE_NAME",
+                `${device?.deviceName}`
+              )
+            : handleRoute(
+                `/singledevice/${device.deviceName}`,
+                "DISPLAY_DEVICE_NAME",
+                `${device?.deviceName}`
+              );
         }}
       >
         {device?.deviceState}

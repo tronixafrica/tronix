@@ -38,7 +38,7 @@ const Header = () => {
     >
       {/* start page title */}
       <div className="pt-[1rem] sm:pt-0 ">
-        <div className="text-white font-poppins pb-3 text-[17px] sm:text-[23px]">
+        <div className="text-white font-poppins pb-3 text-[17px] sm:text-[23px] capitalize">
           {pageTitle} {dashboardPageTitle ? "Precious" : null}
         </div>
 

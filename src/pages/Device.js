@@ -1,11 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import DeviceCardComp from "../components/Devices/DeviceCardComp";
-import { deviceItems } from "../../src/components/DataList/dummyData";
 import MobDeviceCard from "../components/Devices/MobDeviceCard";
 import GoToTop from "../components/GoToTop/GoToTop";
-import IFrameModals from "../components/Modals/IFrameModal";
 import DeviceTypeModal from "../components/Modals/DeviceTypeModal";
-import ConnectDeviceModal from "../components/Modals/ConnectDeviceModal";
 import { AuthContext } from "../state/contexts/AuthContext";
 
 const Device = () => {
@@ -16,15 +13,24 @@ const Device = () => {
   const [allDevice, setAllDevice] = useState();
   const [searchDevice, setSearchDevice] = useState(allDevice);
   const { userProfile } = useContext(AuthContext);
+<<<<<<< HEAD
+=======
+
+  // const [onShow, setOnShow] = useState(false);
+>>>>>>> 550627ae410268de5920916e2ad7b368c2097104
 
   console.log(userProfile?.device, "user devices");
   const devicesArr = [];
+  const prx = userProfile?.device?.proxie || {};
+  const asn = userProfile?.device?.airsyn || {};
 
-  Object.values(userProfile?.device?.proxie).map((item, index) => {
+  // Check if object is null or undefined
+
+  Object.values(prx).map((item, index) => {
     console.log(item, "item sss");
     return devicesArr.push(item);
   });
-  Object.values(userProfile?.device?.airsyn).map((item, index) => {
+  Object.values(asn).map((item, index) => {
     console.log(item, "item sss");
     return devicesArr.push(item);
   });

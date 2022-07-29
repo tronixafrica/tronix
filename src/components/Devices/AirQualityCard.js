@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -9,7 +9,10 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper";
 
 import "../../App.css";
-const AirQualityCard = () => {
+import { AuthContext } from "../../state/contexts/AuthContext";
+const AirQualityCard = (props) => {
+  const { userProfile } = useContext(AuthContext);
+
   return (
     <>
       {/* Start of Air Quality Card */}
@@ -105,8 +108,19 @@ const AirQualityCard = () => {
                 <p className="text-sm font-semibold">Location</p>
               </div>
               <div className="flex justify-between">
-                <p className="text-sm font-thin">Razor drill</p>
-                <p className="text-sm font-thin">Office lounge</p>
+                <p className="text-sm font-thin capitalize">
+                  {
+                    userProfile?.device?.airsyn[`${props.deviceName}`]
+                      .deviceName
+                  }
+                </p>
+                <p className="text-sm font-thin">
+                  {" "}
+                  {
+                    userProfile?.device?.airsyn[`${props.deviceName}`]
+                      .deviceLocation
+                  }
+                </p>
               </div>
               <div className="flex justify-between mt-4">
                 <p className="text-sm font-semibold">ID NUMBER</p>

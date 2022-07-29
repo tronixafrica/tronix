@@ -1,5 +1,6 @@
 import React from "react";
 import SwitchProxy from "./Switch/SwitchProxy";
+import WifiCard from "./WifiCard";
 
 const ProxyDevice = () => {
   return (
@@ -31,7 +32,7 @@ const ProxyDevice = () => {
       text-center
       p-2
       my-2
-      active
+      active:bg-backgroundRed
     "
             id="tabs-home-tab"
             data-bs-toggle="pill"
@@ -59,6 +60,7 @@ const ProxyDevice = () => {
       bg-backgroundDark
       hover:bg-backgroundRed
       focus:bg-backgroundRed
+      active:bg-backgroundRed
       rounded-tr-md
       rounded-br-md
       text-center
@@ -95,7 +97,7 @@ const ProxyDevice = () => {
         >
           {/* Wifi Tab */}
 
-          <SwitchProxy />
+          <WifiCard />
         </div>
       </div>
       {/* End of Single Device */}

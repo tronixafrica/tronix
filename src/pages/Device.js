@@ -1,4 +1,5 @@
-import { useContext, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useContext, useEffect, useState } from "react";
 import DeviceCardComp from "../components/Devices/DeviceCardComp";
 import MobDeviceCard from "../components/Devices/MobDeviceCard";
 import GoToTop from "../components/GoToTop/GoToTop";
@@ -10,14 +11,15 @@ const Device = () => {
   // const [onConnect, setOnConnect] = useState(false);
   // const [deviceName, setDeviceName] = useState("");
   const [val, setVal] = useState("");
-  // const [allDevice, setAllDevice] = useState();
-  // const [searchDevice, setSearchDevice] = useState(allDevice);
+  // const [allDevice, setAllDevice] = useState("");
+
   const { userProfile } = useContext(AuthContext);
 
   // const [onShow, setOnShow] = useState(false);
 
   console.log(userProfile?.device, "user devices");
   const devicesArr = [];
+  const [filteredData, setfilteredData] = useState(devicesArr);
   const prx = userProfile?.device?.proxie || {};
   const asn = userProfile?.device?.airsyn || {};
 
@@ -33,19 +35,31 @@ const Device = () => {
   });
 
   console.log(devicesArr, "deviceArrrtt");
-  // setAllDevice(devicesArr);
 
-  // const handleSearch = (value) => {
-  //   let result = [];
-  //   result = allDevice?.filter((data) => {
-  //     return data?.deviceName.includes(value);
-  //   });
-  //   setSearchDevice(result);
-  // };
+  const handleSearch = (value) => {
+    let result = [];
+    result = devicesArr?.filter((data) => {
+      return data?.deviceName.includes(value);
+    });
+    setfilteredData(result);
+  };
 
   // useEffect(() => {
+  //   console.log(val, "rrrrruu");
+  //   console.log(devicesArr, "yyyyyyyy");
+  //   const handleSearch = (value) => {
+  //     let result = [];
+  //     result = devicesArr?.filter((data) => {
+  //       return data?.deviceName.includes(value);
+  //     });
+  //     setfilteredData(result);
+  //   };
   //   handleSearch(val);
-  // }, [val]);
+  // }, []);
+
+  useEffect(() => {
+    handleSearch(val);
+  }, [val]);
 
   const toggleDevice = () => {
     console.log("This is an iframe", onDisplay);
@@ -58,24 +72,6 @@ const Device = () => {
   //   setOnDisplay(false);
   //   setDeviceName(deviceName);
   //   setOnConnect(true);
-  // }
-
-  // function myFunction() {
-  // var input, filter, ul, li, a, i, txtValue;
-  // input = document.getElementById('myInput');
-  // filter = input.value.toUpperCase();
-  // ul = document.getElementById("myUL");
-  // li = ul.getElementsByTagName('li');
-
-  // Loop through all list items, and hide those who don't match the search query
-  // for (i = 0; i < li.length; i++) {
-  //   a = li[i].getElementsByTagName("a")[0];
-  //   txtValue = a.textContent || a.innerText;
-  //   if (txtValue.toUpperCase().indexOf(filter) > -1) {
-  //     li[i].style.display = "";
-  //   } else {
-  //     li[i].style.display = "none";
-  //   }
   // }
 
   return (
@@ -151,7 +147,7 @@ const Device = () => {
               setVal(event.target.value);
             }}
           />
-          <svg
+          {/* <svg
             style={{ color: "white", transform: "rotate(90deg)" }}
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
@@ -165,7 +161,7 @@ const Device = () => {
               strokeLinejoin="round"
               d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
             />
-          </svg>
+          </svg> */}
         </div>
       </div>
       {/* End of Device Header */}
@@ -192,7 +188,7 @@ const Device = () => {
               } */}
         {/* device.deviceName.includes(searchDevice */}
         <div className="h-[25.63rem] overflow-auto scroll">
-          {devicesArr
+          {filteredData
             .sort((a, b) => (a.deviceLocation > b.deviceLocation ? 1 : -1))
             .map((device) => {
               console.log(device, "ppppp");

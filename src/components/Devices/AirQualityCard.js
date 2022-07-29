@@ -45,54 +45,60 @@ const AirQualityCard = (props) => {
                 modules={[Pagination]}
                 className="w-[34.38rem] overflow-hidden"
               >
-                <SwiperSlide>
-                  <div className="border-none grid sm:grid-cols-3 grid-cols-2 gap-2 mx-1">
-                    {[1, 2, 3, 4, 5, 6].map((i) => (
-                      <div
-                        className="border border-[#059D1D] bg-[#059D1D] w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto"
-                        key={i}
-                      >
-                        <div className="text-center text-white space-y-2">
-                          <p className="text-sm font-thin">CO2</p>
-                          <p className="text-xl font-semibold">0.33</p>
-                          <p className="text-sm font-thin">ONSAFE</p>
+                <div>
+                  <SwiperSlide>
+                    <div className="border-none grid sm:grid-cols-3 grid-cols-2 gap-2 mx-1">
+                      {[1, 2, 3, 4, 5, 6].map((i) => (
+                        <div
+                          className="border border-[#059D1D] bg-[#059D1D] w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto"
+                          key={i}
+                        >
+                          <div className="text-center text-white space-y-2">
+                            <p className="text-sm font-thin">CO2</p>
+                            <p className="text-xl font-semibold">0.33</p>
+                            <p className="text-sm font-thin">ONSAFE</p>
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="border-none grid sm:grid-cols-3 grid-cols-2 gap-2 mx-1">
-                    {[1, 2, 3, 4, 5, 6].map((i) => (
-                      <div
-                        className="border border-[#059D1D] bg-[#059D1D] w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto"
-                        key={i}
-                      >
-                        <div className="text-center text-white space-y-2">
-                          <p className="text-sm font-thin">CO2</p>
-                          <p className="text-xl font-semibold">0.33</p>
-                          <p className="text-sm font-thin">ONSAFE</p>
+                      ))}
+                    </div>
+                  </SwiperSlide>
+                </div>
+                <div>
+                  <SwiperSlide>
+                    <div className="border-none grid sm:grid-cols-3 grid-cols-2 gap-2 mx-1">
+                      {[1, 2, 3, 4, 5, 6].map((i) => (
+                        <div
+                          className="border border-[#059D1D] bg-[#059D1D] w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto"
+                          key={i}
+                        >
+                          <div className="text-center text-white space-y-2">
+                            <p className="text-sm font-thin">CO2</p>
+                            <p className="text-xl font-semibold">0.33</p>
+                            <p className="text-sm font-thin">ONSAFE</p>
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="border-none grid sm:grid-cols-3 grid-cols-2 gap-2 mx-1">
-                    {[1, 2, 3, 4, 5, 6].map((i) => (
-                      <div
-                        className="border border-[#059D1D] bg-[#059D1D] w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto"
-                        key={i}
-                      >
-                        <div className="text-center text-white space-y-2">
-                          <p className="text-sm font-thin">CO2</p>
-                          <p className="text-xl font-semibold">0.33</p>
-                          <p className="text-sm font-thin">ONSAFE</p>
+                      ))}
+                    </div>
+                  </SwiperSlide>
+                </div>
+                <div>
+                  <SwiperSlide>
+                    <div className="border-none grid sm:grid-cols-3 grid-cols-2 gap-2 mx-1">
+                      {[1, 2, 3, 4, 5, 6].map((i) => (
+                        <div
+                          className="border border-[#059D1D] bg-[#059D1D] w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto"
+                          key={i}
+                        >
+                          <div className="text-center text-white space-y-2">
+                            <p className="text-sm font-thin">CO2</p>
+                            <p className="text-xl font-semibold">0.33</p>
+                            <p className="text-sm font-thin">ONSAFE</p>
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                </SwiperSlide>
+                      ))}
+                    </div>
+                  </SwiperSlide>
+                </div>
               </Swiper>
             </div>
           </div>

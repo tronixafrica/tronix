@@ -27,7 +27,7 @@ const SideNav = () => {
       <ul className="px-6">
         <li>
           <img
-            src="/logo/TronixLogo.png"
+            src="/logo/TronixLogo.svg"
             alt="tronix logo"
             className="w-[7rem]"
           />

@@ -294,6 +294,11 @@ const AuthProvider = ({ children }) => {
         return null;
       }
     });
+    // airsynStateRef.on("child_added", (snapshot, prevChildKey) => {
+    //   const newPost = snapshot.val();
+    //   console.log("Author: " + newPost);
+    //   console.log("Previous Post ID: " + prevChildKey);
+    // });
   };
 
   // error function for auth

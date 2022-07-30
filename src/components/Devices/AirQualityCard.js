@@ -43,6 +43,23 @@ const AirQualityCard = (props) => {
   //     }, 5000);
   // }, [unsafes.length]);
 
+  const myAudio = new Audio("/speech.mp3");
+  if (typeof myAudio.loop == "boolean") {
+    myAudio.loop = true;
+    console.log("loop is a boolean");
+  } else {
+    myAudio.addEventListener(
+      "ended",
+      function () {
+        this.currentTime = 0;
+        this.play();
+        console.log("loop is a function");
+      },
+      false
+    );
+  }
+  myAudio.play();
+
   const playSpeech = async () => {
     if (unsafes.length >= 1) {
       const audio = new Audio("/speech.mp3");

@@ -85,9 +85,9 @@ const Header = () => {
               >
                 <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
               </svg>
-              <span className="absolute top-0 right-0 inline-flex items-center justify-center sm:px-2 sm:py-1 px-[0.3rem] py-1 sm:text-xs text-[0.50rem] font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
-                99
-              </span>
+              {/* <span className="absolute top-0 right-0 inline-flex items-center justify-center sm:px-2 sm:py-1 px-[0.3rem] py-1 sm:text-xs text-[0.50rem] font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+                0
+              </span> */}
             </span>
           </div>
           {/* end notificaton icon */}

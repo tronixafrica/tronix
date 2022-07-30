@@ -17,7 +17,7 @@ const SingleDevice = () => {
         <li className="nav-item" role="presentation">
           <a
             href="#tabs-home"
-            className=" w-28 block font-medium text-white text-sm leading-tight border border-[#686868] transition ease-in-out bg-backgroundDark hover:bg-backgroundRed focus:bg-backgroundRed rounded-tl-md rounded-bl-md text-center p-2 my-2 active
+            className=" w-28 block font-medium font-poppins text-white text-sm leading-tight border border-[#686868] transition ease-in-out bg-backgroundDark hover:bg-backgroundRed focus:bg-backgroundRed rounded-tl-md rounded-bl-md text-center p-2 my-2 active
     "
             id="tabs-home-tab"
             data-bs-toggle="pill"
@@ -32,7 +32,7 @@ const SingleDevice = () => {
         <li className="nav-item" role="presentation">
           <a
             href="#tabs-profile"
-            className=" w-28 block font-medium text-sm text-white leading-tight border border-[#686868] transition ease-in-out bg-backgroundDark hover:bg-backgroundRed focus:bg-backgroundRed rounded-tr-md rounded-br-md text-center p-2 my-2
+            className=" w-28 block font-medium font-poppins text-sm text-white leading-tight border border-[#686868] transition ease-in-out bg-backgroundDark hover:bg-backgroundRed focus:bg-backgroundRed rounded-tr-md rounded-br-md text-center p-2 my-2
     "
             id="tabs-profile-tab"
             data-bs-toggle="pill"

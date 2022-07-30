@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useParams } from "react-router-dom";
+import { AuthContext } from "../../state/contexts/AuthContext";
+import { UserAccountProfileContext } from "../../state/contexts/UserAccountProfileContext";
 import SwitchProxy from "./Switch/SwitchProxy";
+import WifiCard from "./WifiCard";
 
 const ProxyDevice = () => {
+  const { deviceName:id } = useParams()
+  const { toggleSwitch } = useContext(UserAccountProfileContext)
+  const { userProfile } = useContext(AuthContext)
+  const userId = userProfile?.account?.userId
+  const deviceState = userProfile?.device?.proxie[id].deviceState === 'on' ? 'off' : 'on'
+
+  console.log(userProfile?.device?.proxie[id].deviceState, 'this is the device')
+  console.log(userProfile, 'this is thsfsdfe device')
+
+  
+
   return (
     <>
       {/* Start of Proxy Device */}
@@ -28,10 +43,11 @@ const ProxyDevice = () => {
       focus:bg-backgroundRed
       rounded-tl-md
       rounded-bl-md
+      font-poppins
       text-center
       p-2
       my-2
-      active
+      active:bg-backgroundRed
     "
             id="tabs-home-tab"
             data-bs-toggle="pill"
@@ -59,7 +75,9 @@ const ProxyDevice = () => {
       bg-backgroundDark
       hover:bg-backgroundRed
       focus:bg-backgroundRed
+      active:bg-backgroundRed
       rounded-tr-md
+      font-poppins
       rounded-br-md
       text-center
       p-2
@@ -85,7 +103,11 @@ const ProxyDevice = () => {
           aria-labelledby="tabs-home-tab"
         >
           {/* Switch Tab */}
-          <SwitchProxy />
+          <SwitchProxy 
+          toggleSwitch={toggleSwitch}
+          deviceId={id}
+          userId={userId}
+          deviceState={deviceState}/>
         </div>
         <div
           className="tab-pane fade"
@@ -95,7 +117,7 @@ const ProxyDevice = () => {
         >
           {/* Wifi Tab */}
 
-          <SwitchProxy />
+          <WifiCard />
         </div>
       </div>
       {/* End of Single Device */}

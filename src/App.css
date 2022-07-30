@@ -79,6 +79,15 @@
   background: #555;
 }
 
+/* .swiper-pagination {
+  margin-top: 8rem !important;
+  border: 2px solid red;
+} */
+
+.swiper-pagination-bullet-active {
+  background-color: #fff !important;
+}
+
 .carousel-item {
   display: none;
   margin-right: -100%;
@@ -100,6 +109,41 @@
 .carousels-fade .carousels-item.active {
   opacity: 1;
 }
+
+.svg-icon-on {
+  width: 3em;
+  height: 3em;
+}
+
+.svg-icon-on path,
+.svg-icon-on polygon,
+.svg-icon-on rect {
+  fill: #06CD3B;
+}
+
+.svg-icon-on circle {
+  stroke: #06CD3B;
+  stroke-width: 1;
+}
+
+.svg-icon-off {
+  width: 3em;
+  height: 3em;
+}
+
+.svg-icon-off path,
+.svg-icon-off polygon,
+.svg-icon-off rect {
+  fill: #555756;
+}
+
+.svg-icon-off circle {
+  stroke: #555756;
+  stroke-width: 1;
+}
+
+
+
 @media (prefers-reduced-motion: reduce) {
   .form-control::file-selector-button {
     -webkit-transition: none;

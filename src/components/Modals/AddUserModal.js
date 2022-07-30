@@ -147,8 +147,9 @@ const AddUserModal = (props) => {
           <button
             type="button"
             className={`flex uppercase justify-center items-center px-4 h-12 w-24 grow font-bold text-textGreyLight rounded-md bg-backgroundRed hover:brightness-90 tracking-widest font-poppins`}
-            onClick={
-              props.onClickButton}
+            onClick={() => {
+              props.onClickButton();
+            }}
           >
             {loader ? <Loader /> : `Add User`}
           </button>

@@ -13,6 +13,7 @@ import { AuthContext } from "../../state/contexts/AuthContext";
 import PulseLoader from "../Modals/PulseLoader";
 const AirQualityCard = (props) => {
   const [unsafes, setUnSafes] = useState([]);
+  const [mouseDown, setMouseDown] = useState(false);
   const [overallStatus, setOverallStatus] = useState();
   const { userProfile } = useContext(AuthContext);
   // const pollutantsThreshold = [
@@ -42,6 +43,8 @@ const AirQualityCard = (props) => {
   //       playSpeech();
   //     }, 5000);
   // }, [unsafes.length]);
+
+  // Play the speech if there is a pollutant
   const myAudio = new Audio("/speech.mp3");
   const playSpeech = () => {
     if (typeof myAudio.loop == "boolean") {
@@ -79,6 +82,25 @@ const AirQualityCard = (props) => {
       stopSpeech();
     }
   }, [unsafes.length]);
+
+  // listen for mouse down and mouse up events
+  useEffect(() => {
+    const handleMouseDown = () => {
+      setMouseDown(true);
+      console.log("mouse down");
+    };
+    const handleMouseUp = () => {
+      setMouseDown(false);
+      console.log("mouse up");
+    };
+    document.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      document.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
 
   const asn =
     userProfile?.device?.airsyn[`${props.deviceName}`].deviceReadings || {};
@@ -175,7 +197,9 @@ const AirQualityCard = (props) => {
               <Swiper
                 pagination={true}
                 modules={[Pagination]}
-                className="w-[34.38rem] overflow-hidden"
+                className={`w-[34.38rem] overflow-hidden ${
+                  mouseDown ? "cursor-grabbing" : "cursor-grab"
+                }`}
               >
                 <SwiperSlide>
                   <div className="border-none grid sm:grid-cols-3 grid-cols-2 gap-2 mx-1">

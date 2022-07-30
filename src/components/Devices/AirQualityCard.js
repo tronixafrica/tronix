@@ -42,31 +42,44 @@ const AirQualityCard = (props) => {
   //       playSpeech();
   //     }, 5000);
   // }, [unsafes.length]);
-
   const myAudio = new Audio("/speech.mp3");
-  if (typeof myAudio.loop == "boolean") {
-    myAudio.loop = true;
-    console.log("loop is a boolean");
-  } else {
-    myAudio.addEventListener(
-      "ended",
-      function () {
-        this.currentTime = 0;
-        this.play();
-        console.log("loop is a function");
-      },
-      false
-    );
-  }
-  myAudio.play();
-
-  const playSpeech = async () => {
-    if (unsafes.length >= 1) {
-      const audio = new Audio("/speech.mp3");
-      // await audio.play();
-      console.log("Playing speech", audio);
+  const playSpeech = () => {
+    if (typeof myAudio.loop == "boolean") {
+      myAudio.loop = true;
+      console.log("loop is a boolean");
+    } else {
+      myAudio.addEventListener(
+        "ended",
+        function () {
+          myAudio.currentTime = 0;
+          myAudio.play();
+          console.log("loop is a function");
+        },
+        true
+      );
     }
+    myAudio.play();
   };
+  const stopSpeech = () => {
+    // const myAudio = new Audio("/speech.mp3");
+    myAudio.removeAttribute("src", "/speech.mp3");
+    myAudio.pause();
+  };
+
+  useEffect(() => {
+    if (unsafes.length > 0) {
+      playSpeech();
+      // cleanup
+      return () => {
+        console.log("cleanup");
+        stopSpeech();
+      };
+    } else {
+      console.log("stopSpeech");
+      stopSpeech();
+    }
+  }, [unsafes.length]);
+
   const asn =
     userProfile?.device?.airsyn[`${props.deviceName}`].deviceReadings || {};
   let readings = [];
@@ -99,7 +112,7 @@ const AirQualityCard = (props) => {
         console.log("this is the min pollutants", pollutant);
       }
     }
-    console.log(unsafes, "unsafes pollutant guys");
+    // console.log(unsafes, "unsafes pollutant guys");
     return threshold;
   }
 

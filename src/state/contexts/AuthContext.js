@@ -264,36 +264,48 @@ const AuthProvider = ({ children }) => {
     const airsynStateRef = ref(db, "/users/" + displayName + "/device/airsyn");
     const proxieStateRef = ref(db, "/users/" + displayName + "/device/proxie");
 
-    onValue(airsynStateRef, (snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-        console.log(data, "airsyn");
-        // Dispatch to userAccountProfileReducer
-        dipsatchUserProfile({
-          type: PROFILE_ACTIONS.UPDATE_AIRSYN,
-          userProfile: data,
-        });
-        console.log("data", displayName);
-      } else {
-        console.log("no data", displayName);
-        return null;
+    onValue(
+      airsynStateRef,
+      (snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          console.log(data, "airsyn");
+          // Dispatch to userAccountProfileReducer
+          dipsatchUserProfile({
+            type: PROFILE_ACTIONS.UPDATE_AIRSYN,
+            userProfile: data,
+          });
+          console.log("data", displayName);
+        } else {
+          console.log("no data", displayName);
+          return null;
+        }
+      },
+      (error) => {
+        console.error(error, "aaaaaa");
       }
-    });
-    onValue(proxieStateRef, (snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-        console.log(data, "proxie");
-        // Dispatch to userAccountProfileReducer
-        dipsatchUserProfile({
-          type: PROFILE_ACTIONS.UPDATE_PROXIE,
-          userProfile: data,
-        });
-        console.log("data", displayName);
-      } else {
-        console.log("no data", displayName);
-        return null;
+    );
+    onValue(
+      proxieStateRef,
+      (snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          console.log(data, "proxie");
+          // Dispatch to userAccountProfileReducer
+          dipsatchUserProfile({
+            type: PROFILE_ACTIONS.UPDATE_PROXIE,
+            userProfile: data,
+          });
+          console.log("data", displayName);
+        } else {
+          console.log("no data", displayName);
+          return null;
+        }
+      },
+      (error) => {
+        console.error(error, "bbbbbb");
       }
-    });
+    );
     // airsynStateRef.on("child_added", (snapshot, prevChildKey) => {
     //   const newPost = snapshot.val();
     //   console.log("Author: " + newPost);

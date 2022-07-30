@@ -10,7 +10,7 @@ const Auth = () => {
         {/* start of Left hand side background image */}
         <div className="h-screen hidden md:flex w-1/3 pt-7 justify-center auth relative">
           <div>
-            <img src="/logo/TronixLogo.png" alt="" className="" />
+            <img src="/logo/TronixLogo.svg" alt="" className="" />
           </div>
         </div>
         {/* end of Left hand side background image */}

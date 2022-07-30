@@ -43,7 +43,7 @@ const LaunchLoader = (props) => {
         animate="animate"
         exit="exit"
       >
-        <img src="/logo/TronixLogo.png" alt="tronix logo" className="w-48" />
+        <img src="/logo/TronixLogo.svg" alt="tronix logo" className="w-48" />
       </motion.div>
     </motion.section>
   );

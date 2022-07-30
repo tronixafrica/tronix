@@ -229,7 +229,13 @@ const DashboardComponent = () => {
                             </p>
                           </div>
                           <div className="flex-1 text-end">
-                            <h1 className="font-poppins text-[#059D1D] text-[100%]">
+                            <h1
+                              className={`font-poppins ${
+                                device?.deviceState === "on"
+                                  ? "text-[#059D1D]"
+                                  : "text-textGrey"
+                              } text-[100%]`}
+                            >
                               {device?.deviceState}
                             </h1>
                           </div>

@@ -96,7 +96,9 @@ const DeviceCardComp = ({ device }) => {
       </p>
       {/* </Link> */}
       <p
-        className="cursor-pointer flex-1 font-poppins"
+        className={`cursor-pointer flex-1 ${
+          device?.deviceState === "on" ? "text-[#059D1D]" : "text-textGrey"
+        } `}
         onClick={() => {
           device?.deviceType === "proxie"
             ? handleRoute(

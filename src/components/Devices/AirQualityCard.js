@@ -42,14 +42,44 @@ const AirQualityCard = (props) => {
   //       playSpeech();
   //     }, 5000);
   // }, [unsafes.length]);
-
-  const playSpeech = async () => {
-    if (unsafes.length >= 1) {
-      const audio = new Audio("/speech.mp3");
-      // await audio.play();
-      console.log("Playing speech", audio);
+  const myAudio = new Audio("/speech.mp3");
+  const playSpeech = () => {
+    if (typeof myAudio.loop == "boolean") {
+      myAudio.loop = true;
+      console.log("loop is a boolean");
+    } else {
+      myAudio.addEventListener(
+        "ended",
+        function () {
+          myAudio.currentTime = 0;
+          myAudio.play();
+          console.log("loop is a function");
+        },
+        true
+      );
     }
+    myAudio.play();
   };
+  const stopSpeech = () => {
+    // const myAudio = new Audio("/speech.mp3");
+    myAudio.removeAttribute("src", "/speech.mp3");
+    myAudio.pause();
+  };
+
+  useEffect(() => {
+    if (unsafes.length > 0) {
+      playSpeech();
+      // cleanup
+      return () => {
+        console.log("cleanup");
+        stopSpeech();
+      };
+    } else {
+      console.log("stopSpeech");
+      stopSpeech();
+    }
+  }, [unsafes.length]);
+
   const asn =
     userProfile?.device?.airsyn[`${props.deviceName}`].deviceReadings || {};
   let readings = [];
@@ -82,7 +112,7 @@ const AirQualityCard = (props) => {
         console.log("this is the min pollutants", pollutant);
       }
     }
-    console.log(unsafes, "unsafes pollutant guys");
+    // console.log(unsafes, "unsafes pollutant guys");
     return threshold;
   }
 
@@ -558,29 +588,29 @@ const AirQualityCard = (props) => {
 
           {/* Start of Device Details Card */}
           <div className="flex sm:flex-row flex-col sm:h-[10.63rem] mt-5 gap-3">
-            <div className="w-full border border-[#686868] bg-backgroundDark text-white font-poppins p-4 rounded-lg">
+            <div className="w-full border border-[#686868] bg-backgroundDark text-white p-4 rounded-lg">
               <p className="font-semibold text-lg mb-2">Details</p>
               <hr className="mb-2 border border-[#686868]" />
-              <div className="flex font-poppins justify-between">
+              <div className="flex justify-between">
                 <p className="text-sm font-semibold">Name of device</p>
                 <p className="text-sm font-semibold">Location</p>
               </div>
-              <div className="flex font-poppins justify-between">
+              <div className="flex justify-between">
                 <p className="text-sm font-thin capitalize">
                   {
-                    userProfile?.device?.airsyn[`${props?.deviceName}`]
+                    userProfile?.device?.airsyn[`${props.deviceName}`]
                       .deviceName
                   }
                 </p>
                 <p className="text-sm font-thin">
                   {" "}
                   {
-                    userProfile?.device?.airsyn[`${props?.deviceName}`]
+                    userProfile?.device?.airsyn[`${props.deviceName}`]
                       .deviceLocation
                   }
                 </p>
               </div>
-              <div className="flex font-poppins justify-between mt-4">
+              <div className="flex justify-between mt-4">
                 <p className="text-sm font-semibold">ID NUMBER</p>
                 <p className="text-sm font-semibold">Group</p>
               </div>
@@ -593,11 +623,11 @@ const AirQualityCard = (props) => {
               <div className="flex items-center justify-center">
                 <img src="/images/sun_logo.svg" width={70} alt="" />
               </div>
-              <div className="flex font-poppins justify-between">
+              <div className="flex justify-between">
                 <p className="font-extrabold text-2xl">32&#176;C</p>
-                <p className="font-bold text-[#f5f5f5]">Sunny</p>
+                <p className="font-bold text-[#C0B6FA]">Rainy</p>
               </div>
-              <p className="text-center uppercase font-poppins text-sm font-semibold">
+              <p className="text-center uppercase text-sm font-semibold">
                 port harcourt
               </p>
             </div>
@@ -619,12 +649,12 @@ const AirQualityCard = (props) => {
               {/* <p className="w-[30px] h-[30px] border border-solid border-red-600 rounded-full bg-backgroundRed"></p> */}
             </div>
             <hr className="mt-3 border border-[#686868]" />
-            <div className="text-2xl font-poppins font-semibold mt-4 px-3">
+            <div className="text-2xl font-semibold mt-4 px-3">
               Notifications
             </div>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-              <div className="px-3 mt-4 pt-3 font-poppins border-t border-[#686868]">
-                <p className="text-sm">High level of co2 detected</p>
+              <div className="px-3 mt-4 pt-3 border-t border-[#686868]">
+                <p className="text-sm font-thin">High level of co2 detected</p>
                 <p className="font-thin text-xs">5mins ago</p>
               </div>
             ))}

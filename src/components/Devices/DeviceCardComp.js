@@ -39,7 +39,7 @@ const DeviceCardComp = ({ device }) => {
       {/* Start of List of Devices Card */}
       {/* <Link to="/singledevice"> */}
       <p
-        className="cursor-pointer flex-1 font-poppins"
+        className="cursor-pointer flex-1 capitalize font-poppins"
         onClick={() => {
           device?.deviceType === "proxie"
             ? handleRoute(
@@ -58,7 +58,7 @@ const DeviceCardComp = ({ device }) => {
       </p>
       {/* </Link> */}
       <p
-        className="cursor-pointer flex-1 font-poppins"
+        className="cursor-pointer flex-1 capitalize font-poppins"
         onClick={() => {
           device?.deviceType === "proxie"
             ? handleRoute(
@@ -77,7 +77,7 @@ const DeviceCardComp = ({ device }) => {
       </p>
       {/* <Link to="/proxydevice"> */}
       <p
-        className="cursor-pointer flex-1 font-poppins"
+        className="cursor-pointer flex-1 capitalize font-poppins"
         onClick={() => {
           device?.deviceType === "proxie"
             ? handleRoute(
@@ -96,7 +96,7 @@ const DeviceCardComp = ({ device }) => {
       </p>
       {/* </Link> */}
       <p
-        className={`cursor-pointer flex-1 ${
+        className={`cursor-pointer flex-1 capitalize ${
           device?.deviceState === "on" ? "text-[#059D1D]" : "text-textGrey"
         } `}
         onClick={() => {

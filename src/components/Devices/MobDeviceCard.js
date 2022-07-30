@@ -25,19 +25,25 @@ const MobDeviceCard = ({ device }) => {
       />
       <div className="flex items-center justify-between border-b border-solid border-[#717171] p-3">
         <p className="flex-1 font-poppins">Name Of Device</p>
-        <p className="flex-1 text-end">{device?.deviceName}</p>
+        <p className="flex-1 text-end capitalize">{device?.deviceName}</p>
       </div>
       <div className="flex items-center justify-between p-3 border-b border-solid border-[#717171]">
         <p className="flex-1 font-poppins">Location</p>
-        <p className="flex-1 text-end">{device?.deviceLocation}</p>
+        <p className="flex-1 text-end capitalize">{device?.deviceLocation}</p>
       </div>
       <div className="flex items-center justify-between font-poppins p-3 border-b border-solid border-[#717171]">
         <p>Device Type</p>
-        <p>{device?.deviceType}</p>
+        <p className="capitalize">{device?.deviceType}</p>
       </div>
       <div className="flex items-center font-poppins justify-between p-3 border-b border-solid border-[#717171]">
         <p>Status</p>
-        <p className="text-[#717171] font-poppins">{device?.deviceState}</p>
+        <p
+          className={`font-poppins capitalize ${
+            device?.deviceState === "on" ? "text-[#059D1D]" : "text-[#717171]"
+          } `}
+        >
+          {device?.deviceState}
+        </p>
       </div>
       <div className="flex items-center justify-between p-3 border-b font-poppins border-solid border-[#717171]">
         <p>Remove Device</p>

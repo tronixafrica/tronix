@@ -638,9 +638,9 @@ const AirQualityCard = (props) => {
                 <p className="text-sm font-semibold">ID NUMBER</p>
                 <p className="text-sm font-semibold">Group</p>
               </div>
-              <div className="flex justify-between">
-                <p className="text-sm font-thin ">123456789</p>
-                <p className="text-sm font-thin ">Air Quality</p>
+              <div className="flex font-poppins justify-between">
+                <p className="text-sm font-thin">123456789</p>
+                <p className="text-sm font-thin">Air Quality</p>
               </div>
             </div>
             <div className="sm:w-[60%] w-full  border border-[#686868] bg-backgroundDark text-white p-2 pb-24 space-y-3 rounded-lg px-4">

@@ -11,10 +11,18 @@ import { Pagination } from "swiper";
 import "../../App.css";
 import { AuthContext } from "../../state/contexts/AuthContext";
 import PulseLoader from "../Modals/PulseLoader";
+import { setConsent } from "firebase/analytics";
+import { Howl } from "howler";
+
 const AirQualityCard = (props) => {
+
   const [unsafes, setUnSafes] = useState([]);
   const [overallStatus, setOverallStatus] = useState();
   const { userProfile } = useContext(AuthContext);
+  const [ co, setCo ] = useState(true)
+  const [ co2, setCo2 ] = useState(true)
+  const [ overalStatus, setoverallStatus ] = useState(false)
+
   // const pollutantsThreshold = [
   //   ["Acetane", 400],
   //   ["Alcohol", 60],
@@ -34,7 +42,41 @@ const AirQualityCard = (props) => {
   //   ["Propane", 800],
   //   ["Toulene", 140],
   // ];
+  
+  const pollutant = {
+    CO: 'CO',
+    CO2: 'CO2',
+    P1: 'P1',
+    P25: 'P25',
+    P10: 'P10',
+    CL: 'CL',
+    P: 'P',
+    BE: 'BE',
+    T: 'T',
+    NH: 'NH',
+    LPG: 'LPG',
+    NO: 'NO',
+    A: 'A',
+    Al: 'Al',
+    OZ: 'OZ'
 
+
+  }
+  // A: Acetone
+  // al: Alcohol
+  // be: Benzene
+  // cl: CL2
+  // co: co
+  // CO2: CO2
+  // lpg: lpg
+  // nh: Nh4
+  // no: NOX
+  // oz: ozone
+  // p: Propane
+  // p1: PM1
+  // p10: PM10
+  // p25: pm2.5  
+  // t:toulene
   // Play the speech if there is a pollutant
   // useEffect(() => {
   //   return () =>
@@ -42,7 +84,9 @@ const AirQualityCard = (props) => {
   //       playSpeech();
   //     }, 5000);
   // }, [unsafes.length]);
+  
   const myAudio = new Audio("/speech.mp3");
+
   const playSpeech = () => {
     if (typeof myAudio.loop == "boolean") {
       myAudio.loop = true;
@@ -60,34 +104,58 @@ const AirQualityCard = (props) => {
     }
     myAudio.play();
   };
+
   const stopSpeech = () => {
     // const myAudio = new Audio("/speech.mp3");
     myAudio.removeAttribute("src", "/speech.mp3");
     myAudio.pause();
   };
 
-  useEffect(() => {
-    if (unsafes.length > 0) {
-      playSpeech();
-      // cleanup
-      return () => {
-        console.log("cleanup");
-        stopSpeech();
-      };
-    } else {
-      console.log("stopSpeech");
-      stopSpeech();
-    }
-  }, [unsafes.length]);
+  const play = (src) => {
+    const sound = new Howl({
+      src: ['/speech.mp3'],
+      html5: true
+    })
 
-  const asn =
-    userProfile?.device?.airsyn[`${props.deviceName}`].deviceReadings || {};
+    sound.play()
+  }
+
+  // useEffect(() => {
+  //   if (unsafes.length > 0) {
+  //     playSpeech();
+  //     // cleanup
+  //     return () => {
+  //       console.log("cleanup");
+  //       stopSpeech();
+  //     };
+  //   } else {
+  //     console.log("stopSpeech");
+  //     stopSpeech();
+  //   }
+  // }, [unsafes.length]);
+
+  const asn = userProfile?.device?.airsyn[`${props.deviceName}`].deviceReadings || {};
+  const asnn = asn[Object.keys(asn)[Object.keys(asn).length - 1]] || {}
+  // asn[Object.keys(device)[Object.keys(device).length - 1]]
+
   let readings = [];
+
+  
+
+  console.log('asna ===>>>>>>> na me', asn)
+  console.log('asnn ===>>>>>>> na me', asnn)
+
   // let readingsArr = [];
-  Object.values(asn).map((item, index) => {
-    console.log(item, "item sss");
-    return readings.push(item);
-  });
+  readings.push(asnn);
+  console.log(readings, 'na the readings ooo');
+
+  
+
+  // Object.values(asn).map((item, index) => {
+  //   console.log(item, "item sss");
+  //   return readings.push(item);
+  // });
+
   console.log(readings, "readings");
 
   // Compare the values of the readings with their threshold values
@@ -113,8 +181,48 @@ const AirQualityCard = (props) => {
       }
     }
     // console.log(unsafes, "unsafes pollutant guys");
-    return threshold;
+    // return threshold;
   }
+
+  useEffect(() => {
+    console.log(userProfile, unsafes, 'the airsyn has changes')
+
+    // CO
+    if (readings[0].CO > 10) {
+      setCo(false)
+      // compare(readings[0].CO, 10, 'CO')
+      console.log('all the unsafes', unsafes);
+    } else {
+      setCo(true)
+      console.log(readings[0].CO, 'this is the co')
+      // compare(readings[0].CO, 10, 'CO')
+    } 
+    
+    // CO2
+    if (readings[0].CO2 > 10) setCo2(false)
+    else setCo2(true)
+
+    
+    co && co2 ? setoverallStatus(true) : setoverallStatus(false)
+    console.log('this ran now mennn', co && co2, overalStatus);
+
+
+    // if (!co || !co2) {
+    //   console.log('enviroment no safe')
+    //   play();
+    //   // cleanup
+    //   // return () => {
+    //   //   console.log("cleanup");
+    //   //     stopSpeech();
+    //   //  };
+    // } else {
+    //   console.log('stopping speech')
+    //   // stopSpeech();
+      
+    // }
+
+    
+  }, [userProfile])
 
   // Object.entries(readings[0]&&readings[0] || {}).map((item, index) => {
   //   console.log(item, "item arr");
@@ -156,7 +264,7 @@ const AirQualityCard = (props) => {
               {/* First Item */}
               <div
                 className={`border  ${
-                  unsafes.length >= 1
+                  !overalStatus
                     ? "border-backgroundRed bg-backgroundRed"
                     : "bg-[#059D1D] border-[#059D1D]"
                 }  sm:w-[30%] w-full rounded-lg flex items-center justify-center`}
@@ -177,32 +285,32 @@ const AirQualityCard = (props) => {
                 modules={[Pagination]}
                 className="w-[34.38rem] overflow-hidden"
               >
-                <SwiperSlide>
-                  <div className="border-none grid sm:grid-cols-3 grid-cols-2 gap-2 mx-1">
-                    {/* First pollutant */}
+                {/* desktop pollutants cards */}
+                {/* first slide */}
+                <SwiperSlide className="hidden sm:grid ">
+                  <div className="border-none grid grid-cols-3 gap-2 mx-1">
+                    {/* CO */}
                     <div
                       className={`border ${
-                        compare(readings[0] && readings[0]["CO"], 10, "CO")
-                          ? "bg-[#059D1D] border-[#059D1D]"
+                        co ? "bg-[#059D1D] border-[#059D1D]"
                           : "bg-backgroundRed border-backgroundRed pollutant_glow"
                       } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
                     >
                       <div className="text-center text-white space-y-2">
                         <p className="text-sm font-thin uppercase">CO</p>
                         <p className="text-xl font-semibold">
-                          {readings[0] && readings[0]["CO"]}
+                          {readings[0] && readings[0][pollutant.CO]}
                         </p>
                         <p className="text-sm font-thin uppercase">
-                          {compare(readings[0] && readings[0]["CO"], 10, "CO")
-                            ? "Safe"
-                            : "Unsafe"}
+                          { co ? 'Safe' : 'Unsafe' }
                         </p>
                       </div>
                     </div>
-                    {/* second pollutant */}
+
+                    {/* CO2 */}
                     <div
                       className={`border ${
-                        compare(readings[0] && readings[0]["CO2"], 10, "CO2")
+                        co2
                           ? "bg-[#059D1D] border-[#059D1D]"
                           : "bg-backgroundRed border-backgroundRed pollutant_glow"
                       } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
@@ -210,17 +318,18 @@ const AirQualityCard = (props) => {
                       <div className="text-center text-white space-y-2">
                         <p className="text-sm font-thin uppercase">CO2</p>
                         <p className="text-xl font-semibold">
-                          {readings[0] && readings[0]["CO2"]}
+                          {readings[0] && readings[0][pollutant.CO2]}
                         </p>
                         <p className="text-sm font-thin uppercase">
-                          {compare(readings[0] && readings[0]["CO2"], 10, "CO2")
+                          {co2
                             ? "Safe"
                             : "Unsafe"}
                         </p>
                       </div>
                     </div>
+
                     {/* third pollutant */}
-                    <div
+                    {/* <div
                       className={`border ${
                         compare(readings[0] && readings[0]["H2"], 15, "H2")
                           ? "bg-[#059D1D] border-[#059D1D]"
@@ -238,11 +347,13 @@ const AirQualityCard = (props) => {
                             : "Unsafe"}
                         </p>
                       </div>
-                    </div>
-                    {/* fourth pollutant */}
-                    <div
+                    </div> */}
+
+
+                    {/* PM1 */}
+                    {/* <div
                       className={`border ${
-                        compare(readings[0] && readings[0]["PM1"], 500, "PM1")
+                        compare(readings[0] && readings[0][pollutant.P1], 500, pollutant.P1)
                           ? "bg-[#059D1D] border-[#059D1D]"
                           : "bg-backgroundRed border-backgroundRed pollutant_glow"
                       } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
@@ -250,23 +361,24 @@ const AirQualityCard = (props) => {
                       <div className="text-center text-white space-y-2">
                         <p className="text-sm font-thin uppercase">PM1</p>
                         <p className="text-xl font-semibold">
-                          {readings[0] && readings[0]["PM1"]}
+                          {readings[0] && readings[0][pollutant.P1]}
                         </p>
                         <p className="text-sm font-thin uppercase">
                           {compare(
-                            readings[0] && readings[0]["PM1"],
+                            readings[0] && readings[0][pollutant.P1],
                             500,
-                            "PM1"
+                            pollutant.P1
                           )
                             ? "Safe"
                             : "Unsafe"}
                         </p>
                       </div>
-                    </div>
-                    {/* fifth pollutant */}
-                    <div
+                    </div> */}
+
+                    {/* PM2.5 */}
+                    {/* <div
                       className={`border ${
-                        compare(readings[0] && readings[0]["PM25"], 500, "PM25")
+                        compare(readings[0] && readings[0][pollutant.P25], 500, pollutant.P25)
                           ? "bg-[#059D1D] border-[#059D1D]"
                           : "bg-backgroundRed border-backgroundRed pollutant_glow"
                       } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
@@ -274,23 +386,24 @@ const AirQualityCard = (props) => {
                       <div className="text-center text-white space-y-2">
                         <p className="text-sm font-thin uppercase">PM2.5</p>
                         <p className="text-xl font-semibold">
-                          {readings[0] && readings[0]["PM25"]}
+                          {readings[0] && readings[0][pollutant.P25]}
                         </p>
                         <p className="text-sm font-thin uppercase">
                           {compare(
-                            readings[0] && readings[0]["PM25"],
+                            readings[0] && readings[0][pollutant.P25],
                             500,
-                            "PM25"
+                            pollutant.P25
                           )
                             ? "Safe"
                             : "Unsafe"}
                         </p>
                       </div>
-                    </div>
-                    {/* sixth pollutant */}
-                    <div
+                    </div> */}
+
+                    {/* PM10 */}
+                    {/* <div
                       className={`border ${
-                        compare(readings[0] && readings[0]["PM10"], 500, "PM10")
+                        compare(readings[0] && readings[0][pollutant.P10], 500, pollutant.P10)
                           ? "bg-[#059D1D] border-[#059D1D]"
                           : "bg-backgroundRed border-backgroundRed pollutant_glow"
                       } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
@@ -298,27 +411,24 @@ const AirQualityCard = (props) => {
                       <div className="text-center text-white space-y-2">
                         <p className="text-sm font-thin uppercase">PM10</p>
                         <p className="text-xl font-semibold">
-                          {readings[0] && readings[0]["PM10"]}
+                          {readings[0] && readings[0][pollutant.P10]}
                         </p>
                         <p className="text-sm font-thin uppercase">
                           {compare(
-                            readings[0] && readings[0]["PM10"],
+                            readings[0] && readings[0][pollutant.P10],
                             500,
-                            "PM10"
+                            pollutant.P10
                           )
                             ? "Safe"
                             : "Unsafe"}
                         </p>
                       </div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="border-none grid sm:grid-cols-3 grid-cols-2 gap-2 mx-1">
-                    {/* seventh pollutant */}
-                    <div
+                    </div> */}
+
+                    {/* CL */}
+                    {/* <div
                       className={`border ${
-                        compare(readings[0] && readings[0]["CL2"], 40, "CL2")
+                        compare(readings[0] && readings[0][pollutant.CL], 40, pollutant.CL)
                           ? "bg-[#059D1D] border-[#059D1D]"
                           : "bg-backgroundRed border-backgroundRed pollutant_glow"
                       } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
@@ -326,261 +436,19 @@ const AirQualityCard = (props) => {
                       <div className="text-center text-white space-y-2">
                         <p className="text-sm font-thin uppercase">CL2</p>
                         <p className="text-xl font-semibold">
-                          {readings[0] && readings[0]["CL2"]}
+                          {readings[0] && readings[0][pollutant.CL]}
                         </p>
                         <p className="text-sm font-thin uppercase">
-                          {compare(readings[0] && readings[0]["CL2"], 40, "CL2")
+                          {compare(readings[0] && readings[0][pollutant.CL], 40, pollutant.CL)
                             ? "Safe"
                             : "Unsafe"}
                         </p>
                       </div>
-                    </div>
-                    {/* eight pollutant */}
-                    <div
-                      className={`border ${
-                        compare(
-                          readings[0] && readings[0]["Propane"],
-                          800,
-                          "Propane"
-                        )
-                          ? "bg-[#059D1D] border-[#059D1D]"
-                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
-                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
-                    >
-                      <div className="text-center text-white space-y-2">
-                        <p className="text-sm font-thin uppercase">Propane</p>
-                        <p className="text-xl font-semibold">
-                          {readings[0] && readings[0]["Propane"]}
-                        </p>
-                        <p className="text-sm font-thin uppercase">
-                          {compare(
-                            readings[0] && readings[0]["Propane"],
-                            800,
-                            "Propane"
-                          )
-                            ? "Safe"
-                            : "Unsafe"}
-                        </p>
-                      </div>
-                    </div>
-                    {/* ninth pollutant */}
-                    <div
-                      className={`border ${
-                        compare(
-                          readings[0] && readings[0]["Benzene"],
-                          40,
-                          "Benzene"
-                        )
-                          ? "bg-[#059D1D] border-[#059D1D]"
-                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
-                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
-                    >
-                      <div className="text-center text-white space-y-2">
-                        <p className="text-sm font-thin uppercase">Benzene</p>
-                        <p className="text-xl font-semibold">
-                          {readings[0] && readings[0]["Benzene"]}
-                        </p>
-                        <p className="text-sm font-thin uppercase">
-                          {compare(
-                            readings[0] && readings[0]["Benzene"],
-                            40,
-                            "Benzene"
-                          )
-                            ? "Safe"
-                            : "Unsafe"}
-                        </p>
-                      </div>
-                    </div>
-                    {/* tenth pollutant */}
-                    <div
-                      className={`border ${
-                        compare(
-                          readings[0] && readings[0]["Toulene"],
-                          140,
-                          "Toulene"
-                        )
-                          ? "bg-[#059D1D] border-[#059D1D]"
-                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
-                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
-                    >
-                      <div className="text-center text-white space-y-2">
-                        <p className="text-sm font-thin uppercase">Toluene</p>
-                        <p className="text-xl font-semibold">
-                          {readings[0] && readings[0]["Toulene"]}
-                        </p>
-                        <p className="text-sm font-thin uppercase">
-                          {compare(
-                            readings[0] && readings[0]["Toulene"],
-                            140,
-                            "Toulene"
-                          )
-                            ? "Safe"
-                            : "Unsafe"}
-                        </p>
-                      </div>
-                    </div>
-                    {/* eleventh pollutant */}
-                    <div
-                      className={`border ${
-                        compare(readings[0] && readings[0]["O3"], 40, "O3")
-                          ? "bg-[#059D1D] border-[#059D1D]"
-                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
-                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
-                    >
-                      <div className="text-center text-white space-y-2">
-                        <p className="text-sm font-thin uppercase">O3</p>
-                        <p className="text-xl font-semibold">
-                          {readings[0] && readings[0]["O3"]}
-                        </p>
-                        <p className="text-sm font-thin uppercase">
-                          {compare(readings[0] && readings[0]["O3"], 40, "O3")
-                            ? "Safe"
-                            : "Unsafe"}
-                        </p>
-                      </div>
-                    </div>
-                    {/* twelveth pollutant */}
-                    <div
-                      className={`border ${
-                        compare(readings[0] && readings[0]["Nh4"], 40, "Nh4")
-                          ? "bg-[#059D1D] border-[#059D1D]"
-                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
-                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
-                    >
-                      <div className="text-center text-white space-y-2">
-                        <p className="text-sm font-thin uppercase">Nh4</p>
-                        <p className="text-xl font-semibold">
-                          {readings[0] && readings[0]["Nh4"]}
-                        </p>
-                        <p className="text-sm font-thin uppercase">
-                          {compare(readings[0] && readings[0]["Nh4"], 40, "Nh4")
-                            ? "Safe"
-                            : "Unsafe"}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                    </div>*/}
+                  </div> 
                 </SwiperSlide>
-                <SwiperSlide>
-                  <div className="border-none grid sm:grid-cols-3 grid-cols-2 gap-2 mx-1">
-                    {/* thirteenth pollutant */}
-                    <div
-                      className={`border ${
-                        compare(readings[0] && readings[0]["LPG"], 8, "LPG")
-                          ? "bg-[#059D1D] border-[#059D1D]"
-                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
-                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
-                    >
-                      <div className="text-center text-white space-y-2">
-                        <p className="text-sm font-thin uppercase">LPG</p>
-                        <p className="text-xl font-semibold">
-                          {readings[0] && readings[0]["LPG"]}
-                        </p>
-                        <p className="text-sm font-thin uppercase">
-                          {compare(readings[0] && readings[0]["LPG"], 8, "LPG")
-                            ? "Safe"
-                            : "Unsafe"}
-                        </p>
-                      </div>
-                    </div>
-                    {/* fourteenth pollutant */}
-                    <div
-                      className={`border ${
-                        compare(readings[0] && readings[0]["NOX"], 40, "NOX")
-                          ? "bg-[#059D1D] border-[#059D1D]"
-                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
-                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
-                    >
-                      <div className="text-center text-white space-y-2">
-                        <p className="text-sm font-thin uppercase">NOX</p>
-                        <p className="text-xl font-semibold">
-                          {readings[0] && readings[0]["NOX"]}
-                        </p>
-                        <p className="text-sm font-thin uppercase">
-                          {compare(readings[0] && readings[0]["NOX"], 40, "NOX")
-                            ? "Safe"
-                            : "Unsafe"}
-                        </p>
-                      </div>
-                    </div>
-                    {/* fifteenth pollutant */}
-                    <div
-                      className={`border ${
-                        compare(
-                          readings[0] && readings[0]["Acetane"],
-                          400,
-                          "Acetane"
-                        )
-                          ? "bg-[#059D1D] border-[#059D1D]"
-                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
-                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
-                    >
-                      <div className="text-center text-white space-y-2">
-                        <p className="text-sm font-thin uppercase">Acetane</p>
-                        <p className="text-xl font-semibold">
-                          {readings[0] && readings[0]["Acetane"]}
-                        </p>
-                        <p className="text-sm font-thin uppercase">
-                          {compare(
-                            readings[0] && readings[0]["Acetane"],
-                            400,
-                            "Acetane"
-                          )
-                            ? "Safe"
-                            : "Unsafe"}
-                        </p>
-                      </div>
-                    </div>
-                    {/* sixteenth pollutant */}
-                    <div
-                      className={`border ${
-                        compare(
-                          readings[0] && readings[0]["Alcohol"],
-                          60,
-                          "Alcohol"
-                        )
-                          ? "bg-[#059D1D] border-[#059D1D]"
-                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
-                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
-                    >
-                      <div className="text-center text-white space-y-2">
-                        <p className="text-sm font-thin uppercase">Alcohol</p>
-                        <p className="text-xl font-semibold">
-                          {readings[0] && readings[0]["Alcohol"]}
-                        </p>
-                        <p className="text-sm font-thin uppercase">
-                          {compare(
-                            readings[0] && readings[0]["Alcohol"],
-                            60,
-                            "Alcohol"
-                          )
-                            ? "Safe"
-                            : "Unsafe"}
-                        </p>
-                      </div>
-                    </div>
-                    {/* seventeenth pollutant */}
-                    <div
-                      className={`border ${
-                        compare(readings[0] && readings[0]["CH4"], 40, "CH4")
-                          ? "bg-[#059D1D] border-[#059D1D]"
-                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
-                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
-                    >
-                      <div className="text-center text-white space-y-2">
-                        <p className="text-sm font-thin uppercase">CH4</p>
-                        <p className="text-xl font-semibold">
-                          {readings[0] && readings[0]["CH4"]}
-                        </p>
-                        <p className="text-sm font-thin uppercase">
-                          {compare(readings[0] && readings[0]["CH4"], 40, "CH4")
-                            ? "Safe"
-                            : "Unsafe"}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </SwiperSlide>
+
+                
               </Swiper>
             </div>
           </div>

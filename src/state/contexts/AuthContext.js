@@ -269,7 +269,7 @@ const AuthProvider = ({ children }) => {
       (snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.val();
-          console.log(data, "airsyn");
+          console.log(data, "this is the new airsyn data");
           // Dispatch to userAccountProfileReducer
           dipsatchUserProfile({
             type: PROFILE_ACTIONS.UPDATE_AIRSYN,

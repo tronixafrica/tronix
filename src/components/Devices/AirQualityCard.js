@@ -1023,14 +1023,14 @@ const AirQualityCard = (props) => {
             </div>
             <div className="sm:w-[60%] w-full  border border-[#686868] bg-backgroundDark text-white p-2 pb-24 space-y-3 rounded-lg px-4">
               <div className="flex items-center justify-center">
-                <img src="/images/sun_logo.svg" width={70} alt="" />
+                <img src="/images/cloud.png" width={70} alt="" />
               </div>
               <div className="flex justify-between">
                 <p className="font-extrabold text-2xl">32&#176;C</p>
-                <p className="font-bold text-[#C0B6FA]">Rainy</p>
+                <p className="font-bold text-[#C0B6FA]">Cloudy</p>
               </div>
               <p className="text-center uppercase text-sm font-semibold">
-                port harcourt
+                Lagos
               </p>
             </div>
           </div>

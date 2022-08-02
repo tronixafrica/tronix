@@ -126,7 +126,7 @@ const AirQualityCard = (props) => {
   };
 
   
-  const play = (src) => {
+  const play = () => {
     const sound = new Howl({
       src: ['/speech.mp3'],
       html5: true

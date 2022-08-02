@@ -118,7 +118,7 @@ const DashboardComponent = () => {
                     aria-controls="tabs-home"
                     aria-selected="true"
                   >
-                    <div className="h-full transition ease-in-out duration-300 hover:bg-backgroundRed bg-transparent w-[100%] p-[2rem] cursor-pointer rounded-lg border border-solid border-[#777]">
+                    <div className="h-full transition ease-in-out duration-300 hover:bg-backgroundRed bg-transparent w-[100%] p-[2rem] cursor-pointer rounded-lg border border-solid border-[#454545]">
                       <div className="flex flex-row justify-between">
                         <h1 className="font-raleway sm:text-base text-textGreyLighter">
                           TOTAL DEVICES
@@ -160,7 +160,7 @@ const DashboardComponent = () => {
                     aria-controls="tabs-profile"
                     aria-selected="false"
                   >
-                    <div className="h-full transition ease-in-out duration-300 hover:bg-backgroundRed bg-transparent w-[100%] p-[2rem] cursor-pointer rounded-lg border border-solid border-[#777]">
+                    <div className="h-full transition ease-in-out duration-300 hover:bg-backgroundRed bg-transparent w-[100%] p-[2rem] cursor-pointer rounded-lg border border-solid border-[#454545]">
                       <div className="flex flex-row justify-between">
                         <h1 className="font-raleway text-base text-textGreyLighter">
                           TOTAL USERS
@@ -190,7 +190,7 @@ const DashboardComponent = () => {
                 role="tabpanel"
                 aria-labelledby="tabs-home-tab"
               >
-                <div className="bg-backgroundDark h-[32rem] mt-[4%] p-[1rem] border border-[#777] rounded-lg">
+                <div className="bg-backgroundDark h-[32rem] mt-[4%] p-[1rem] border border-[#454545] rounded-lg">
                   <div className="p-3 overflow-auto scroll h-[28rem]">
                     <h1 className="text-[160%] font-poppins text-textGreyLighter mb-[20px] ml-[8px]">
                       Devices
@@ -252,7 +252,7 @@ const DashboardComponent = () => {
                 role="tabpanel"
                 aria-labelledby="tabs-profile-tab"
               >
-                <div className="bg-backgroundDark h-[32rem] mt-[4%] p-[1rem] border border-[#777] rounded-lg">
+                <div className="bg-backgroundDark h-[32rem] mt-[4%] p-[1rem] border border-[#454545] rounded-lg">
                   <div className="p-3 overflow-auto scroll h-[28rem]">
                     <h1 className="text-[160%] font-poppins text-textGreyLighter mb-[20px] ml-[8px]">
                       Users
@@ -281,7 +281,7 @@ const DashboardComponent = () => {
           </div>
           {/* END OF DIV HOLDING CARDS DIV AND DEVICES+USERS DIV */}
           {/* START OF NOTIFICATIONS DIV */}
-          <div className="bg-backgroundDark h-[40rem] w-[29%] p-[1rem] hidden sm:block border border-[#777] rounded-lg">
+          <div className="bg-backgroundDark h-[40rem] w-[29%] p-[1rem] hidden sm:block border border-[#454545] rounded-lg">
             <div className="p-2 overflow-auto scroll h-[100%]">
               <h1 className="text-[160%] font-poppins text-textAuthGrey mb-[20px] ml-[8px]">
                 Notifications

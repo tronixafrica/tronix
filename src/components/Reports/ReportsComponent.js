@@ -8,7 +8,7 @@ const ReportsComponent = () => {
       {/* TIME FRAME + POLLUTANT CONTAINER STARTS HERE */}
       <div className="bg-backgroundGrey flex flex-col mb-10 justify-between h-[90%] w-full sm:w-[70%]">
         {/* TIME FRAME DIV STARTS HERE */}
-        <div className="bg-backgroundDark border border-[#777] rounded-lg flex flex-col justify-between h-40 sm:h-[35%] w-full sm:w-full font-poppins text-base text-textGreyLighter p-5 sm:p-8">
+        <div className="bg-backgroundDark border border-[#454545] rounded-lg flex flex-col justify-between h-40 sm:h-[35%] w-full sm:w-full font-poppins text-base text-textGreyLighter p-5 sm:p-8">
           <h1 className="text-[150%]">Time frame</h1>
           <div className="bg-backgroundDark w-[95%] flex flex-row justify-between">
             <div className="w-[45%]">
@@ -58,19 +58,19 @@ const ReportsComponent = () => {
           <TimeIntervalCard />
         </div>
         {/* POLLUTATNTS DIV STARTS HERE */}
-        <div className="bg-backgroundDark border border-[#777] mt-8 rounded-lg flex flex-col h-[45%] w-full font-poppins text-base text-textGreyLighter">
+        <div className="bg-backgroundDark border border-[#454545] mt-8 rounded-lg flex flex-col h-[45%] w-full font-poppins text-base text-textGreyLighter">
           <h1 className="text-[150%] p-6 sm:p-8">Pollutant</h1>
-          <div className="border-[#777] border-t transition ease-in-out duration-300 hover:bg-backgroundRed">
+          <div className="border-[#454545] border-t transition ease-in-out duration-300 hover:bg-backgroundRed">
             <p className="font-poppins text-textGreyLighter text-[120%] p-3 sm:p-5 flex flex-row items-center">
               CO<sub>2</sub>
             </p>
           </div>
-          <div className="border-[#777] border-t transition ease-in-out duration-300 hover:bg-backgroundRed">
+          <div className="border-[#454545] border-t transition ease-in-out duration-300 hover:bg-backgroundRed">
             <p className="font-poppins text-textGreyLighter text-[120%] p-3 sm:p-5 flex flex-row items-center">
               CO
             </p>
           </div>
-          <div className="border-[#777] border-t flex flex-row items-center transition ease-in-out duration-300 hover:bg-backgroundRed hover:rounded-b-lg">
+          <div className="border-[#454545] border-t flex flex-row items-center transition ease-in-out duration-300 hover:bg-backgroundRed hover:rounded-b-lg">
             <p className="font-poppins text-textGreyLighter text-[120%] p-3 sm:p-5 flex flex-row items-center">
               PM1
             </p>

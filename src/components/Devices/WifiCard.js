@@ -10,8 +10,8 @@ const WifiCard = () => {
       <div className="border border-backgroundDark bg-backgroundDark w-full sm:w-[50%] h-full rounded-lg p-6 text-white space-y-8">
         <div className="flex items-center justify-between">
           <div className="hidden sm:block"></div>
-          <div className="text-center flex-2 text-base font-semibold">
-            Wifi Configuration
+          <div className="text-center flex-2 sm:text-base text-[13px] font-semibold">
+            Repeater Configuration
           </div>
           <div className="flex items-center justify-center">
             <button

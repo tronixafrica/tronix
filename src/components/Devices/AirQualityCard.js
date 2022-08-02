@@ -21,6 +21,20 @@ const AirQualityCard = (props) => {
   const { userProfile } = useContext(AuthContext);
   const [ co, setCo ] = useState(true)
   const [ co2, setCo2 ] = useState(true)
+  const [ p1, setP1 ] = useState(true)
+  const [ p10, setP10 ] = useState(true)
+  const [ cl2, setCl2 ] = useState(true)
+  const [ p25, setP25 ] = useState(true)
+  const [ p, setP ] = useState(true)
+  const [ be, setBE ] = useState(true)
+  const [ oz, setOz ] = useState(true)
+  const [ t, setT ] = useState(true)
+  const [ nh, setNh ] = useState(true)
+  const [ lpg, setLpg ] = useState(true)
+  const [ no, setNo ] = useState(true)
+  const [ a, setA ] = useState(true)
+  const [ al, setAl ] = useState(true)
+  const [ sound, setSound ] = useState(0)
   const [ overalStatus, setoverallStatus ] = useState(false)
 
   // const pollutantsThreshold = [
@@ -111,28 +125,20 @@ const AirQualityCard = (props) => {
     myAudio.pause();
   };
 
+  
   const play = (src) => {
     const sound = new Howl({
       src: ['/speech.mp3'],
       html5: true
     })
 
-    sound.play()
-  }
+    sound.once('end', () => {
+      sound.play()
+    })
 
-  // useEffect(() => {
-  //   if (unsafes.length > 0) {
-  //     playSpeech();
-  //     // cleanup
-  //     return () => {
-  //       console.log("cleanup");
-  //       stopSpeech();
-  //     };
-  //   } else {
-  //     console.log("stopSpeech");
-  //     stopSpeech();
-  //   }
-  // }, [unsafes.length]);
+    sound.play()
+    
+  }
 
   const asn = userProfile?.device?.airsyn[`${props.deviceName}`].deviceReadings || {};
   const asnn = asn[Object.keys(asn)[Object.keys(asn).length - 1]] || {}
@@ -148,14 +154,6 @@ const AirQualityCard = (props) => {
   // let readingsArr = [];
   readings.push(asnn);
   console.log(readings, 'na the readings ooo');
-
-  
-
-  // Object.values(asn).map((item, index) => {
-  //   console.log(item, "item sss");
-  //   return readings.push(item);
-  // });
-
   console.log(readings, "readings");
 
   // Compare the values of the readings with their threshold values
@@ -184,59 +182,75 @@ const AirQualityCard = (props) => {
     // return threshold;
   }
 
+
+
   useEffect(() => {
     console.log(userProfile, unsafes, 'the airsyn has changes')
 
     // CO
-    if (readings[0].CO > 10) {
-      setCo(false)
-      // compare(readings[0].CO, 10, 'CO')
-      console.log('all the unsafes', unsafes);
-    } else {
-      setCo(true)
-      console.log(readings[0].CO, 'this is the co')
-      // compare(readings[0].CO, 10, 'CO')
-    } 
+    if (readings[0].CO > 10) setCo(false) 
+    else setCo(true)
     
     // CO2
-    if (readings[0].CO2 > 10) setCo2(false)
+    if (readings[0].CO2 > 20) setCo2(false)
     else setCo2(true)
-
     
-    co && co2 ? setoverallStatus(true) : setoverallStatus(false)
-    console.log('this ran now mennn', co && co2, overalStatus);
+    // P10
+    if (readings[0].P10 > 500) setP10(false)
+    else setP10(true)
+    
+    // P10
+    if (readings[0].P1 > 500) setP1(false)
+    else setP1(true)
+    
+    // P25
+    if (readings[0].P25 > 500) setP25(false)
+    else setP25(true)
+    
+    // CL
+    if (readings[0].CL > 35) setCl2(false)
+    else setCl2(true)
+    
+    // P
+    if (readings[0].P > 800) setP(false)
+    else setP(true)
+    
+    //BE
+    if (readings[0].BE > 40) setBE(false)
+    else setBE(true)
+    
+    //BE
+    if (readings[0].OZ > 40) setOz(false)
+    else setOz(true)
+    
+    //Toulene
+    if (readings[0].T > 140) setT(false)
+    else setT(true)
 
-
-    // if (!co || !co2) {
-    //   console.log('enviroment no safe')
-    //   play();
-    //   // cleanup
-    //   // return () => {
-    //   //   console.log("cleanup");
-    //   //     stopSpeech();
-    //   //  };
-    // } else {
-    //   console.log('stopping speech')
-    //   // stopSpeech();
-      
-    // }
-
+    //NH4
+    if (readings[0].NH > 40) setNh(false)
+    else setNh(true)
+    
+    // LPG
+    if (readings[0].LPG > 8) setLpg(false)
+    else setLpg(true)
+    
+    // NOX
+    if (readings[0].NO > 40) setNo(false)
+    else setNo(true)
+    
+    // ACETONE
+    if (readings[0].A > 400) setA(false)
+    else setA(true)
+    
+    // ALCOHOL
+    if (readings[0].Al > 60) setAl(false)
+    else setAl(true)
     
   }, [userProfile])
 
-  // Object.entries(readings[0]&&readings[0] || {}).map((item, index) => {
-  //   console.log(item, "item arr");
-  //   return readingsArr.push(item);
-  // });
-  // console.log(readingsArr, "readingsArr");
+ 
 
-  // const chunkSize = 6;
-  // let chunkedReadings = [];
-  // for (let i = 0; i < readingsArr.length; i += chunkSize) {
-  //   const chunk = readingsArr.slice(i, i + chunkSize);
-  //   chunkedReadings.push(chunk);
-  // }
-  // console.log(chunkedReadings, "chunkedReadings");
 
   return (
     <>
@@ -244,15 +258,21 @@ const AirQualityCard = (props) => {
       <div className="w-full flex gap-8 ">
         <div className="w-full">
           {/* Start of Pollutant Card */}
+          {
+            co && co2 && p1 && p10 && p25 && cl2 && p && be && oz && t && nh && lpg && no
+            && a && al ? null : play()
+          }
           <div className="bg-backgroundDark w-full p-4 sm:h-[350px] rounded-lg border border-[#686868]">
             <div className="flex justify-between mb-3 px-3">
               <p className="font-semibold text-lg text-white">Pollutants</p>
               <p
                 className={`text-lg font-semibold ${
-                  unsafes.length >= 1 ? "text-backgroundRed" : "text-[#059D1D]"
+                  co && co2 && p1 && p10 && p25 && cl2 && p && be && oz && t && nh && lpg && no
+                  && a && al  ? "text-[#059D1D]" : "text-backgroundRed"
                 } capitalize`}
               >
-                {unsafes.length >= 1 ? "Unsafe" : "Safe"}
+                {co && co2 && p1 && p10 && p25 && cl2 && p && be && oz && t && nh && lpg && no
+                && a && al  ? "Safe" : "Unsafe"}
               </p>
             </div>
             <hr className="border border-[#e2b6b6]" />
@@ -264,9 +284,10 @@ const AirQualityCard = (props) => {
               {/* First Item */}
               <div
                 className={`border  ${
-                  !overalStatus
-                    ? "border-backgroundRed bg-backgroundRed"
-                    : "bg-[#059D1D] border-[#059D1D]"
+                  co && co2 && p1 && p10 && p25 && cl2 && p && be && oz && t && nh && lpg && no
+                  && a && al
+                    ? "bg-[#059D1D] border-[#059D1D]"
+                    : "border-backgroundRed bg-backgroundRed"
                 }  sm:w-[30%] w-full rounded-lg flex items-center justify-center`}
               >
                 <div className="text-center text-white space-y-2 ">
@@ -274,11 +295,14 @@ const AirQualityCard = (props) => {
                     overall status
                   </p>
                   <p className="font-thin text-sm">
-                    {unsafes.length >= 1 ? "Unsafe" : "Safe"}
+                    {co && co2 && p1 && p10 && p25 && cl2 && p && be && oz && t && nh && lpg && no
+                  && a && al ? "Safe" : "Unsafe"}
                   </p>
                 </div>
               </div>
               {/* Second Item */}
+
+
               {/* Carousel Items */}
               <Swiper
                 pagination={true}
@@ -328,32 +352,11 @@ const AirQualityCard = (props) => {
                       </div>
                     </div>
 
-                    {/* third pollutant */}
-                    {/* <div
-                      className={`border ${
-                        compare(readings[0] && readings[0]["H2"], 15, "H2")
-                          ? "bg-[#059D1D] border-[#059D1D]"
-                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
-                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
-                    >
-                      <div className="text-center text-white space-y-2">
-                        <p className="text-sm font-thin uppercase">H2</p>
-                        <p className="text-xl font-semibold">
-                          {readings[0] && readings[0]["H2"]}
-                        </p>
-                        <p className="text-sm font-thin uppercase">
-                          {compare(readings[0] && readings[0]["H2"], 15, "H2")
-                            ? "Safe"
-                            : "Unsafe"}
-                        </p>
-                      </div>
-                    </div> */}
-
 
                     {/* PM1 */}
-                    {/* <div
+                    <div
                       className={`border ${
-                        compare(readings[0] && readings[0][pollutant.P1], 500, pollutant.P1)
+                        p1
                           ? "bg-[#059D1D] border-[#059D1D]"
                           : "bg-backgroundRed border-backgroundRed pollutant_glow"
                       } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
@@ -364,21 +367,17 @@ const AirQualityCard = (props) => {
                           {readings[0] && readings[0][pollutant.P1]}
                         </p>
                         <p className="text-sm font-thin uppercase">
-                          {compare(
-                            readings[0] && readings[0][pollutant.P1],
-                            500,
-                            pollutant.P1
-                          )
+                          {p1
                             ? "Safe"
                             : "Unsafe"}
                         </p>
                       </div>
-                    </div> */}
+                    </div>
 
                     {/* PM2.5 */}
-                    {/* <div
+                    <div
                       className={`border ${
-                        compare(readings[0] && readings[0][pollutant.P25], 500, pollutant.P25)
+                        p25
                           ? "bg-[#059D1D] border-[#059D1D]"
                           : "bg-backgroundRed border-backgroundRed pollutant_glow"
                       } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
@@ -389,21 +388,17 @@ const AirQualityCard = (props) => {
                           {readings[0] && readings[0][pollutant.P25]}
                         </p>
                         <p className="text-sm font-thin uppercase">
-                          {compare(
-                            readings[0] && readings[0][pollutant.P25],
-                            500,
-                            pollutant.P25
-                          )
+                          { p25
                             ? "Safe"
                             : "Unsafe"}
                         </p>
                       </div>
-                    </div> */}
+                    </div>
 
                     {/* PM10 */}
-                    {/* <div
+                    <div
                       className={`border ${
-                        compare(readings[0] && readings[0][pollutant.P10], 500, pollutant.P10)
+                        p10
                           ? "bg-[#059D1D] border-[#059D1D]"
                           : "bg-backgroundRed border-backgroundRed pollutant_glow"
                       } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
@@ -414,21 +409,17 @@ const AirQualityCard = (props) => {
                           {readings[0] && readings[0][pollutant.P10]}
                         </p>
                         <p className="text-sm font-thin uppercase">
-                          {compare(
-                            readings[0] && readings[0][pollutant.P10],
-                            500,
-                            pollutant.P10
-                          )
+                          {p10
                             ? "Safe"
                             : "Unsafe"}
                         </p>
                       </div>
-                    </div> */}
+                    </div>
 
                     {/* CL */}
-                    {/* <div
+                    <div
                       className={`border ${
-                        compare(readings[0] && readings[0][pollutant.CL], 40, pollutant.CL)
+                        cl2
                           ? "bg-[#059D1D] border-[#059D1D]"
                           : "bg-backgroundRed border-backgroundRed pollutant_glow"
                       } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
@@ -439,16 +430,559 @@ const AirQualityCard = (props) => {
                           {readings[0] && readings[0][pollutant.CL]}
                         </p>
                         <p className="text-sm font-thin uppercase">
-                          {compare(readings[0] && readings[0][pollutant.CL], 40, pollutant.CL)
+                          {cl2
                             ? "Safe"
                             : "Unsafe"}
                         </p>
                       </div>
-                    </div>*/}
+                    </div>
                   </div> 
                 </SwiperSlide>
-
                 
+                {/* SECOND SLIDE */}
+                <SwiperSlide className="hidden sm:grid ">
+                  <div className="border-none grid sm:grid-cols-3 grid-cols-2 gap-2 mx-1">
+                    
+                    {/* PROPANE*/}
+                    <div
+                      className={`border ${
+                        p
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">Propane</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.P]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {p
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* BENZENE */}
+                    <div
+                      className={`border ${
+                        be
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">Benzene</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.BE]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {be
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* TOULENE */}
+                    <div
+                      className={`border ${
+                        t
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">Toluene</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.T]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {t
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div> 
+
+                    {/* OZONE */}
+                    <div
+                      className={`border ${
+                        oz
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">OZONE</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.OZ]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {oz
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* NH4 */}
+                    <div
+                      className={`border ${
+                        nh
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">Nh4</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.NH]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {nh
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* LPG */}
+                    <div
+                      className={`border ${
+                       lpg
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">LPG</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.LPG]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {lpg
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+                  </div> 
+                </SwiperSlide>  
+
+                {/* third slide */}
+                <SwiperSlide className="hidden sm:grid ">
+                  <div className="border-none grid sm:grid-cols-3 grid-cols-2 gap-2 mx-1">
+                    {/* NOX */}
+                    <div
+                      className={`border ${
+                        no
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">NOX</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.NO]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {no
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* ACETANE*/}
+                    <div
+                      className={`border ${
+                        a
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">Acetane</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.A]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {a ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* ALCOHOL */}
+                    <div
+                      className={`border ${
+                        al
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">Alcohol</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.Al]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {al
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+
+                    
+                  </div>
+                </SwiperSlide>
+                
+
+                {/* mobile view */}
+
+                {/* first slide */}
+                <SwiperSlide className="sm:hidden grid">
+                  <div className="border-none grid grid-cols-2 gap-2 mx-1">
+                    {/* CO */}
+                    <div
+                      className={`border ${
+                        co
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">CO</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.CO]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {co
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* CO2 */}
+                    <div
+                      className={`border ${
+                        co2
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">CO2</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.CO2]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {co2
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+
+
+                    {/* PM1 */}
+                    <div
+                      className={`border ${
+                        p1
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">PM1</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.P1]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {p1
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* PM2.5 */}
+                    <div
+                      className={`border ${
+                        p25
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">PM2.5</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.P25]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {p25
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+
+                    
+                  </div>
+                </SwiperSlide>
+                
+                {/* second slide */}
+                <SwiperSlide className="sm:hidden grid">
+                  <div className="border-none grid grid-cols-2 gap-2 mx-1">
+                    {/* PM10 */}
+                    <div
+                      className={`border ${
+                        p10
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">PM10</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.P10]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {p10
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* CL */}
+                    <div
+                      className={`border ${
+                        cl2
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">CL2</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.CL]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {cl2
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+
+
+                    {/* PROPANE*/}
+                    <div
+                      className={`border ${
+                        p
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">Propane</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.P]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {p
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* OZONE */}
+                    <div
+                      className={`border ${
+                        oz
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">OZONE</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.OZ]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {oz
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+
+                  </div>
+                </SwiperSlide>
+
+                {/* third slide */}
+                <SwiperSlide className="sm:hidden grid">
+                  <div className="border-none grid grid-cols-2 gap-2 mx-1">
+                    {/* BENZENE */}
+                    <div
+                      className={`border ${
+                        be
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">Benzene</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.P]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {be
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* TOULENE */}
+                    <div
+                      className={`border ${
+                        t
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">Toluene</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.T]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {t
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* NH4 */}
+                    <div
+                      className={`border ${
+                        nh
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">Nh4</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.NH]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {nh
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* LPG */}
+                    <div
+                      className={`border ${
+                        lpg
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">LPG</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.LPG]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {lpg
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+
+                {/* fourth slide */}
+                <SwiperSlide className="sm:hidden grid">
+                  <div className="border-none grid grid-cols-2 gap-2 mx-1">
+                    
+                    {/* NOX */}
+                    <div
+                      className={`border ${
+                        no
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">NOX</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.NO]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {no
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* ACETANE*/}
+                    <div
+                      className={`border ${
+                        a
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">Acetane</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.A]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {a
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* ALCOHOL */}
+                    <div
+                      className={`border ${
+                        al
+                          ? "bg-[#059D1D] border-[#059D1D]"
+                          : "bg-backgroundRed border-backgroundRed pollutant_glow"
+                      } w-full h-[110px] rounded-lg flex items-center justify-center overflow-auto`}
+                    >
+                      <div className="text-center text-white space-y-2">
+                        <p className="text-sm font-thin uppercase">Alcohol</p>
+                        <p className="text-xl font-semibold">
+                          {readings[0] && readings[0][pollutant.Al]}
+                        </p>
+                        <p className="text-sm font-thin uppercase">
+                          {al
+                            ? "Safe"
+                            : "Unsafe"}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
               </Swiper>
             </div>
           </div>
@@ -509,10 +1043,12 @@ const AirQualityCard = (props) => {
             <div className="flex items-center justify-between px-3">
               <p
                 className={`text-3xl font-semibold ${
-                  unsafes.length >= 1 ? "text-backgroundRed" : "text-[#059D1D]"
+                  co && co2 && p1 && p10 && p25 && cl2 && p && be && oz && t && nh && lpg && no
+                  && a && al ? "text-[#059D1D]" : "text-backgroundRed"
                 } capitalize`}
               >
-                {unsafes.length >= 1 ? "Unsafe" : "Safe"}
+                { co && co2 && p1 && p10 && p25 && cl2 && p && be && oz && t && nh && lpg && no
+                  && a && al ? "Safe" : "Unsafe" }
               </p>
               {/* <p className="w-[30px] h-[30px] border border-solid border-red-600 rounded-full bg-backgroundRed"></p> */}
             </div>
